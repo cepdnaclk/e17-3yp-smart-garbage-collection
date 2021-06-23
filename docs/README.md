@@ -9,14 +9,14 @@ title: Project Template
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Smart garbage collection
 
 ---
 
 ## Team
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
+-  E/17/352, Tillekeratne L.J.I, [email](mailto:e17352@eng.pdn.ac.lk)
+-  E/17/398, Wijerathne I.D.H.S.D, [email](mailto:e17352@eng.pdn.ac.lk)
+-  E/17/148, Kalpana M.W.V, [email](mailto:e17148@eng.pdn.ac.lk)
 
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
@@ -64,8 +64,8 @@ What was achieved, future developments, commercialization plans
 
 ## Links
 
-- [Project Repository](https://github.com/cepdnaclk/{{ page.repository-name }}){:target="_blank"}
-- [Project Page](https://cepdnaclk.github.io/{{ page.repository-name}}){:target="_blank"}
+- [Project Repository](https://github.com/cepdnaclk/{{ page.e17-3yp-smart-garbage-collection }}){:target="_blank"}
+- [Project Page](https://cepdnaclk.github.io/{{ page.e17-3yp-smart-garbage-collection}}){:target="_blank"}
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
