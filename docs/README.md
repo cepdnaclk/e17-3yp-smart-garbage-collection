@@ -3,8 +3,8 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and project title
-repository-name: eYY-3yp-project-template
-title: Project Template
+repository-name: e17-3yp-smart-garbage-collection
+title: Smart Garbage Collection
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
