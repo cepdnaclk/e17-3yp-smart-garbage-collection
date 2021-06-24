@@ -9,7 +9,7 @@ title: Smart Garbage Collection
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Smart garbage collection
+# Smart Garbage Collection
 
 ---
 
