@@ -42,4 +42,12 @@
         }
     ],
     "tags": ["Web", "Embedded Systems"]
+    
+    "media": [
+        {
+            "type": "youtube",
+            "title": "Smart Garbage Managemnet System",
+            "url": "#"
+        }
+    ]
 }
