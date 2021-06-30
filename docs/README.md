@@ -35,6 +35,7 @@ title: Smart Garbage Collection
 
 ## Introduction
 
+
 ### Overview
 
 The problem of proper garbage collection & disposal is a continuous struggle that we face as a country. Not only in cities but also in places like large parks, grounds, organizations such as schools, universities, offices and factories also are in need of a solution for proper garbage disposal and collection. Identifying the priorities of where and when to collect the garbage first and assigning people for different places is very hard without getting a proper overview. Therefore, the authorities assigned to do the garbage collection often end up not providing a proper service to the publlic. Complaints from the general public who are in need of a way to dispose house hold garbage are also arising because of these issues. Current garbage bin systems that are used by the public, often get overflown affecting the scenic beauty of the environment and also causing many health problems. People getting used to burn plastic, polythene because of not having a proper way to dispose house hold garbage also causes envioronmental pollution.
