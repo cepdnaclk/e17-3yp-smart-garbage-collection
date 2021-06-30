@@ -25,20 +25,20 @@
             "website": "#"
         }
     ],
-    "supervisors": [
+     "supervisors": [
         {
             "name": "Dr. Isuru Nawinne",
-            "email": "isurun@.pdn.ac.lk",
-            "linkedin_profile":"#",
-            "website": "#",
-            "researchgate_profile":"#"
+            "email": "isurunawinne@eng.pdn.ac.lk",
+            "linkedin_profile":"https://lk.linkedin.com/in/isuru-nawinne-73302833",
+            "researchgate_profile":"#",
+            "website": "#"
         },
         {
-            "name": "Supervisor 2",
-            "email": "email@eng.pdn.ac.lk",
-            "linkedin_profile":"#",
-            "website": "#",
-            "researchgate_profile":"#"
+            "name": "Dr. Mahanama Wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk",
+            "linkedin_profile":"https://www.linkedin.com/in/mahanama",
+            "researchgate_profile":"#",
+            "website": "#"
         }
     ],
     "tags": ["Web", "Embedded Systems"]
