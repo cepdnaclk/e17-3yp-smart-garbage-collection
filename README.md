@@ -27,20 +27,15 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 
 ### Hardware
 - Sensors to get fill level (volume & weight) of garbage.
-- Sensors to identify garbage type(plastic,glass)
 - LED indicator(red,yellow,green) to show fill level on the garbage bin & for night visibility.
 - Compaction mechanism along with a security sensor used to compact garbage when garbage limit is full. (Compaction happens only when security sensor identifies when bin is not used. Compaction will reduce the number of times that bins should be emptied.)
 - Solar panel to get power 
-- Fragrance unit to get rid of the smell (activates once food waste bin is opened and filled upto some level)
-- Locking system - red bins will be locked
-- Qr scanner to unlock (used by people who collect garbage)
 
 
 ### Website
 - To get the overview of the garbage bin( fill level, battery capacity, garbage categories ..) & decide the priority
 - Assign employees to the each garbage bin to collect the disposal
 - View bins and garbage collecting employees in a map
-- Lock/unlock bins (system will be able to lock a certain bin once it reaches some limit as a solution for avoiding overflowing garbage bins)
 - Add/remove new bins to the system
 - Set parameter values(fill level and garbage categories) for indication of status(red,yellow,green) and to set when to do compaction process
 
