@@ -2,19 +2,6 @@ ___
 # Smart Garbage Collection
 ___
 
-## Team
-- Tillekeratne L.J.I : E/17/352 : [e17352@eng.pdn.ac.lk](e17352@eng.pdn.ac.lk)
-- Wijerathne I.D.H.S.D : E/17/398 :  [e17398@eng.pdn.ac.lk](e17398@eng.pdn.ac.lk)
-- Kalpana M.W.V: E/17/148 : [e17148@eng.pdn.ac.lk](e17148@eng.pdn.ac.lk)
-
-## Supervisors
-- Dr. Isuru Nawinne
-- Dr. Mahanama Wickramasinghe
-
-## Related Links
-- [Project Page](https://cepdnaclk.github.io/e17-3yp-smart-garbage-collection/)
-- [Department Website](http://www.ce.pdn.ac.lk/)
-
 ## Overview
 
 Smart garbage collection system provides a platform to manage garbage collecting in a large area with proper coordination between the responsible authorities and the workers assigned to collect garbage while utilizing the available resources effectively. And also the people who are in need of a proper system to dispose garbage will be benefited by the system. The system can be implemented in cities, grounds, parks and any large public areas and it will make a high positive impact on public health & environment as well. 
@@ -52,6 +39,18 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ### High Level Diagram
 ![](https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/images/Smart-Garbage-Collector.jpg)
 
+## Team
+- Tillekeratne L.J.I : E/17/352 : [e17352@eng.pdn.ac.lk](e17352@eng.pdn.ac.lk)
+- Wijerathne I.D.H.S.D : E/17/398 :  [e17398@eng.pdn.ac.lk](e17398@eng.pdn.ac.lk)
+- Kalpana M.W.V: E/17/148 : [e17148@eng.pdn.ac.lk](e17148@eng.pdn.ac.lk)
+
+## Supervisors
+- Dr. Isuru Nawinne
+- Dr. Mahanama Wickramasinghe
+
+## Related Links
+- [Project Page](https://cepdnaclk.github.io/e17-3yp-smart-garbage-collection/)
+- [Department Website](http://www.ce.pdn.ac.lk/)
 
 
 
