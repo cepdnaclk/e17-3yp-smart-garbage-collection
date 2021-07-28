@@ -52,8 +52,6 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ### High Level Diagram
 ![](https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/images/Smart-Garbage-Collector.jpg)
 
-### Data and Control Flow
-![](https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/images/Data&ControlFlow.png)
 
 
 
