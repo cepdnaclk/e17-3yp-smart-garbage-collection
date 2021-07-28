@@ -50,6 +50,5 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ## Solution Archtecture
 
 ### High Level Diagram
-(images/Smart-Garbage-Collector.jpg)
-
+https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/images/Smart-Garbage-Collector.jpg
 
