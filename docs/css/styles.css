@@ -216,20 +216,18 @@ a:hover {
 /*    Header     */
 /*****************/
 .header {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	padding-top: 8rem;
+	padding-bottom: 8rem;
 	background: url('../images/header-background.jpg') center center no-repeat;
 	background-size: cover;
 	text-align: center;
-	
-	
 }
 
-#topic {
-	font-size: 5.5rem;
-	line-height: 4.8rem;
+.header .h1-large {
+	margin-bottom: 2.5rem;
 	color: #ffffff;
-
+	font-size: 4rem;
+	line-height: 4.5rem;
 }
 
 
