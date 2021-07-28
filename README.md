@@ -47,6 +47,9 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 - Using map can easily locate the bin
 
 
+##Solution Archtecture
 
+###High Level Diagram
+(images/Smart-Garbage-Collector.jpg)
 
 
