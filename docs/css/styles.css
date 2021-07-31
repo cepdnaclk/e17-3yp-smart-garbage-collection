@@ -225,18 +225,11 @@ a:hover {
 
 .header .h1-large {
 	margin-bottom: 2.5rem;
-	color: #000080;
+	color: #000000;
 	font-size: 4rem;
 	line-height: 4.5rem;
 }
 
-.header .col-lg-12 {
-	right: 50%
-}
-
-.header .side-img {
-	left: 50%
-}
 
 /************************/
 /*     Introduction     */
