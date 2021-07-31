@@ -230,6 +230,13 @@ a:hover {
 	line-height: 4.5rem;
 }
 
+.header .col-lg-12 {
+	right: 50%
+}
+
+.header .side-img {
+	left: 50%
+}
 
 /************************/
 /*     Introduction     */
