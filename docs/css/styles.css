@@ -499,10 +499,10 @@ a:hover {
 	
 	/* General Styles */
 	.h2-heading {
-		color: #4747d1;
 		width: 35.25rem;
 		margin-right: auto;
 		margin-left: auto;
+		color: #5c5cd6;
 	}
 
 	.p-heading {
