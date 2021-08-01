@@ -742,15 +742,6 @@ a:hover {
 	
 	/* Footer */
 
-	#footer {
-		text-align: center;
-		padding-top: 7%;
-		padding-bottom: 2%;
-	}
-	.footer-icon {
-		padding: 1%;
-	}
-
 	.footer-dark {
   		padding:50px 0;
   		color:#f0f9ff;
