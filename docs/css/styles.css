@@ -75,8 +75,8 @@ h6 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:900px;
-    height:550px;
+    width:700px;
+    height:500px;
 }
 .li-space-lg li {
 	margin-bottom: 0.5rem;
@@ -746,7 +746,13 @@ a:hover {
 	.footer-icon{
 		padding:1%;
 	}
-	
+	#footer p.left {
+ 		float: left;
+	}
+
+	#footer p.right {
+ 		float: right;
+	}
 	
 	/* end of footer */
 
