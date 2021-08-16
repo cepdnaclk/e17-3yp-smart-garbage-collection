@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 function Home() {
 
     const classes = useStyles();
@@ -25,9 +27,14 @@ function Home() {
         <Button variant="contained" color="primary" href="/Signin" size="large" className={classes.margin}>
             Sign in
         </Button>
+
         <Button variant="contained" color="primary" href="/Signup" size="large" className={classes.margin}>
             Sign up
-        </Button></div>;
+        </Button>
+
+
+
+    </div>;
 }
 
 export default Home;
