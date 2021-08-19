@@ -11,8 +11,12 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-        backgroundColor: '#0F3057',
+        backgroundColor: '#E7E7DE',
     },
+    text: {
+        color: '#0F3057',
+        fontFamily: '"Righteous", cursive',
+    }
 
 }));
 
@@ -21,7 +25,7 @@ export default function Appbar(props) {
     return (
         <AppBar position="fixed" className={classes.appBar} >
             <Toolbar>
-                <Typography variant="h6" noWrap>
+                <Typography variant="h4" noWrap className={classes.text}>
                     {props.section}
                 </Typography>
             </Toolbar>

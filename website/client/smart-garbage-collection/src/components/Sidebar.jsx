@@ -24,14 +24,23 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        backgroundColor: '#0F3057',
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
 
+    text: {
+        color: '#E7E7DE',
+        fontFamily: '"Righteous", cursive', // didn't work
+
+    }
+
 }));
 
 const links = ['./Overview', './Customize', './SentRequests', './MapView']
-const icons = [<SettingsRemoteRoundedIcon />, < SettingsRoundedIcon />, < SendRoundedIcon />, < RoomRoundedIcon />]
+
+// try to improve style adding
+const icons = [<SettingsRemoteRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < SettingsRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < SendRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < RoomRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />]
 
 function renderIcon(index) {
     return icons[index];
@@ -53,7 +62,8 @@ export default function Sidebar() {
             {['Overview', 'Customize', 'Requests', 'Map view'].map((text, index) => (
                 <ListItem button key={text} component={Link} to={links[index]}>
                     <ListItemIcon>{renderIcon(index)}</ListItemIcon>
-                    <ListItemText primary={text} />
+                    {/* //h1 tag added  */}
+                    <h1><ListItemText primary={text} className={classes.text} /></h1>
                 </ListItem>
 
             ))}
