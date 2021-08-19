@@ -22,16 +22,19 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
+
     },
     drawerPaper: {
         width: drawerWidth,
         backgroundColor: '#0F3057',
+
     },
     // necessary for content to be below app bar
     // toolbar: theme.mixins.toolbar,
 
     text: {
         color: '#E7E7DE',
+
         fontFamily: '"Righteous", cursive', // didn't work
 
     }
@@ -62,7 +65,7 @@ export default function Sidebar() {
         <User name="Isara" />
         <Divider />
         <List>
-            {['Overview', 'Customize', 'Requests', 'Map view'].map((text, index) => (
+            {['Overview', 'Customize', 'Sent Requests', 'Map view'].map((text, index) => (
                 <ListItem button key={text} component={Link} to={links[index]}>
                     <ListItemIcon>{renderIcon(index)}</ListItemIcon>
                     {/* //h1 tag added  */}
