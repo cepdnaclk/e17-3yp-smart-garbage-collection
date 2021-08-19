@@ -15,6 +15,12 @@ h2 {
     font-family: 'Righteous', cursive;
 }
 
+h3 {
+    color: #008891;
+    font-family: 'Righteous', cursive;
+    font-size: 1.5rem;
+}
+
 .main-heading {
     font-family: 'Righteous', cursive;
     font-size: 4em;
