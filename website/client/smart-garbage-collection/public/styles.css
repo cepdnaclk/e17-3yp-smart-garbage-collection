@@ -9,7 +9,10 @@ h1 {
 }
 
 h2 {
-    color: #008891;
+    /* color: #008891; */
+    color: #0F3057;
+    font-size: 1.8rem;
+    font-family: 'Righteous', cursive;
 }
 
 .main-heading {

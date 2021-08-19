@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-        backgroundColor: '#E7E7DE',
+        backgroundColor: '#008891',
     },
     text: {
-        color: '#0F3057',
+        color: 'white',
         fontFamily: '"Righteous", cursive',
     }
 
