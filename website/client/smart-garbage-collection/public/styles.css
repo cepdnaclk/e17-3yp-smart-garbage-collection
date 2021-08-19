@@ -1,6 +1,6 @@
 body {
-    background-color: #d2f8f6;
-    /* background-color: #0F3057; */
+    /* background-color: #d2f8f6; */
+    background-color: #0F3057;
     /* background-image: url("src\images\wave.png"); */
 }
 
@@ -9,7 +9,10 @@ h1 {
 }
 
 h2 {
-    color: #008891;
+    /* color: #008891; */
+    color: #0F3057;
+    font-size: 1.8rem;
+    font-family: 'Righteous', cursive;
 }
 
 .main-heading {

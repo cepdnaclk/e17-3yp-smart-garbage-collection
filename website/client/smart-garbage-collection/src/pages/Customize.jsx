@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
+import CustomizeForm from '../components/CustomizeForm';
 
 
 const drawerWidth = 240;
@@ -38,7 +39,7 @@ export default function Customize() {
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <h1>Customize</h1>
+                <CustomizeForm />
 
             </main>
         </div>

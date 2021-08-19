@@ -11,6 +11,7 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import SettingsRemoteRoundedIcon from '@material-ui/icons/SettingsRemoteRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
+import User from './User';
 
 
 const drawerWidth = 240;
@@ -21,17 +22,29 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
+
     },
     drawerPaper: {
         width: drawerWidth,
+        backgroundColor: '#0F3057',
+
     },
     // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
+    // toolbar: theme.mixins.toolbar,
+
+    text: {
+        color: '#E7E7DE',
+
+        fontFamily: '"Righteous", cursive', // didn't work
+
+    }
 
 }));
 
 const links = ['./Overview', './Customize', './SentRequests', './MapView']
-const icons = [<SettingsRemoteRoundedIcon />, < SettingsRoundedIcon />, < SendRoundedIcon />, < RoomRoundedIcon />]
+
+// try to improve style adding
+const icons = [<SettingsRemoteRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < SettingsRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < SendRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />, < RoomRoundedIcon fontSize="large" style={{ color: '#E7E7DE' }} />]
 
 function renderIcon(index) {
     return icons[index];
@@ -47,13 +60,16 @@ export default function Sidebar() {
         }}
         anchor="left"
     >
-        <div className={classes.toolbar} />
+        {/* <div className={classes.toolbar} /> */}
+        {/* name must be passed */}
+        <User name="Isara" />
         <Divider />
         <List>
-            {['Overview', 'Customize', 'Requests', 'Map view'].map((text, index) => (
+            {['Overview', 'Customize', 'Sent Requests', 'Map view'].map((text, index) => (
                 <ListItem button key={text} component={Link} to={links[index]}>
                     <ListItemIcon>{renderIcon(index)}</ListItemIcon>
-                    <ListItemText primary={text} />
+                    {/* //h1 tag added  */}
+                    <h1><ListItemText primary={text} className={classes.text} /></h1>
                 </ListItem>
 
             ))}

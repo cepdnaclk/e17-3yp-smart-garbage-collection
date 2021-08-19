@@ -11,6 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+// try to implement password visibility 
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -97,6 +99,8 @@ function Form(props) {
                     id="password"
                     autoComplete="current-password"
                 />
+
+
                 {/* <FormControlLabel ### REMEMBER ME
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
@@ -124,7 +128,7 @@ function Form(props) {
                     </Grid>
                 </Grid>
             </form>
-        </div>
+        </div >
     );
 }
 

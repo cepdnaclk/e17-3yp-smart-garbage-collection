@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
+import TempTable from '../components/TempTable';
+import ButtonBar from '../components/ButtonBar';
 
 
 const drawerWidth = 240;
@@ -26,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+
 }));
 
 export default function SentRequests() {
@@ -34,11 +37,12 @@ export default function SentRequests() {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Appbar section="Requests"></Appbar>
+            <Appbar section="Sent Requests"></Appbar>
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <h1>SentRequests</h1>
+                <ButtonBar />
+                <TempTable />
 
             </main>
         </div>
