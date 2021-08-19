@@ -8,7 +8,6 @@ import Overview from '../pages/Overview.jsx';
 import Customize from '../pages/Customize.jsx';
 import MapView from '../pages/MapView.jsx';
 import SentRequests from '../pages/SentRequests.jsx';
-import AddRemoveBins from '../pages/AddRemoveBins.jsx';
 
 function App() {
     return (<Router>
@@ -21,7 +20,7 @@ function App() {
             <Route exact path="/Customize"><Customize /></Route>
             <Route exact path="/MapView"><MapView /></Route>
             <Route exact path="/SentRequests"><SentRequests /></Route>
-            <Route exact path="/AddRemoveBins"><AddRemoveBins /></Route>
+
         </Switch>
     </Router>);
 

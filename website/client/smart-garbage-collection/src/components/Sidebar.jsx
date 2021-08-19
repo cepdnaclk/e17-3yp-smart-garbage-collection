@@ -4,10 +4,13 @@ import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
+import { Link } from 'react-router-dom'
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import SettingsRemoteRoundedIcon from '@material-ui/icons/SettingsRemoteRounded';
+import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 
 
 const drawerWidth = 240;
@@ -27,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const links = ['./Overview', './Customize', './SentRequests', './MapView']
+const icons = [<SettingsRemoteRoundedIcon />, < SettingsRoundedIcon />, < SendRoundedIcon />, < RoomRoundedIcon />]
+
+function renderIcon(index) {
+    return icons[index];
+}
 
 export default function Sidebar() {
     const classes = useStyles();
@@ -41,11 +50,12 @@ export default function Sidebar() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts', 'wow'].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            {['Overview', 'Customize', 'Requests', 'Map view'].map((text, index) => (
+                <ListItem button key={text} component={Link} to={links[index]}>
+                    <ListItemIcon>{renderIcon(index)}</ListItemIcon>
                     <ListItemText primary={text} />
                 </ListItem>
+
             ))}
         </List>
 
