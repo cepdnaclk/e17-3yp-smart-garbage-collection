@@ -7,7 +7,8 @@ function Signup() {
 
     return (<Container component="main" maxWidth="xs" >
         <CssBaseline />
-        <Form title="Sign Up" msg="Already have an account? Sign in" link="/Signin" />
+        {/* nextPage should be changed to error message or dashboard */}
+        <Form title="Sign Up" msg="Already have an account? Sign in" link="/Signin" nextPage="/Dashboard" />
     </Container>
     );
 }
