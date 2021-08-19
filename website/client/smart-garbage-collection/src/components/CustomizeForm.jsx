@@ -25,7 +25,7 @@ export default function CustomizeForm() {
             <Grid container spacing={3}>
 
                 <Grid item xs={6}>
-                    <h2>Add or Remove</h2>
+                    <h2>Add or Remove Units</h2>
                     <Paper className={classes.paper}>
 
                         <AddRemoveForm />

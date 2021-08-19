@@ -28,5 +28,5 @@ const useStyles = makeStyles((theme) => ({
 export default function User(props) {
     const classes = useStyles();
     return (<div><Avatar className={classes.user} alt={props.name} src={userImg} />
-        <h2 className={classes.text}>{props.name}</h2></div >);
+        <h3 className={classes.text}>{props.name}</h3></div >);
 }
