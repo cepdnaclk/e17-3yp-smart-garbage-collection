@@ -107,6 +107,7 @@ function Form(props) {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    href={props.nextPage}
                 >
                     {props.title}
                 </Button>
