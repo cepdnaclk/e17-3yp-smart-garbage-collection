@@ -11,6 +11,7 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import SettingsRemoteRoundedIcon from '@material-ui/icons/SettingsRemoteRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
+import User from './User';
 
 
 const drawerWidth = 240;
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#0F3057',
     },
     // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
+    // toolbar: theme.mixins.toolbar,
 
     text: {
         color: '#E7E7DE',
@@ -56,7 +57,9 @@ export default function Sidebar() {
         }}
         anchor="left"
     >
-        <div className={classes.toolbar} />
+        {/* <div className={classes.toolbar} /> */}
+        {/* name must be passed */}
+        <User name="Isara" />
         <Divider />
         <List>
             {['Overview', 'Customize', 'Requests', 'Map view'].map((text, index) => (
