@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
-
+import TempTable1 from '../components/TempTable1';
+import ButtonBar from '../components/ButtonBar';
 
 const drawerWidth = 240;
 
@@ -38,7 +39,8 @@ export default function Dashboard() {
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <h1>Hi</h1>
+                <ButtonBar placeholder='Search by Unit Id' isView='yes' />
+                <TempTable1 />
 
             </main>
         </div>
