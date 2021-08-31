@@ -1,3 +1,5 @@
+// Requests Table 
+
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,53 +12,34 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 
+
 const columns = [
-    { id: 'name', label: 'Unit ID', minWidth: 170 },
-    { id: 'code', label: 'Bin', minWidth: 100 },
-    {
-        id: 'population',
-        label: 'Fill Level',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'size',
-        label: 'Assign',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'density',
-        label: 'Progress',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    },
+    { id: 'request_id', label: 'Request ID', minWidth: 100 },
+    { id: 'time', label: 'Time', minWidth: 100 },
+    { id: 'collector', label: 'Assigned To', minWidth: 100, align: 'left' },
+    { id: 'status', label: 'Status', minWidth: 100, align: 'right' },
 ];
 
-function createData(name, code, population, size) {
-    const density = population / size;
-    return { name, code, population, size, density };
+
+
+function createData(request_id, time, collector, status) {
+
+    return { request_id, time, collector, status };
 }
 
+
+
 const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
+    createData('1', '4.00 p.m', "Collector1", 'Accepted'),
+    createData('2', '5.40 p.m', "Collector2", 'Declined'),
+    createData('3', '3.30 p.m', "Collector3", 'Completed'),
+    createData('4', '2.25 p.m', "Collector1", 'Accepted'),
+    createData('5', '1.00 p.m', "Collector1", 'Accepted'),
+    createData('6', '5.05 p.m', "Collector2", 'Declined'),
+    createData('7', '3.07 p.m', "Collector3", 'Completed'),
+    createData('8', '2.00 p.m', "Collector1", 'Accepted'),
+
+
 ];
 
 const StyledTableCell = withStyles((theme) => ({
@@ -84,7 +67,23 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function TempTable() {
+// function setColor(id, value) {
+
+//     if (id === 'status') {
+//         if (value === 'Completed') return '#54E346'; //green
+//         else if (value === 'Accepted') return '#185ADB'; //blue
+//         else return '#F92727'; //red
+//     }
+// }
+
+// function setValue(id, value) {
+
+//     if (id === 'status') return <b>value</b>;
+//     return value;
+// }
+
+
+export default function TempTable2() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -122,8 +121,11 @@ export default function TempTable() {
                                     {columns.map((column) => {
                                         const value = row[column.id];
                                         return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            <TableCell key={column.id} align={column.align} >
+                                                {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
+                                                {column.id === 'status' ? <b>{value}</b> : value}
+                                                {/* {setValue(column.id, value)} */}
+
                                             </TableCell>
                                         );
                                     })}
@@ -145,3 +147,4 @@ export default function TempTable() {
         </Paper>
     );
 }
+

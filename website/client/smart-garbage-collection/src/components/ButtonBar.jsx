@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ButtonBar() {
+export default function ButtonBar(props) {
     const classes = useStyles();
 
     return (<div> <Grid container spacing={1} className={classes.main}>
@@ -48,7 +48,7 @@ export default function ButtonBar() {
                 </IconButton>
                 <InputBase
                     className={classes.input}
-                    placeholder="Search by unit ID"
+                    placeholder={props.placeholder}
                     inputProps={{ 'aria-label': 'search by unit id' }}
                 />
                 <IconButton type="submit" className={classes.iconButton} aria-label="search">
@@ -60,7 +60,8 @@ export default function ButtonBar() {
             </Paper>
         </Grid>
         <Grid item xs={6}>
-            <ToggleButton />
+            {props.isView === 'yes' ? <ToggleButton /> : null}
+
         </Grid>
     </Grid>
     </div>

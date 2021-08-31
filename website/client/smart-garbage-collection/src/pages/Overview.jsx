@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
-import TempTable from '../components/TempTable';
+import TempTable1 from '../components/TempTable1';
 import ButtonBar from '../components/ButtonBar';
 
 
@@ -41,8 +41,8 @@ export default function Overview() {
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <ButtonBar />
-                <TempTable />
+                <ButtonBar placeholder='Search by Unit Id' isView='yes' />
+                <TempTable1 />
 
             </main>
         </div>
