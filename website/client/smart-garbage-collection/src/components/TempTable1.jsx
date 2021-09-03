@@ -11,6 +11,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import SelectCollector from './SelectCollector';
+import IconButton from '@material-ui/core/IconButton';
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import { Grid } from '@material-ui/core';
 
 
 const columns = [
@@ -18,7 +21,7 @@ const columns = [
     { id: 'bin', label: 'Bin', minWidth: 100 },
     { id: 'fill_level', label: 'Fill Level', minWidth: 100, align: 'right' },
     { id: 'compaction', label: 'Compaction', minWidth: 100, align: 'right' },
-    { id: 'assign', label: 'Assign', minWidth: 100, align: 'right' },
+    { id: 'assign', label: 'Assign', minWidth: 100, align: 'center' },
     { id: 'location', label: 'Location', minWidth: 100, align: 'right' },
     { id: 'battery', label: 'Battery', minWidth: 100, align: 'right' },
 
@@ -29,10 +32,10 @@ function createData(unit_id, bin, fill_level, compaction, assign, location, batt
 }
 
 const rows = [
-    createData('1', 'Food', "10%", 'None', null, 'Loc1', '57%'),
-    createData('1', 'Paper', "91%", 3, 'Collector1', 'Loc1', '62%'),
-    createData('1', 'Polythene', "60%", 2, 'Collector1', 'Loc1', '50%'),
-    createData('1', 'Other', "20%", 'None', null, 'Loc1', '88%'),
+    createData('1', 'Food', "10%", 'None', null, 'Locaction 1', '57%'),
+    createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', '62%'),
+    createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', '50%'),
+    createData('1', 'Other', "20%", 'None', null, 'Location 1', '88%'),
     createData('2', 'Food', "10%", 'None', null, 'Loc2', '57%'),
     createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', '57%'),
     createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', '90%'),
@@ -84,7 +87,21 @@ function setColor(id, value) {
 function setValue(id, value) {
 
     if (id === 'fill_level') return <b>{value}</b>;
-    else if (id === 'assign') return <SelectCollector />;
+    else if (id === 'assign') {
+        return <div>
+            <Grid container >
+                <Grid item xs={6}>
+                    <SelectCollector />
+                </Grid>
+                <Grid item xs={6}>
+                    <IconButton aria-label="send">
+                        <SendRoundedIcon />
+                    </IconButton>
+                </Grid>
+
+
+            </Grid></div>
+    };
     return value;
 }
 

@@ -67,14 +67,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-// function setColor(id, value) {
+function setColor(id, value) {
 
-//     if (id === 'status') {
-//         if (value === 'Completed') return '#54E346'; //green
-//         else if (value === 'Accepted') return '#185ADB'; //blue
-//         else return '#F92727'; //red
-//     }
-// }
+    if (id === 'status') {
+        if (value === 'Completed') return '#DCFFCC'; //green
+        else if (value === 'Accepted') return '#B4F2E1'; //blue
+        else return '#FFBCBC'; //red
+    }
+}
 
 // function setValue(id, value) {
 
@@ -121,7 +121,7 @@ export default function TempTable2() {
                                     {columns.map((column) => {
                                         const value = row[column.id];
                                         return (
-                                            <TableCell key={column.id} align={column.align} >
+                                            <TableCell key={column.id} align={column.align} style={{ backgroundColor: setColor(column.id, value) }}>
                                                 {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
                                                 {column.id === 'status' ? <b>{value}</b> : value}
                                                 {/* {setValue(column.id, value)} */}

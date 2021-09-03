@@ -8,6 +8,7 @@ import Overview from '../pages/Overview.jsx';
 import Customize from '../pages/Customize.jsx';
 import MapView from '../pages/MapView.jsx';
 import SentRequests from '../pages/SentRequests.jsx';
+import TempOverview from '../pages/TempOverview'; // temporary one -remove this
 
 function App() {
     return (<Router>
@@ -20,6 +21,8 @@ function App() {
             <Route exact path="/Customize"><Customize /></Route>
             <Route exact path="/MapView"><MapView /></Route>
             <Route exact path="/SentRequests"><SentRequests /></Route>
+            {/* temporary */}
+            <Route exact path="/TempOverview"><TempOverview /></Route>
 
         </Switch>
     </Router>);
