@@ -32,18 +32,18 @@ function createData(unit_id, bin, fill_level, compaction, assign, location, batt
 }
 
 const rows = [
-    createData('1', 'Food', "10%", 'None', null, 'Locaction 1', '57%'),
-    createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', '62%'),
-    createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', '50%'),
-    createData('1', 'Other', "20%", 'None', null, 'Location 1', '88%'),
-    createData('2', 'Food', "10%", 'None', null, 'Loc2', '57%'),
-    createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', '57%'),
-    createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', '90%'),
-    createData('2', 'Other', "20%", 'None', null, 'Loc2', '17%'),
-    createData('3', 'Food', "10%", 'None', null, 'Loc3', '57%'),
-    createData('3', 'Paper', "91%", 3, 'Collector1', 'Loc3', '42%'),
-    createData('3', 'Polythene', "60%", 3, 'Collector1', 'Loc3', '57%'),
-    createData('3', 'Other', "20%", 'None', null, 'Loc3', '7%'),
+    createData('1', 'Food', "10%", 'None', null, 'Locaction 1', 'HIGH'),
+    createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', 'HIGH'),
+    createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', 'MEDIUM'),
+    createData('1', 'Other', "20%", 'None', null, 'Location 1', 'HIGH'),
+    createData('2', 'Food', "10%", 'None', null, 'Loc2', 'LOW'),
+    createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', 'MEDIUM'),
+    createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', 'HIGH'),
+    createData('2', 'Other', "20%", 'None', null, 'Loc2', 'HIGH'),
+    createData('3', 'Food', "10%", 'None', null, 'Loc3', 'HIGH'),
+    createData('3', 'Paper', "91%", 3, 'Collector1', 'Loc3', 'HIGH'),
+    createData('3', 'Polythene', "60%", 3, 'Collector1', 'Loc3', 'MEDIUM'),
+    createData('3', 'Other', "20%", 'None', null, 'Loc3', 'HIGH'),
 
 
 

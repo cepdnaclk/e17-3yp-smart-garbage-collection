@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
-import TempMap from '../components/TempMap';
+//import TempMap from '../components/TempMap';
 
 
 const drawerWidth = 240;
@@ -39,7 +39,8 @@ export default function MapView() {
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <TempMap />
+                {/* <TempMap /> */}
+                Map
 
             </main>
         </div>

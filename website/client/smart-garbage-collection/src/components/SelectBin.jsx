@@ -26,7 +26,7 @@ export default function SelectCollector() {
     return (
         <div>
             <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Select</InputLabel>
+                <InputLabel id="demo-simple-select-label">Select a bin</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
