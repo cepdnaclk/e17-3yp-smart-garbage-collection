@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Axios from 'axios';
 
 // try to implement password visibility 
 
@@ -39,6 +40,20 @@ const useStyles = makeStyles((theme) => ({
 
 function NameBoxes() {
     const classes = useStyles();
+
+    const [fnameReg, setFameReg] = useState('');
+    const [lnameReg, setLameReg] = useState('');
+
+    // http 
+    const register = () => {
+        Axios.post("http://localhost:3002/Signup", {
+            adminfname: fnameReg,
+            adminlname: lnameReg,
+        }).then((response) => {
+            console.log(response);
+        });
+    }
+
     return (<Grid container spacing={2} className={classes.form}><Grid item xs={12} sm={6}>
         <TextField
             autoComplete="fname"
@@ -49,6 +64,12 @@ function NameBoxes() {
             id="firstName"
             label="First Name"
             autoFocus
+
+            // take user input
+            onChange={(e) => {
+                setFameReg(e.target.value);
+            }}
+
         />
     </Grid>
         <Grid item xs={12} sm={6}>
@@ -60,12 +81,31 @@ function NameBoxes() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+
+                // take user input
+                onChange={(e) => {
+                    setLameReg(e.target.value);
+                }}
+
             />
         </Grid></Grid>);
 }
 
 function Form(props) {
     const classes = useStyles();
+
+    const [usernameReg, setUsernameReg] = useState('');
+    const [passwordReg, setPasswordReg] = useState('');
+
+    const register = () => {
+        Axios.post("http://localhost:3002/Signup", {
+            adminusername: usernameReg,
+            adminpassword: passwordReg,
+        }).then((response) => {
+            console.log(response);
+        });
+    }
+
     return (
 
         <div className={classes.paper}>
@@ -87,6 +127,11 @@ function Form(props) {
                     name="username"
                     autoComplete="username"
                     autoFocus
+
+                    // take user input
+                    onChange={(e) => {
+                        setUsernameReg(e.target.value);
+                    }}
                 />
                 <TextField
                     variant="outlined"
@@ -98,6 +143,11 @@ function Form(props) {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+
+                    // take user input
+                    onChange={(e) => {
+                        setPasswordReg(e.target.value);
+                    }}
                 />
 
 
@@ -112,6 +162,7 @@ function Form(props) {
                     color="primary"
                     className={classes.submit}
                     href={props.nextPage}
+                    onClick={register}
                 >
                     {props.title}
                 </Button>
