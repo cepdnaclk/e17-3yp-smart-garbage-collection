@@ -88,6 +88,8 @@ li {
     position: relative;
 }
 
+
+
 .datageneration{
     height: 140vh;
     position: relative;
@@ -101,7 +103,7 @@ li {
 }
 
 .ui {
-    height: 120vh;
+    height: 200vh;
     position: relative;
     background-color: var(--primary);
 }
@@ -463,8 +465,6 @@ li {
 
 /* Gradient Border And Background On Icons */
 
-.home_text,
-.home .fas,
 .circuits .far,
 .datageneration .far,
 .information .fas,
@@ -477,6 +477,19 @@ li {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.home_text,
+.home .fas {
+    padding: 15px 0;
+    background: -webkit-gradient( linear, left top, left bottom, from(#013d13), to(#00a18f));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 15px 5px rgba(0,0,0,0.1),
+                 10px 20px 5px rgba(0,0,0,0.05),
+                 -10px 20px 5px rgba(0,0,0,0.05);
+    -webkit-text-stroke: 1px rgb(80, 223, 99);
 }
 
 .navbar-nav a:hover,
