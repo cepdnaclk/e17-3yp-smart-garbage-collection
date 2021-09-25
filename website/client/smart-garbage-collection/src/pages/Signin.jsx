@@ -134,6 +134,11 @@ function Signin() {
                             Don't have an account? Sign Up
                         </Link>
                     </Grid>
+                    <Grid item>
+
+                        Don't have an account? Sign Up
+
+                    </Grid>
                 </Grid>
             </form>
 
