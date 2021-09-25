@@ -1,31 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Your description">
     <meta name="author" content="Your name">
 
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+    <meta property="og:site_name" content="" />
+    <!-- website name -->
+    <meta property="og:site" content="" />
+    <!-- website link -->
+    <meta property="og:title" content="" />
+    <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" />
+    <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" />
+    <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" />
+    <!-- where do you want your post to link to -->
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- to have large image post format in Twitter -->
+
     <!-- Webpage Title -->
-    <title>Smart Garbage Collection</title>
-    
+    <title>Smart Garbage Collector</title>
+
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/fontawesome-all.min.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
-	
-	<!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="./css/aos.min.css" rel="stylesheet">
+    <link href="./css/swiper.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- University logo -->
+    <link rel="icon" href="./assets/images/university_logo.png">
 </head>
+
 <body>
-    
+
     <!-- Navigation -->
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
         <div class="container">
 
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text" href="index.html">Trashbot</a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,614 +65,1330 @@
                         <a class="nav-link active" aria-current="page" href="#header">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#introduction">Introduction</a>
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#architecture">Architecture</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#solution-overview">Solution</a>
+                        <a class="nav-link" href="#features">Features</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#datageneration">Data Flow</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="#datageneration">Data Generation</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="#flowchart">Flow Chart/ Algorithms</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="#diagrams">Diagrams</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#design">Design</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="#circuits">Circuit</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="#model">3D Model</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="#ui">UI /UX</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#ui-designs">UI Designs</a>
-                    </li>
-		    <li class="nav-item">
-                        <a class="nav-link" href="#testing">Testing</a>
+                        <a class="nav-link" href="#timeline">Timeline</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#budget">Budget</a>
                     </li>
-		    <li class="nav-item">
-                        <a class="nav-link" href="#timeline">Timeline</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#team">Team</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactus">Contact</a>
+                    </li>
                 </ul>
-             
-            </div> <!-- end of navbar-collapse -->
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
+                
+            </div>
+            <!-- end of navbar-collapse -->
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of navbar -->
     <!-- end of navigation -->
 
-      
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="h1-large">SMART<br> GARBAGE<br> COLLECTION</h1>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of header -->
-    <!-- end of header -->
+
+    <!-- Home -->
+    <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5" data-aos="fade-right">
+            <h1 class="headline"> <b><span class="home_text">Smart</span> <span class="home_text"><br>Garbage Collector</span><br></b></h1>
+            <h2 class="headline"> <b>For A Proper Garbage Management For Smart Cities<br></b></h1>
+
+            <div class="my-3">
+                <a class="btn" href="https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection" target="_blank">Project Repository</a>
+            </div>
+            <div class=" d-flex align-items-left justify-content-left position-relative" data-aos="zoom-in" data-aos-delay="200">
+                <a href="assets/video.mp4" class="glightbox play-btn"></a>
+            </div>
+            <br>
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of home -->
 
 
-    <!-- Introduction -->
-    <div id="introduction" class="basic-1 bg-gray">
+    <!-- About -->
+    <section class="about d-flex align-items-center text-light py-5" id="about">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-container">
-                    <h1>INTRODUCTION</h1>
-                    <br>
-                    <p>
-                        Proper garbage collection & disposal has been a continuous struggle. Main issue that we identified id that there is no way to get an overview of fill levels of the bins. Therefore, authorities in charge of collecting garbage do not know when and where to collect garbage. This leads to inefficiency in assigning garbage collectors. And also time and fuel consumption are hight when collecting garbage, due to lack of a proper system. People tend to burn plastic/polythene because of the lack of a proper household garbage collection system and it gives rise to severe environmental polution. Furthermore, overflowing garbage bins which can be seen very often in public areas affect on public health negatively and scenic beauty of the environment is also destroyed.
-                    <br><br>
-                    Smart garbage collection system provides a platform to manage garbage collecting in a large area with proper coordination between the responsible authorities and the workers assigned to collect garbage while utilizing the available resources effectively. And also the people who are in need of a proper system to dispose garbage will be benefited by the system. The system can be implemented in cities, grounds, parks and any large public areas and it will make a high positive impact on public health & environment as well.
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    
+                    <div class="section-title">
+                        <h2><span class="home_text">why</span></h2>
+                        <p>Why do we need a Smart Garbage Collector?</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >Proper garbage collection & disposal has been a continuous struggle. Main issue that we identified is that there is no way to get an overview of fill levels of the bins. Therefore, authorities in charge of collecting garbage do not
+                        know when and where to collect garbage. This leads to inefficiency in assigning garbage collectors. And also time and fuel consumption are hight when collecting garbage, due to lack of a proper system. People tend to burn plastic/polythene
+                        because of the lack of a proper household garbage collection system and it gives rise to severe environmental polution. Furthermore, overflowing garbage bins which can be seen very often in public areas affect on public health
+                        negatively and scenic beauty of the environment is also destroyed.</p><br><br>
+                    
+                    <div class="section-title">
+                        <h2><span class="home_text">Solution Overview</span></h2>
+                        <p>What is Smart Garbage Collector?</p>
+                    </div>
+                    
+                    <p align="justify" class="py-2 para-light">Smart garbage collection system provides a platform to manage garbage collecting in a large area with proper coordination between the responsible authorities and the workers assigned to collect garbage while utilizing the available
+                        resources effectively. And also the people who are in need of a proper system to dispose garbage will be benefited by the system. The system can be implemented in cities, grounds, parks and any large public areas and it will make
+                        a high positive impact on public health & environment as well.</p>
+                </div>
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <img class="img-fluid" src="./assets/images/intro.png" alt="about">
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of about -->
+
+    <!-- Solution Architecture -->
+    <section class="architecture d-flex align-items-center text-light py-5" id="architecture">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    
+                    <div class="section-title">
+                        <h2><span class="home_text">Architecture</span></h2>
+                        <p>Solution Architecture</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >The main device of our system is the Smart Garbage Bin. 
+                        Inside the Garbage bin the main controller is ATmega328p microcontroller. From this controller,
+                         we implement three main features. They are User Alerting system, Fill Level Detection System 
+                         and Compaction mechanism. Considring compaction mechanism, it has seperate security system to
+                         detect the compation mechanism. The main power supply of the system is solar panel unit. There
+                         is also a bin location identification system inside the smart garbage bin.
+                    </p><br><br>
+
+                    <p align="justify" class="py-2 para-light" >The Smart Garbage Bin can be connected to the AWS server
+                    via the GSM module and GPS module. In order to communicate with the server, there will be a web
+                    application as well as a mobile application. When garbage is put in to the bin, the LED indicators in 
+                    Fill Level Detection Unit will be turned on according to the fill level. And, if the Garbage Bin is 
+                    already full, Bin sends the fill level information to the server. Then, the server is responsible for 
+                    updating details in both mobile application and web application. According to the compaction process 
+                    details in the web server, the garbage bin will be automatically compacted. Otherwise, web application 
+                    will send the request to Garbage Bin Collector through the mobile application. He/ she can view all 
+                    the locations of assigned bins using the Google map in the mobile application.
+
+                    </p><br><br>
+                    
+                </div>
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <img class="img-fluid" src="./assets/images/diagrams/overview.jpg" alt="about">
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of solution architecture -->
+
+    <!-- Features -->
+    <section class="features d-flex align-items-center py-5" id="features">
+        <div class="container text-light">
+            <div class="section-title">
+                <h2><span class="home_text">Features</span></h2>
+                <p>Check Our Special System Features</p>
+            </div>
+            <div class="row gy-4 py-2" data-aos="zoom-in">
+                <h3 style="color: rgb(117, 168, 145);">FEATURES OF GARBAGE BIN</h3>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-sort-amount-up-alt fa-2x"></i>
+                        <h4 class="py-2">Fill Level Detection</h4>
+                        <p class="para-light">Can decide on the priority to collect garbage</p><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-lightbulb fa-2x"></i>
+                        <h4 class="py-2"> LED Indicators</h4>
+                        <p class="para-light">Users can know whether to dispose or not & night visibility</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-compress fa-2x"></i>
+                        <h4 class="py-2">Compaction</h4>
+                        <p class="para-light">Reduce number of times garbage should be collected, max space utilization</p>
+                    </div><br><br><br>
+                </div>
+                <h3 style="color: rgb(117, 168, 145);">FEATURES OF WEBSITE</h3>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-search fa-2x"></i>
+                        <h4 class="py-2">Get Overview</h4>
+                        <p class="para-light">Can decide on priority, can stop overflowing bins efficiency</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-user-check fa-2x"></i>
+                        <h4 class="py-2">Assign Collectors</h4>
+                        <p class="para-light">Managing a large area becomes easy high efficiency</p><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-sliders-h fa-2x"></i>
+                        <h4 class="py-2">Set Parameters</h4>
+                        <p class="para-light">Parameters to detect fill levels change as prefered</p><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                        <h4 class="py-2">View on a Map</h4>
+                        <p class="para-light">Easy to keep track of the procedure</p><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-trash-restore fa-2x"></i>
+                        <h4 class="py-2">Add/Remove Bins</h4>
+                        <p class="para-light">Expanding the system with more units</p><br>
+                    </div><br><br><br>
+                </div>
+                <h3 style="color: rgb(117, 168, 145);">FEATURES OF Mobile App</h3>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-comments fa-2x"></i>
+                        <h4 class="py-2">Handle Requests</h4>
+                        <p class="para-light">Can cancel or accept requests based on availability</p><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-search fa-2x"></i>
+                        <h4 class="py-2"> Get Overview</h4>
+                        <p class="para-light">Can get an idea on how much garbage is there to be collected</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                        <h4 class="py-2">Locate on a Map</h4>
+                        <p class="para-light">Can easily find the best route to collect the garbage bins assigned, increased efficiency</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of features --> 
+    
+    <!-- Information -->
+    <section class="information">
+        <div class="container-fluid">
+            <div class="row text-light">
+                <div class="col-lg-4 text-center p-5" data-aos="zoom-in">
+                    <i class="fas fa-laptop fa-3x p-2"></i>
+                    <h4 class="py-3">Website</h4>
+                    <p class="para-light">Used for administration purpose by the adminintrator</p>
+                </div>
+                <div class="col-lg-4 text-center p-5 text-dark" data-aos="zoom-in">
+                    <i class="fas fa-mobile-alt fa-3x p-2"></i>
+                    <h4 class="py-3">Mobile App</h4>
+                    <p class="para-light">Used by the garbage collectors</p>
+                </div>
+                <div class="col-lg-4 text-center p-5" data-aos="zoom-in">
+                    <i class="fas fa-dumpster fa-3x p-2"></i>
+                    <h4 class="py-3">Garbage bin </h4>
+                    <p class="para-light">Used by the general public</p>
+                </div>
+            </div>
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of information -->
+
+
+    <!-- Data and Control Flow -->
+    <!-- Generation of Data -->
+    <section class="datageneration d-flex align-items-center text-light py-5" id="datageneration">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    
+                    <div class="section-title">
+                        <p>Data Generation</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >Smart Garbage Collector system's block diagram consists of following four units
                     </p>
-			
-			<!--<a class="button-blue" href="#design">Find further!</a>-->
-			<!-- <button class="button button2" onclick=" ">Watch Product Video</button> -->
-			<!--<a href="https://app.animaker.com/video/0VOD47AH4NI9Y01B" target="_blank" style="color:#53575a;"><h3> Watch Product Video</h3></a>-->
-			<video width="700" height="400" controls class="center">
-				<source src="Product Video.mp4" type=video/mp4></video>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of introduction -->
 
-     
-	<!-- Solution overview -->
-    <div id="solution-overview" class="cards-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Solution Overview</h1>
-                    <!-- Card -->
-                    <div class="card first">
-                        <div class="card-icon">
-                            <br><img src="images/computer.png" alt="web" style="height: 55px; width: 45px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Website</h4>
-                            <div class="card-text">Used for administration purpose by the adminintrator</div>
-                        </div>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p>Input Unit</p>
                     </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card second">
-                        <div class="card-icon">
-                            <br>
-                            <img src="images/user-interface.png" alt="web" style="height: 50px; width: 50px;">
-			    <br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Mobile App</h4>
-                            <div class="card-text">Used by the garbage collectors<br><br></div>
-                        </div>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p>Controlling Unit</p>
                     </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card third">
-                        <div class="card-icon">
-                            <br><img src="images/trash-bin.png" alt="web" style="height: 50px; width: 45px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Garbage bin</h4>
-                            <div class="card-text">Used by the general public<br><br></div>
-                        </div>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p>Processing Unit</p>
                     </div>
-                    <!-- end of card -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-		
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of introduction -->
-	
-	
-    <!-- Hardware features -->
-    <div id="hwfeatures" class="cards-1 bg-gray">
-        <div class="container">
-	    
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Hardware features</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card first">
-                        <div class="card-icon">
-                            <br><img src="images/fill_level.png" alt="web" style="height: 55px; width: 50px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Fill level detection</h4>
-                            <div class="card-text">Can decide on the priority to collect garbage<br><br></div>
-                        </div>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p>Output Unit</p>
                     </div>
-                    <!-- end of card -->
 
-                    <!-- Card -->
-                    <div class="card second">
-                        <div class="card-icon">
-                            <br><img src="images/led_i.png" alt="web" style="height: 55px; width: 50px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">LED indicators</h4>
-                            <div class="card-text">For fill level (red,yellow,green)- users can know whether to dispose or not  & night visibility</div>
-                        </div>
-                    </div>
-                    <!-- end of card -->
+                    <p align="justify" class="py-2 para-light" >The input unit acts as the power supply unit in the system. Here the solar panel 
+                        collects power from the sun’s rays.
+                         It is a monocrystallic panel, containing solar photovoltaic cells which convert the sun 
+                         rays into electricity. The Dc power from the solar panel is then stored in the 12 volts battery
+                        used to operate all the electronic components in the controlling unit and processing unit. 
+                        Then the controlling unit consists of relay switch [5V dual channel], ardino UNO [ATmega328 8-bit], ultra- sonic sensor 
+                        and LED indicators.
+                         These components are used to control the complete processing unit. The ultra- sonic sensor senses the garbage
+                        accumulated in the container bin at the constrained level (say about 5cm from the top of the container bin) and sends signal
+                        to the micro chip. The micro chip is programmed to actuate the GSM module which sends a message to the administrator
+                         when the constrained level of garbage is accumulated in the garbage bin. It also controls the relay switch to actuate the DC motor. 
+                        And considering the fill level information, LEDs are turned on by the micro chip.
 
-                    <!-- Card -->
-                    <div class="card third">
-                        <div class="card-icon">
-                            <br><img src="images/compact.png" alt="web" style="height: 55px; width: 50px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Compaction</h4>
-                            <div class="card-text">Reduce number of times garbage should be collected, max space utilization</div>
-                        </div>
-                    </div>
-                    <!-- end of card -->
+                    </p><br>
 
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-1 -->
-    <!-- end of hardware features -->
+                    <p align="justify" class="py-2 para-light" >Next, the processing Unit has the DC motor. The Dc motor is connected to relay switch which 
+                        actuates the scissor mechanism to compact the garbage in
+                        the garbage bin at constrained level. The relay switch with a H-bridge arrangement is used to control the Dc motor. This
+                        relay switch as two switch s1 and s2. When s1 is ON’s, the motor terminals with a positive polarity, thus the direction of
+                        rotation of the lead screw connected to the motor is in clockwise direction to extend the mechanism, similarly when s1 is
+                        off and s2 is actuated the lead screw will rotate in counter-clockwise direction to retract the mechanism. Next, the output unit 
+                        consists of a GSM module, when the ultra-sonic sensor senses the level of garbage in the container bin, therefore actuating the 
+                        scissor mechanism for compaction of waste and when the garbage
+                        reaches about 3cm at top of the container bin, the ultra sonic sensor sends signal to the GSM module via mocro chip,
+                        thereby it sends the message stating that the bin is going to be filled and need to dispose the wastes. Tha data and control flow can be observed in the diagram.
 
-    <!-- software web features -->
-    <div id="sw-web-features" class="cards-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Website features</h2>
+                    </p><br>
                     
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card first">
-                        <div class="card-icon">
-                            <br><img src="images/search.png" alt="web" style="height: 50px; width: 55px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Get overview</h4>
-                            <div class="card-text">Can decide on priority can stop overflowing bins efficiency</div>
-                        </div>
+                </div>
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <div class="section-title">
+                        <h2><span class="home_text">block Diagram</span></h2>
                     </div>
-                    <!-- end of card -->
+                    <img class="img-fluid" src="./assets/images/diagrams/block.PNG" alt="about"><br><br><br><br><br><br><br>
 
-                    <!-- Card -->
-                    <div class="card second">
-                        <div class="card-icon">
-                            <br><img src="images/user.png" alt="web" style="height: 54px; width: 60px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Assign collectors</h4>
-                            <div class="card-text">Managing a large area becomes easy high efficiency</div>
-                        </div>
+                    <div class="section-title">
+                        <h2><span class="home_text">Data and Control Flow</span></h2>
                     </div>
-                    <!-- end of card -->
+                    <img class="img-fluid" src="./assets/images/diagrams/data.PNG" alt="about">
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of data generation -->
 
-                    <!-- Card -->
-                    <div class="card third">
-                        <div class="card-icon">
-                            <br><img src="images/placeholder.png" alt="web" style="height: 50px; width: 60px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">View on a map</h4>
-                            <div class="card-text">Easy to keep track of the procedure</div>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-			
-			 <!-- Card -->
-                    <div class="card fourth">
-                        <div class="card-icon">
-                            <br><img src="images/delete.png" alt="web" style="height: 50px; width: 60px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Add/remove bins</h4>
-                            <div class="card-text">Expanding the system with more units</div>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-			
-			 <!-- Card -->
-                    <div class="card fifth">
-                        <div class="card-icon">
-                            <br><img src="images/cogwheel-setting.png" alt="web" style="height: 50px; width: 60px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Set parameters</h4>
-                            <div class="card-text">Parameters to detect fill levels change as prefered</div>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-1 -->
-    <!-- end of software web features -->
-
-    <!-- software app features -->
-    <div id="sw-app-features" class="cards-1 bg-gray">
+    <!-- Flow Chart / Algorithms -->
+    <section class="flowchart d-flex align-items-center text-light py-5" id="flowchart">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Mobile App features</h2>
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
                     
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
+                    <div class="section-title">
+                        <p>Flow Diagram & Algorithms</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >Firstly, the GSM module and other ports are initialized. 
+                        Then, we check whether garbage bin is used by someone. If it is used, the fill height is sensed 
+                        and fill level is calculated. If the fill level is lower than 50%, Green colored LED is turned on, 
+                        if the fill level is in between 50% - 80%, yellow LED is turned on. Otherwise, red LED is turned on.
+                        If red LED is turned on, it s checked wheth bin needs to be compacted or not by using the number 
+                        of compaction processes. If number of compaction processes are lower than 3, then the compaction 
+                        process is automatically turned on. When compaction is going, if someone tries to put garbage 
+                        in to the garbage bin, it will be automatically stopped. If it is not, compaction process will be 
+                        completed. After that the number of compaction processes will be updated.
 
-                    <!-- Card -->
-                    <div class="card first">
-                        <div class="card-icon">
-                            <br><img src="images/request.png" alt="web" style="height: 60px; width: 65px;"><br>
+                    </p><br><br><br><br><br><br><br><br>
+                    
+                </div>
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <img class="img-fluid" src="./assets/images/diagrams/flow_new.jpg" alt="about">
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of flow chart -->
+
+    <!-- System Diagrams -->
+    <section class="slide py-5" id="diagrams">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="section-title">
+                    <h2><span class="home_text">Diagrams</span></h2>
+                    <p>Check our System Diagrmas</p>
+                </div>
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <!--<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./assets/images/diagrams/er.jpg" class="mx-auto d-block w-80" alt="...">
+
                         </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Handle requests</h4>
-                            <div class="card-text">Can cancel or accept requests based on availability<br><br><br></div>
+                        <div class="carousel-item">
+                            <img src="./assets/images/diagrams/relational.PNG" class="mx-auto d-block w-80" alt="...">
+
                         </div>
                     </div>
-                    <!-- end of card -->
 
-                    <!-- Card -->
-                    <div class="card second">
-                        <div class="card-icon">
-                            <br><img src="images/search.png" alt="web" style="height: 50px; width: 55px;"><br>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Get overview</h4>
-                            <div class="card-text">Can get an idea on how much garbage is there to be collected<br><br><br></div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of System Diagrams -->
+
+
+    <!-- Designs -->
+    <!--Circuit Designs-->
+    <section class="circuits d-flex align-items-center py-5" id="circuits">
+        <div class="container text-light">
+            <div class="section-title">
+                <h2><span class="home_text">Circuit Designs</span></h2>
+                <p>Check our Circuit Diagrmas</p>
+            </div>
+            <div class="row gy-4" data-aos="zoom-in">
+                <div class="col-lg-4">
+                    <div class="card bg-transparent px-4">
+                        <h3><span class="home_text">POWER SUPPLY UNIT</span></h3><br>
+                        <!-- <p class="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Solar panel absorbs sunlight with the help of photovoltaic cells which convert the sun rays into electricity.</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Battery Charge controller is used to control the rate at which electri current is added from electric batteries and it prevents overcharging.</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Then electric power stored in the battery which is used to operate all the electric components.</p>
+                        </div><br><br><br>
+                        <div class="my-3">
+                            <a class="btn" href="circuits.html">View Circuit Diagram</a>
                         </div>
                     </div>
-                    <!-- end of card -->
+                </div>
 
-                    <!-- Card -->
-                    <div class="card third">
-                        <div class="card-icon">
-                            <br><img src="images/placeholder.png" alt="web" style="height: 50px; width: 60px;"><br>
+                <div class="col-lg-4">
+                    <div class="card bg-transparent px-4">
+                        <h3><span class="home_text">FILL LEVEL DETECTION UNIT</span></h3><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>The ultrasonic sensor senses the waste in the bin at the constrained level and send signals to the microcontroller.</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="fas fa-cloud"></i></i></p>
+                            <p>0-50% of fill level - on Green LED</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="fas fa-cloud"></i></i></p>
+                            <p>50-80% of fill level - on Yellow LED</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="fas fa-cloud"></i></i></p>
+                            <p>Greater than 80% of fill level - on Red LED</p>
+                        </div><br><br><br><br>
+                        
+                        <div class="my-3">
+                            <a class="btn" href="circuits.html#fill_level_unit">View Circuit Diagram</a>
                         </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Locate on a map</h4>
-                            <div class="card-text">Can easily locate the bins & find the best route to cover all the garbage bins assigned, Increased efficiency</div>
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card bg-transparent px-4">
+                        <h3><span class="home_text">COMPACTION UNIT</span></h3><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Microcontroller turn on the relay switch, once the bin is full and compaction times are less than 4 to actuate the DC motor.</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>DC motor activates the scissor jack mechanism to compact the waste in the bin.</p>
+                        </div><br>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>When the compaction begins, buzzer will be turned on and User activity can be monitored using IR sensor.</p>
+                        </div><br><br><br>
+                        <div class="my-3">
+                            <a class="btn" href="circuits.html#compaction_unit">View Circuit Diagram</a>
                         </div>
                     </div>
-                    <!-- end of card -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-1 -->
-    <!-- end of software app features -->
-
-	
-	 <!-- Solution Architecture -->
-    <div id="solarchitecture" class="cards-1 bg-gray">
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Solution Architecture</h1><br>
-                    <h2 class="h2-heading">High Level Diagram</h2><br>
-		    <img src="images/High_Level.png" alt="solution" class="center"><br><br><br><br>
-			<!-- <h2 class="h2-heading">Data and Control Flow</h2><br>
-			<img src="images/data.PNG" alt="solution" ><br><br><br><br> -->
-
-    <!-- Control Flow -->
-    <div id="control-flow" class="basic-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Control Flow</h1><br>
-		    <img src="images/flow.PNG" alt="solution" class="center"><br><br><br><br>
-                </div> <!-- end of col -->
-		
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of Control Flow -->
-	
-    <!-- Database -->
-    <div id="database" class="basic-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Database Design</h1><br>
-                </div> <!-- end of col -->
-                <div class="row">
-                    <div class="col-lg-12"><img src="images/database/ER_Diagram.png" alt="overview1" ></div>
                 </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of Database design -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of circuit designs -->
 
-
-    <!-- Circuit Diagrams -->
-    <div id="circuit" class="basic-1 bg-gray">
+    <!-- 3D Model -->
+    <section class="slide py-5" id="model">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Circuit Diagrams</h1><br>
-                </div> <!-- end of col -->
-		<div class="col-lg-12">
-                    <h2>Power Supply Unit</h2><br>
-                </div> <!-- end of col -->
-		<div class="row">
-                    <div class="col-lg-12"><img src="images/Power_supply_circuit.PNG" alt="overview1" ></div>
+            <div class="row d-flex align-items-center">
+                <div class="section-title">
+                    <h2><span class="home_text">3D Model Designs</span></h2>
+                    <p>Check our Smart Garbage Bin Designs</p>
                 </div>
-		<div class="col-lg-12">
-                    <h2>Fill Level Detection Unit</h2><br>
-                </div> <!-- end of col -->
-		<div class="row">
-                    <div class="col-lg-12"><img src="images/Fill_level_circuit.PNG" alt="overview1" ></div>
-                </div>
-		<div class="col-lg-12">
-                    <h2>Compaction Unit</h2><br>
-                </div> <!-- end of col -->
-		<div class="row">
-                    <div class="col-lg-12"><img src="images/compaction_circuit.PNG" alt="overview1" ></div>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of Circuit Diagrams -->
-		
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                        
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./assets/images/3dmodel/model.jpg" class="mx-auto d-block w-80" alt="...">
 
-    <!-- UI Designs -->
-    <div id="ui-designs" class="basic-1 bg-gray">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/images/3dmodel/model1.jpg" class="mx-auto d-block w-80" alt="...">
+
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="./assets/images/3dmodel/model2.jpg" class="mx-auto d-block w-80" alt="...">
+
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/images/3dmodel/main.jpg" class="mx-auto d-block w-80" alt="...">
+
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/images/3dmodel/model4.jpg" class="mx-auto d-block w-80" alt="...">
+
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/images/3dmodel/model7.jpg" class="mx-auto d-block w-80" alt="...">
+
+                        </div>
+                        
+
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of System Diagrams -->
+
+    <!--UI /UX Designs-->
+    <section class="ui d-flex align-items-center text-light py-5" id="ui">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>UI Designs - Website</h1><br>
-                </div> <!-- end of col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6"><img src="images/web ui/home.jpeg" alt="overview1" width="500px" ></div>
-                <div class="col-lg-6"><img src="images/web ui/signup.jpeg" alt="overview2" width="500px"></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6"><img src="images/web ui/signin.jpeg" alt="overview1" width="500px" ></div>
-                <div class="col-lg-6"><img src="images/web ui/overview1.jpeg" alt="overview2" width="500px"></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6"><img src="images/web ui/overview2.jpeg" alt="customize" width="500px" ></div>
-                <div class="col-lg-6"><img src="images/web ui/customize.jpeg" alt="requests" width="500px" ></div>
-            </div> <!-- end of row -->  
-            <div class="row">
-                <div class="col-lg-6"><img src="images/web ui/requests.jpeg" alt="customize" width="500px" ></div>
-            </div> <!-- end of row -->  
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <!--Web App UI Demonstration-->
+                    <div class="section-title">
+                        <h2><span class="home_text">UI /UX Design</span></h2>
+                        <p>Web Apllication UI Desings</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >Once the administrator creates an account and login to 
+                        this application, he/she can,
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Get a full Overview of the entire Bin Systemwith the fill levels and other Details.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Select a certain Garbage Bin and Garbage Collector.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Send Collectors the requests.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Search certain Units by Unit ID.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Toggle between the views(Table View and Graph View).</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Add/ Remove Bins to the System.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Change System parameters(Bin Height, Fill Level Ranges).</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>View accepted/declined requests by Garbage Collectors.</p>
+                        </div>
+                        
+                    </p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <!--Mobile App UI Demonstration-->
+                    <div class="section-title">
+                        <p>Mobile Apllication UI Desings</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >Once the Garbage Collector creates an account and login to 
+                        this mobile application, he/she can,
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Get a full Overview of the entire Bin System with the fill levels and other Details.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Accept/ Decilne all requests and accept/decline one request.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>See all locations of accepted Garbage bins</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Search certain Units by Unit ID.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Toggle between the views(Table View and Graph View).</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Add/ Remove Bins to the System.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Change System parameters(Bin Height, Fill Level Ranges).</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>View accepted/declined requests by Garbage Collectors.</p>
+                        </div>
+                        
+                    </p>
+                    
+                </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>UI Designs - Mobile App</h1><br>
-                </div> <!-- end of col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-4"><img src="images/mobile ui/Home.JPG" alt="home" height="500px"></div>
-                <div class="col-lg-4"><img src="images/mobile ui/Signup.JPG" alt="signin" height="500px" ></div>
-                <div class="col-lg-4"><img src="images/mobile ui/Signin.JPG" alt="Signup" height="500px" ></div>
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-4"><img src="images/mobile ui/Dashboard.JPG" alt="Dashboard" height="500px"></div>
-                <div class="col-lg-4"><img src="images/mobile ui/AcceptRequest.JPG" alt="accept" height="500px" ></div>
-                <div class="col-lg-4"><img src="images/mobile ui/Map.JPG" alt="map" height="500px" ></div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of UI Designs -->
+                
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <!--Web App UI designs Slider-->
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
 
-    <!-- Testing -->
-    <div id="testing" class="basic-1 bg-gray">
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="img-fluid" src="./assets/images/webui/home.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/signup.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/signin.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/overview1.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/overview2.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/customize.jpeg" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/webui/requests.jpeg" alt="about">
+    
+                            </div>
+                        </div>
+    
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+    
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div><br><br><br><br><br>
+                    <!--end of web app ui design slider-->
+
+                    <!--Mobile App UI designs Slider-->
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
+
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="img-fluid" src="./assets/images/mobileui/Home.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/Signin.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/Signup.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/Dashboard.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/NewRequests.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/AcceptRequest.JPG" alt="about">
+    
+                            </div>
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="./assets/images/mobileui/Map.JPG" alt="about">
+    
+                            </div>
+                        </div>
+    
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+    
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <!--end of mobile app ui design slider-->
+                </div>
+                
+
+
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of UI designs -->
+
+    <!-- Testing Plans -->
+    <section class="testing d-flex align-items-center text-light py-5" id="testing">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Testing Plan</h1><br>
-		    <h2 class="h2-heading">Software Testing</h2><br>
-		    <img src="images/test.PNG" alt="solution" class="center"><br><br><br><br>
-		    <h2 class="h2-heading">Software Testing Tools</h2><br>
-		    <img src="images/testing_tools.png" alt="solution" class="center"><br><br><br><br>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <!--Unit testing-->
+                    <div class="section-title">
+                        <h2><span class="home_text">Software Testing</span></h2>
+                        <p>Unit Testing Plans</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>User Registration - Check whether username and password are valid.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>User/ Administrator Login - Check whether username and password are correct.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Sending Notifications to Gabage Collectors - 
+                                When Garbage bin is full, check whether Admin gets notification message.
+                            </p>
+                        </div>
+                    </p><br><br><br><br><br><br><br><br><br>
+
+                    <!--Integration Testing-->
+                    <div class="section-title">
+                
+                        <p>Integration Testing Plans</p>
+                    </div>
+                    <p align="justify" class="py-2 para-light" >
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Checking the connection of GSM Module.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Checking the connection of GPS Module..</p>
+                        </div>
+                    </p><br><br><br><br><br><br><br><br>
+                </div>
+
+                <!--Testing tools-->
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+                    <div class="section-title">
+                        <h2><span class="home_text">Testing Tools</span></h2>
+                        <p>REST API Testing</p>
+                    </div>
+                    <img class="img-fluid" src="./assets/images/postman.png" alt="about"><br><br><br>
+                    <div class="section-title">
+                        <p>FUNCTIONAL TESTING</p>
+                    </div>
+                    <img class="img-fluid" src="./assets/images/appium.png" alt="about">
+
+
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+
     <!-- end of Testing -->
 
-      <!-- Budget -->
-      <div id="budget" class="basic-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Budget</h1><br>
-		    <img src="images/Budget.png" alt="Budjet" class="center">
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of Budget -->
-	
-	<!-- Timeline -->
-      <div id="timeline" class="basic-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Timeline</h1><br>
-		    <img src="images/timeline.PNG" alt="Timeline" class="center">
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of Timeline -->
-
-    <!-- Team -->
-    <div id="team" class="cards-2 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Our Team</h2>
-                    <p class="p-heading"></p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img class="img-fluid" src="images/E17352.png" alt="alternative" style="border-radius: 50%;">
+    <!-- Timeline -->
+    <section class="timeline d-flex align-items-center py-5" id="timeline">
+        <div class="container"><br><br>
+            <div class="section-title">
+                <h2><span class="home_text">Timeline</span></h2>
+                <p>Our Project Timeline</p>
+            </div><br><br>
+            <div class="timeline">
+              <ul>
+                <li>
+                  <div class="timeline-content">
+                    <h3 class="date">05th July, 2021 - 19th July, 2021</h3>
+                    <h1>Presenting the Project Proposal</h1>
+                    <p>Thinking innovative ideas for the project and presenting one specific idea with
+                        a project proposal.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-content">
+                    <h3 class="date">20th July, 2021 - 27th July, 2021 </h3>
+                    <h1>Frameworks and Technologies</h1>
+                    <p>Getting familiarized with the frameworks and technologies.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-content">
+                    <h3 class="date">27th July, 2021 - 10th August, 2021</h3>
+                    <h1>Front End Development</h1>
+                    <p>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Website Basic Front End Development.</p>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Isara Tillekeratne</h5>
-                            <p class="card-text">E/17/352</p>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Mobile App Basic Front End Development.</p>
+                        </div>
+                    
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-content">
+                    <h3 class="date">10th August, 2021 - 24th August, 2021</h3>
+                    <h1>Designing 3D Model</h1>
+                    <p>For Smart Garbage Collector, the 3D model is designed. See 3D model from here.</p>
+                  </div>
+                </li>
+                <li>
+                    <div class="timeline-content">
+                      <h3 class="date">24th August, 2021 - 03th September, 2021</h3>
+                      <h1>Progress Review - Milestone 2</h1>
+                      <p>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Presenting detailed soultion architecture.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Presenting Technology familiarity</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Demonstrating progress of software applications.</p>
+                        </div>
+                        <div class="block d-flex align-items-center">
+                            <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                            <p>Presenting testing methods which are used in system development.</p>
+                        </div>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timeline-content">
+                      <h3 class="date">10th August, 2021 - 24th August, 2021</h3>
+                      <h1>Designing 3D Model</h1>
+                      <p>For Smart Garbage Collector, the 3D model is designed. See 3D model from here.</p>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </div>
+    </section>
+    <!-- end of timeline -->
+
+
+    <!-- Budget -->
+    <section class="budget d-flex align-items-center py-5" id="budget"> 
+        <div class="container text-light" data-aos="fade-up">
+            <div class="section-title">
+                <h2><span class="home_text">Our Budget</span></h2>
+                <p>Bill of Materials</p>
+            </div>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Quantity</th>
+                        <th>Unit Price (LKR)</th>
+                        <th>Price (LKR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ATMEGA328P Microcontroller</td>
+                        <td>1</td>
+                        <td>600</td>
+                        <td>600</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>GSM Module</td>
+                        <td>1</td>
+                        <td>1950</td>
+                        <td>1950</td>
+                    </tr>
+                    <tr>
+                        <td>GPS Module</td>
+                        <td>1</td>
+                        <td>1250</td>
+                        <td>1250</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Solar Panel (20W, 12V) with Polycarbonate shield</td>
+                        <td>1</td>
+                        <td>6000</td>
+                        <td>4500</td>
+                    </tr>
+                    <tr>
+                        <td>PWM Charge Controller(12V, 20A)</td>
+                        <td>1</td>
+                        <td>4200</td>
+                        <td>4200</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Battery(12V)</td>
+                        <td>1</td>
+                        <td>2499</td>
+                        <td>2499</td>
+                    </tr>
+                    <tr>
+                        <td>Ultrasonic Sensor</td>
+                        <td>2</td>
+                        <td>190</td>
+                        <td>380</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>IR Sensor</td>
+                        <td>1</td>
+                        <td>110</td>
+                        <td>110</td>
+                    </tr>
+                    <tr>
+                        <td>LED</td>
+                        <td>3</td>
+                        <td>11</td>
+                        <td>33</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Buzzer</td>
+                        <td>1</td>
+                        <td>35</td>
+                        <td>35</td>
+                    </tr>
+                    <tr>
+                        <td>DC Motor(12V)</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Dual-Channel Relay Module</td>
+                        <td>1</td>
+                        <td>250</td>
+                        <td>250</td>
+                    </tr>
+                    <tr>
+                        <td>Outer Cover with Scissor Jack</td>
+                        <td>1</td>
+                        <td>2000</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td> </td>
+                        <td> </td>
+                        <td>Total</td>
+                        <td>18772</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- End of Budget -->
+
+    <!-- Our Team -->
+    <section class="team d-flex align-items-center text-light py-5" id="team">
+        <div class="container"> <br><br>
+            <!-- Developers -->
+            <div class="section-title">
+                <h2><span class="home_text">Our Team</span></h2>
+                <p>Developers</p>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="assets/images/E17352.png" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Isara Tillekeratne</h4>
+                                <span>E/17/352</span>
+                            </div>
+                            <div class="social">
+                    
+                                <a href="https://github.com/IsaraTillekeratne"><i class="bi bi-github"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="assets/images/E17398.png" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info">
+                                <div class="member-info-content">
+                                    <h4>Hashini Wijerathne</h4>
+                                    <span>E/17/398</span>
+                                </div>
+                                <div class="social">
+                                
+                                    <a href="https://github.com/hashiniWijerathne"><i class="bi bi-github"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="assets/images/E17148.png" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Vidurangi Kalpana</h4>
+                                <span>E/17/148</span>
+                            </div>
+                            <div class="social">
                             
+                                <a href="https://github.com/VidurangiKalpana"><i class="bi bi-github"></i></a>
+
+                            </div>
                         </div>
                     </div>
-                    <!-- end of card -->
+                </div>
 
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img class="img-fluid" src="images/E17398.png" alt="alternative" style="border-radius: 50%;><br>
-                        </div>
-                        <div class="card-body"><br>
-                            <h5 class="card-title">Hashini Wijerathne</h5>
-                            <p class="card-text">E/17/398</p>
-                            
-                        </div>
-                    </div>
-                    <!-- end of card -->
+            </div><br><br>
 
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img class="img-fluid" src="images/E17148.png" alt="alternative" style="border-radius: 50%;><br>
-                        </div>
-                        <div class="card-body"><br>
-                            <h5 class="card-title">Vidurangi Kalpana</h5>
-                            <p class="card-text">E/17/148</p>
-                           
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-    
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-2 -->
-    <!-- end of team -->
-
-<!-- Supervisors -->
-    <div id="supervisors" class="cards-2 bg-gray">
-        <div class="container">
+            <!-- Advisors -->
+            <div class="section-title">
+                <p>Advisors</p>
+            </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Our Supervisors</h2>
-                    <p class="p-heading"></p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="advisor" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="assets/images/IsuruSir.PNG" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Dr. Isuru Nawinne</h4>
+                                <span>Senior Lecturer</span>
+                            </div>
+                            <div class="social">
+                    
+                                <a href="https://lk.linkedin.com/in/isuru-nawinne-73302833 "><i class="bi bi-linkedin"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="advisor" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="assets/images/MahanamaSir.PNG" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info">
+                                <div class="member-info-content">
+                                    <h4>Dr. Mahanama Wickaramasinghe</h4>
+                                    <span>Senior Lecturer</span>
+                                </div>
+                                <div class="social">
+                                
+                                    <a href="https://www.linkedin.com/in/mahanama"><i class="bi bi-linkedin"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End of Team -->
+
+    <!-- Contact -->
+    <section class="contactus text-light py-5" id ="contactus">
+        <div class="container" data-aos="zoom-in">
             <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img class="img-fluid" src="images/IsuruSir.PNG" alt="alternative" style="border-radius: 50%;">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Dr. Isuru Nawinne</h5>
-                            <p class="card-text">Senior Lecturer</p>
-                            
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-map fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Smart Garbage <br>Collector</h4>
                         </div>
                     </div>
-                    <!-- end of card -->
-
-			<div class="card"></div>
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img class="img-fluid" src="images/MahanamaSir.PNG" alt="alternative" style="border-radius: 50%;>
-                        </div>
-                        <div class="card-body"><br>
-                            <h5 class="card-title">Dr. Mahanama Wickramasinghe</h5>
-                            <p class="card-text">Senior Lecturer</p>
-                            
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Call Us</h4>
                         </div>
                     </div>
-                    <!-- end of card -->
-    
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-2 -->
-    <!-- end of Supervisors -->
-	
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Messsage Us</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Quick Links</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of row -->
+        </div><br>
+        <!-- end of container -->
+    </section>
+    <!-- end of contactus -->
+
 
     <!-- Footer -->
+    <section class="footer text-light">
+        <div class="container">
+            <div class="row" data-aos="fade-right">
+                <div class="col-lg-3 py-4 py-md-5"> 
+                    <p class="py-3 para-light">Smart garbage Collector is an IoT system which facilitates the management of Garbage Collection and disposal.</p>    
+                </div>
+                <!-- end of col -->
 
-    <footer id ="footer" class="footer">
-	    <div class="row" >
-		    <div class="col-lg-6" style="text-align:left;padding-left:10%;">
-			    
-			    <h3 >Contact Us</h3>
-				<div><p>  +94 77 764 8682 (Isara)  </p></div>
-				<div><p>  +94 77 269 3120 (Hashini)  </p></div>
-				<div><p>  +94 70 327 2396 (Kalpana)  </p></div>
-			    
-	   	    </div>
-		    <br>
-	    		<div class="col-lg-6" style="text-align:left;padding-left:10%;">
-			
-				<h3 >Links</h3>
-							    
-				<div><p>  <a href="https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection" style="color:MediumSeaGreen;">Project Repo</a>  </p></div>
-				<div><p>  <a href="http://eng.pdn.ac.lk/" style="color:MediumSeaGreen;">Faculty of Engineering</a>  </p></div>
-				<div><p>  <a href="http://www.ce.pdn.ac.lk/" style="color:MediumSeaGreen;">Department of Computer Engineering</a></p></div>
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div> 
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i> 
+                            <p class="ms-3">+94 77 764 8682 (Isara)</p>  
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">+94 77 269 3120 (Hashini)</p>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">+94 70 327 2396 (Vidurangi)</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- end of col -->
 
-				
-				<!-- <a href="https://projects.ce.pdn.ac.lk/" style="color:MediumSeaGreen;">Department Projects</a><br><br> -->
-				<!-- <a href="https://www.pdn.ac.lk/academics/academics.php/" style="color:Aqua;">University of Peradeniya</a><br><br> -->
-				
-				
-				
-	   		 </div>
-	</div>
-      </footer>
-    <!-- end of Footer -->
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>                            
+                                <p class="ms-3">e17352@eng.pdn.ac.lk</p>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>                            
+                                <p class="ms-3">e17398@eng.pdn.ac.lk</p>                            
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">e17148@eng.pdn.ac.lk</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- end of col -->
+
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div>
+                        
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="https://www.pdn.ac.lk/academics/academics.php/" target="_blank">
+                                <p class="ms-3">University of Peradeniya</p>
+                            </a>
+
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="http://eng.pdn.ac.lk/" target="_blank">
+                                <p class="ms-3">Faculty of Engineering</p>
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="http://www.ce.pdn.ac.lk/" target="_blank">
+                                <p class="ms-3">Department of Computer Engineering</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of footer -->
+
+
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light">
+        <div class="container d-flex justify-content-between">
+            <div>
+                
+            </div>
+            
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of bottom -->
+
 
     <!-- Back To Top Button -->
     <button onclick="topFunction()" id="myBtn">
-        <img src="images/up-arrow.png" alt="alternative">
+        <img src="assets/images/up-arrow.png" alt="alternative">
     </button>
     <!-- end of back to top button -->
-    	
+
+
     <!-- Scripts -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- Bootstrap framework -->
+    <script src="./js/purecounter.min.js"></script>
+    <!-- Purecounter counter for statistics numbers -->
+    <script src="./js/swiper.min.js"></script>
+    <!-- Swiper for image and text sliders -->
+    <script src="./js/aos.js"></script>
+    <!-- AOS on Animation Scroll -->
+    <script src="./js/script.js"></script>
+    <!-- Custom scripts -->
 </body>
+
 </html>
