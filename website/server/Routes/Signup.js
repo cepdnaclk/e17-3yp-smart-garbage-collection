@@ -36,6 +36,7 @@ Router.post("/", async function (req, res) {
 
                     // succesfull signup 
 
+                    // hash password
                     bcrypt.hash(password, saultRounds, (err, hash) => {
 
                         if (err) console.log(err);

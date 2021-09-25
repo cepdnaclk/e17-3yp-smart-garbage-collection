@@ -26,9 +26,12 @@ Router.post("/", async function (req, res) {
                 }
                 if (result.length > 0) {
                     bcrypt.compare(password, result[0].password, (error, response) => {
-                        if (response) res.send({ message: 'succesful' })
+                        if (response) {
+
+                            res.send({ message: 'succesful' });
+                        }
                         else {
-                            res.send({ message: 'Incorrect password' })
+                            res.send({ message: 'Incorrect password' });
                         }
                     })
                 }
