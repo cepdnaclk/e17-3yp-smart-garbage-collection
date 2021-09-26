@@ -16,7 +16,7 @@ Router.get("/get", (req, res) => {
 // get bins by unit id
 Router.get("/getByUnitId", (req, res) => {
 
-    const id = req.body.unitID;
+    const id = req.query.unitID;
 
     db.query("SELECT * FROM bin WHERE unit_id = ?", id, (err, result) => {
         if (err) res.send({ err: err })
