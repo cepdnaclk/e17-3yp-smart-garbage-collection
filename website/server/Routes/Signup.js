@@ -1,7 +1,9 @@
 const express = require('express');
 const db = require("../connection");
-
+const bcrypt = require('bcrypt');
 const Router = express.Router();
+
+const saultRounds = 10; // for pw hashing
 
 Router.post("/", async function (req, res) {
 
@@ -33,19 +35,30 @@ Router.post("/", async function (req, res) {
                 else {
 
                     // succesfull signup 
-                    db.query("INSERT INTO admin (fname, lname, username, password) VALUES (?,?,?,?)",
-                        [fname, lname, username, password],
-                        (err, result) => {
-                            if (err) {
-                                res.send({ err: err });
-                                //console.log(err);
-                            }
-                            else {
-                                res.send({ message: 'successful' });
 
-                            }
+                    // hash password
+                    bcrypt.hash(password, saultRounds, (err, hash) => {
 
-                        });
+                        if (err) console.log(err);
+
+                        db.query("INSERT INTO admin (fname, lname, username, password) VALUES (?,?,?,?)",
+                            [fname, lname, username, hash],
+                            (err, result) => {
+                                if (err) {
+                                    res.send({ err: err });
+                                    //console.log(err);
+                                }
+                                else {
+                                    res.send({ message: 'successful' });
+
+                                }
+
+                            });
+
+
+                    })
+
+
 
                 }
             });
