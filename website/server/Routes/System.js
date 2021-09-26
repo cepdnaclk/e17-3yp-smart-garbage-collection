@@ -2,6 +2,8 @@ const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
 
+
+// DID NOT WORK //////////////////////////////////////////////
 Router.put("/update", (req, res) => {
 
     // system id is 1
@@ -13,7 +15,7 @@ Router.put("/update", (req, res) => {
 
     // if nothing entered
     if (binHeight === '' && redRange === '' && yellowRange === '' && greenRange === '') {
-        res.send({ message: 'Nothing updated' })
+        res.send({ message: 'No data entered for updation' })
     }
 
     else {

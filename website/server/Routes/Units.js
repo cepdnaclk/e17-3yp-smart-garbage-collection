@@ -156,6 +156,18 @@ Router.get("/getById", (req, res) => {
     });
 });
 
+// get max id
+Router.get("/maxId", (req, res) => {
+
+    db.query("SELECT MAX(id) FROM unit", (err, result) => {
+        if (err) res.send({ err: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
+});
+
 
 
 module.exports = Router;
