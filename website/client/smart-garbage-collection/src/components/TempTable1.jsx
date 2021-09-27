@@ -1,6 +1,6 @@
 // Overview Table 
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -14,6 +14,7 @@ import SelectCollector from './SelectCollector';
 import IconButton from '@material-ui/core/IconButton';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import { Grid } from '@material-ui/core';
+import Axios from 'axios';
 
 
 const columns = [
@@ -108,8 +109,8 @@ function setValue(id, value) {
 
 export default function TempTable1() {
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -120,8 +121,32 @@ export default function TempTable1() {
         setPage(0);
     };
 
+
+    // fetch data from the api
+    const [bins, setBins] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:3002/Bins/get")
+            .then(res => {
+                console.log(res);
+                setBins(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
+
+
     return (
         <Paper className={classes.root}>
+
+            {/* <ul>
+                {bins.map(bin => (
+                    <li key={bin.id}> {bin.category} </li>
+                ))}
+            </ul> */}
+
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead >
