@@ -2,6 +2,19 @@ const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
 
+// get all requests
+Router.get("/getAll", (req, res) => {
+
+    db.query("SELECT * FROM assign", (err, result) => {
+        if (err) res.send({ err: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
+});
+
+
 // add a request
 Router.post("/add", (req, res) => {
 

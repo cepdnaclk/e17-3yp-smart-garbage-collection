@@ -1,6 +1,6 @@
 // Requests Table 
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -10,37 +10,37 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import Axios from 'axios';
 
 
 const columns = [
-    { id: 'request_id', label: 'Request ID', minWidth: 100 },
+    { id: 'id', label: 'Request ID', minWidth: 100 },
     { id: 'time', label: 'Time', minWidth: 100 },
-    { id: 'collector', label: 'Assigned To', minWidth: 100, align: 'left' },
+    { id: 'collectorName', label: 'Assigned To', minWidth: 100, align: 'left' },
     { id: 'status', label: 'Status', minWidth: 100, align: 'right' },
 ];
 
 
 
-function createData(request_id, time, collector, status) {
+// function createData(request_id, time, collector, status) {
 
-    return { request_id, time, collector, status };
-}
-
-
-
-const rows = [
-    createData('1', '4.00 p.m', "Collector1", 'Accepted'),
-    createData('2', '5.40 p.m', "Collector2", 'Declined'),
-    createData('3', '3.30 p.m', "Collector3", 'Completed'),
-    createData('4', '2.25 p.m', "Collector1", 'Accepted'),
-    createData('5', '1.00 p.m', "Collector1", 'Accepted'),
-    createData('6', '5.05 p.m', "Collector2", 'Declined'),
-    createData('7', '3.07 p.m', "Collector3", 'Completed'),
-    createData('8', '2.00 p.m', "Collector1", 'Accepted'),
+//     return { request_id, time, collector, status };
+// }
 
 
-];
+
+// const rows = [
+//     createData('1', '4.00 p.m', "Collector1", 'Accepted'),
+//     createData('2', '5.40 p.m', "Collector2", 'Declined'),
+//     createData('3', '3.30 p.m', "Collector3", 'Completed'),
+//     createData('4', '2.25 p.m', "Collector1", 'Accepted'),
+//     createData('5', '1.00 p.m', "Collector1", 'Accepted'),
+//     createData('6', '5.05 p.m', "Collector2", 'Declined'),
+//     createData('7', '3.07 p.m', "Collector3", 'Completed'),
+//     createData('8', '2.00 p.m', "Collector1", 'Accepted'),
+// ];
+
+let rows = [];
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -84,6 +84,59 @@ function setColor(id, value) {
 
 
 export default function TempTable2() {
+
+    // fetch data from the api
+    const [requests, setRequests] = useState([]);
+    const [collectors, setCollector] = useState([]);
+
+    // get collectors
+    useEffect(() => {
+        Axios.get("http://localhost:3002/Collectors")
+            .then(res => {
+                console.log(res);
+                setCollector(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
+    // get requests
+    useEffect(() => {
+        Axios.get("http://localhost:3002/Requests/getAll")
+            .then(res => {
+                console.log(res);
+                setRequests(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, []);
+
+
+
+    // push all data to the rows array
+    requests.map((request) => {
+        let id = request.request_id;
+        let time = request.time;
+        let collectorId = request.collector_id;
+        let status = request.status;
+        let collectorName;
+
+        // get collector name
+        collectors.map((collector) => {
+            if (collector.id === collectorId) {
+                collectorName = collector.fname + ' ' + collector.lname;
+            }
+        });
+
+
+        let dataRow = { id, time, collectorName, status };
+        rows.push(dataRow);
+    });
+
+    console.log(rows);
+
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
