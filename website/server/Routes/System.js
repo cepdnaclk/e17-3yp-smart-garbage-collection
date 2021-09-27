@@ -2,70 +2,62 @@ const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
 
+Router.put("/update/binHeight", (req, res) => {
 
-// DID NOT WORK //////////////////////////////////////////////
-Router.put("/update", (req, res) => {
-
-    // system id is 1
-    const id = 1;
     const binHeight = req.body.binHeight;
-    const redRange = req.body.redRange;
-    const yellowRange = req.body.yellowRange;
-    const greenRange = req.body.greenRange;
+    //const binHeight = parseInt(req.body.binHeight);
 
-    // if nothing entered
-    if (binHeight === '' && redRange === '' && yellowRange === '' && greenRange === '') {
-        res.send({ message: 'No data entered for updation' })
-    }
+    db.query("UPDATE systemsettings SET bin_height = ? WHERE id = 1",
+        binHeight, (err, result) => {
+            if (err) res.send({ err: err });
+            else {
+                res.send({ message4: 'Bin height updated' })
+            }
+        });
 
-    else {
-
-        // update bin height
-        if (binHeight != '') {
-            db.query("UPDATE system SET bin_height = ? WHERE id = ?",
-                [binHeight, id], (err, result) => {
-                    if (err) res.send({ err: err });
-                    else {
-                        res.send({ message1: 'Bin height updated' })
-                    }
-                })
-
-        }
-
-        // update red range
-        if (redRange != '') {
-            db.query("UPDATE system SET red_range = ? WHERE id = ?",
-                [redRange, id], (err, result) => {
-                    if (err) res.send({ err: err });
-                    else {
-                        res.send({ message2: 'Red range updated' })
-                    }
-                })
-        }
-
-        // update yellow range
-        if (yellowRange != '') {
-            db.query("UPDATE system SET yellow_range = ? WHERE id = ?",
-                [yellowRange, id], (err, result) => {
-                    if (err) res.send({ err: err });
-                    else {
-                        res.send({ message3: 'yellow range updated' })
-                    }
-                })
-        }
-
-        // update green range
-        if (greenRange != '') {
-            db.query("UPDATE system SET green_range = ? WHERE id = ?",
-                [greenRange, id], (err, result) => {
-                    if (err) res.send({ err: err });
-                    else {
-                        res.send({ message4: 'green range updated' })
-                    }
-                })
-        }
-
-    }
 });
+
+Router.put("/update/redRange", (req, res) => {
+
+    const red_range = req.body.red_range;
+
+    db.query("UPDATE systemsettings SET red_range = ? WHERE id = 1",
+        red_range, (err, result) => {
+            if (err) res.send({ err: err });
+            else {
+                res.send({ message4: 'Red range updated' })
+            }
+        });
+
+});
+
+Router.put("/update/yellowRange", (req, res) => {
+
+    const yellow_range = req.body.yellow_range;
+
+    db.query("UPDATE systemsettings SET yellow_range = ? WHERE id = 1",
+        yellow_range, (err, result) => {
+            if (err) res.send({ err: err });
+            else {
+                res.send({ message4: 'yellow range updated' })
+            }
+        });
+
+});
+
+Router.put("/update/greenRange", (req, res) => {
+
+    const green_range = req.body.green_range;
+
+    db.query("UPDATE systemsettings SET green_range = ? WHERE id = 1",
+        green_range, (err, result) => {
+            if (err) res.send({ err: err });
+            else {
+                res.send({ message4: 'green range updated' })
+            }
+        });
+
+});
+
 
 module.exports = Router;
