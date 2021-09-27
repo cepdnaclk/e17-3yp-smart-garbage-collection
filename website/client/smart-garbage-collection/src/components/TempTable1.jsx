@@ -28,27 +28,26 @@ const columns = [
 
 ];
 
-function createData(unit_id, bin, fill_level, compaction, assign, location, battery) {
-    return { unit_id, bin, fill_level, compaction, assign, location, battery };
-}
+// function createData(unit_id, bin, fill_level, compaction, assign, location, battery) {
+//     return { unit_id, bin, fill_level, compaction, assign, location, battery };
+// }
 
-const rows = [
-    createData('1', 'Food', "10%", 'None', null, 'Locaction 1', 'HIGH'),
-    createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', 'HIGH'),
-    createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', 'MEDIUM'),
-    createData('1', 'Other', "20%", 'None', null, 'Location 1', 'HIGH'),
-    createData('2', 'Food', "10%", 'None', null, 'Loc2', 'LOW'),
-    createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', 'MEDIUM'),
-    createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', 'HIGH'),
-    createData('2', 'Other', "20%", 'None', null, 'Loc2', 'HIGH'),
-    createData('3', 'Food', "10%", 'None', null, 'Loc3', 'HIGH'),
-    createData('3', 'Paper', "91%", 3, 'Collector1', 'Loc3', 'HIGH'),
-    createData('3', 'Polythene', "60%", 3, 'Collector1', 'Loc3', 'MEDIUM'),
-    createData('3', 'Other', "20%", 'None', null, 'Loc3', 'HIGH'),
+// const rows = [
+//     createData('1', 'Food', "10%", 'None', null, 'Locaction 1', 'HIGH'),
+//     createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', 'HIGH'),
+//     createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', 'MEDIUM'),
+//     createData('1', 'Other', "20%", 'None', null, 'Location 1', 'HIGH'),
+//     createData('2', 'Food', "10%", 'None', null, 'Loc2', 'LOW'),
+//     createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', 'MEDIUM'),
+//     createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', 'HIGH'),
+//     createData('2', 'Other', "20%", 'None', null, 'Loc2', 'HIGH'),
+//     createData('3', 'Food', "10%", 'None', null, 'Loc3', 'HIGH'),
+//     createData('3', 'Paper', "91%", 3, 'Collector1', 'Loc3', 'HIGH'),
+//     createData('3', 'Polythene', "60%", 3, 'Collector1', 'Loc3', 'MEDIUM'),
+//     createData('3', 'Other', "20%", 'None', null, 'Loc3', 'HIGH'),
+// ];
 
-
-
-];
+const rows = [];
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -77,11 +76,12 @@ const useStyles = makeStyles((theme) => ({
 
 function setColor(id, value) {
 
-    var val = parseInt(value);
+    //var val = parseInt(value);
+    var val = value;
     if (id === 'fill_level') {
         if (val < 50) return '#54E346'; //green
         else if (val < 80) return 'yellow';
-        else return '#F92727'; //red
+        else if (val >= 80) return '#F92727'; //red
     }
 }
 
@@ -124,7 +124,11 @@ export default function TempTable1() {
 
     // fetch data from the api
     const [bins, setBins] = useState([]);
+    const [units, setUnits] = useState([]);
+    //const [collector, setCollector] = useState('');
+    //const [binId, setBinId] = useState('');
 
+    // get bins data
     useEffect(() => {
         Axios.get("http://localhost:3002/Bins/get")
             .then(res => {
@@ -134,18 +138,98 @@ export default function TempTable1() {
             .catch(err => {
                 console.log(err)
             })
-    }, [])
+    }, []);
+
+    // get units data
+    useEffect(() => {
+        Axios.get("http://localhost:3002/Units/getAll")
+            .then(res => {
+                //console.log(res);
+                setUnits(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, []);
+
+    // // get collector name by bin id if in sent or accepted statuses
+    // const getAssignedCollector = ((id) => {
+
+    //     Axios.get("http://localhost:3002/Collectors/getByBinId?binId=" + id)
+    //         .then(res => {
+    //             //console.log(res);
+    //             let collName = res.data[0].fname + ' ' + res.data[0].lname;
+    //             setCollector(collName);
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         });
+
+    // });
+
+    // get collector name by bin id if in sent or accepted statuses
+    // useEffect(() => {
+
+    //     Axios.get("http://localhost:3002/Collectors/getByBinId?binId=" + binId)
+    //         .then(res => {
+    //             //console.log(res);
+    //             let collName = res.data[0].fname + ' ' + res.data[0].lname;
+    //             setCollector(collName);
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         });
+
+    // }, []);
+
+    // push data to rows array
+    units.map((unit) => {
+
+        // single unit
+        let unit_id = unit.id;
+        let location = unit.location;
+        let binArr = [];
+        let fill_levelArr = [];
+        let compactionArr = [];
+        let assignArr = [];
+        let batteryArr = [];
+
+        bins.map((bin) => {
+
+            // call function to set collector name
+            //getAssignedCollector(bin.id);
+
+            // set bin id
+            //setBinId(bin.id);
+
+            if (bin.unit_id === unit_id) {
+                binArr.push(bin.category);
+                fill_levelArr.push(bin.fill_level);
+                compactionArr.push(bin.compaction_cycles);
+                batteryArr.push(bin.battery);
+                assignArr.push('collector');
+            }
+        });
+
+        for (let i = 0; i < 4; i++) {
+            let bin = binArr[i];
+            let fill_level = fill_levelArr[i];
+            let compaction = compactionArr[i];
+            let battery = batteryArr[i];
+            let assign = assignArr[i];
+            let rowData = { unit_id, bin, fill_level, compaction, assign, location, battery };
+            console.log(rowData);
+            rows.push(rowData);
+        }
+
+    });
 
 
 
     return (
         <Paper className={classes.root}>
 
-            {/* <ul>
-                {bins.map(bin => (
-                    <li key={bin.id}> {bin.category} </li>
-                ))}
-            </ul> */}
+
 
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -171,8 +255,9 @@ export default function TempTable1() {
                                         return (
                                             <TableCell key={column.id} align={column.align} style={{ backgroundColor: setColor(column.id, value) }}>
                                                 {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
+                                                {column.id === 'fill_level' ? <b>{value}</b> : value}
 
-                                                {setValue(column.id, value)}
+                                                {/* {setValue(column.id, value)} */}
 
                                             </TableCell>
                                         );
