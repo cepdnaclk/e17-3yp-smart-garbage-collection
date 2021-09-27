@@ -2,10 +2,10 @@ const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
 
-// add new units - UNIT ID SHOULD AUTO FILL /////////////// CHANGE
+// add new units 
 Router.post("/add", (req, res) => {
 
-    const id = req.body.unitID;
+    const id = parseInt(req.query.unitID);
     const location = req.body.unitLocation;
 
     const binCategories = ["Food", "Paper", "Polythene", "Other"];
@@ -70,16 +70,18 @@ Router.post("/add", (req, res) => {
 
 
 // delete a unit
-Router.delete("/delete", (req, res) => {
+Router.delete("/delete/:id", (req, res) => {
 
-    const id = req.body.unitID;
+    //const id = parseInt(req.body.unitID);
+    const id = req.params.id;
+
 
     // checking if id is a number -----------> try 
     //if (typeof (id) === 'number') {
 
     // check if Id exists
     db.query("SELECT * FROM unit WHERE id = ?",
-        [id],
+        id,
         (err, result) => {
 
             if (err) {
@@ -159,11 +161,11 @@ Router.get("/getById", (req, res) => {
 // get max id
 Router.get("/maxId", (req, res) => {
 
-    db.query("SELECT MAX(id) FROM unit", (err, result) => {
+    db.query("SELECT MAX(id) AS nextId FROM unit", (err, result) => {
         if (err) res.send({ err: err })
         else {
             res.send(result);
-            //res.send(result[0].category);
+
         }
     });
 });

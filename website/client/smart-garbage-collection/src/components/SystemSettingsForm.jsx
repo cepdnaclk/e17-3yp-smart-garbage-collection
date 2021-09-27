@@ -28,9 +28,6 @@ export default function SystemSettingsForm() {
     const updateBinHeight = () => {
         Axios.put("http://localhost:3002/System/update/binHeight", {
             binHeight: binHeight,
-            // red_range: redRange,
-            // yellow_range: yellowRange,
-            // green_range: greenRange,
         }).then(res => {
             console.log(res);
         })
