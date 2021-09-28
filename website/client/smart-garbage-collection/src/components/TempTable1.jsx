@@ -51,7 +51,7 @@ const columns = [
 //     createData('3', 'Other', "20%", 'None', null, 'Loc3', 'HIGH'),
 // ];
 
-const rows = [];
+// const rows = [];
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -152,6 +152,7 @@ export default function TempTable1() {
 
 
     // fetch data from the api
+    const rows = [];
     const [bins, setBins] = useState([]);
     const [units, setUnits] = useState([]);
     const [searchId, setSearchId] = useState('');
@@ -250,8 +251,6 @@ export default function TempTable1() {
         }
 
     });
-
-
 
     return (
         <div>

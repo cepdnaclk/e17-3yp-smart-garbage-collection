@@ -44,7 +44,7 @@ const columns = [
 //     createData('8', '2.00 p.m', "Collector1", 'Accepted'),
 // ];
 
-let rows = [];
+
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -108,6 +108,7 @@ function setColor(id, value) {
 export default function TempTable2() {
 
     // fetch data from the api
+    const rows = [];
     const [requests, setRequests] = useState([]);
     const [collectors, setCollector] = useState([]);
     const [searchId, setSearchId] = useState('');
