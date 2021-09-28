@@ -20,7 +20,8 @@ import Axios from 'axios';
 const columns = [
     { id: 'unit_id', label: 'Unit ID', minWidth: 100 },
     { id: 'bin', label: 'Bin', minWidth: 100 },
-    { id: 'fill_level', label: 'Fill Level', minWidth: 100, align: 'right' },
+    { id: 'fill_level', label: 'Fill Level (%)', minWidth: 100, align: 'right' },
+    { id: 'color', label: '', minWidth: 50, align: 'right' },
     { id: 'compaction', label: 'Compaction', minWidth: 100, align: 'right' },
     { id: 'assign', label: 'Assign', minWidth: 100, align: 'center' },
     { id: 'location', label: 'Location', minWidth: 100, align: 'right' },
@@ -78,11 +79,18 @@ function setColor(id, value) {
 
     //var val = parseInt(value);
     var val = value;
-    if (id === 'fill_level') {
-        if (val < 50) return '#54E346'; //green
-        else if (val < 80) return 'yellow';
-        else if (val >= 80) return '#F92727'; //red
+    // if (id === 'fill_level') {
+    //     if (val < 50) return '#54E346'; //green
+    //     else if (val < 80) return 'yellow';
+    //     else if (val >= 80) return '#F92727'; //red
+    // }
+
+    if (id === 'color') {
+        if (val === 'g') return '#54E346'; //green
+        else if (val === 'y') return 'yellow';
+        else if (val === 'r') return '#F92727'; //red
     }
+
 }
 
 function setValue(id, value) {
@@ -193,14 +201,9 @@ export default function TempTable1() {
         let compactionArr = [];
         let assignArr = [];
         let batteryArr = [];
+        let colorArr = []
 
         bins.map((bin) => {
-
-            // call function to set collector name
-            //getAssignedCollector(bin.id);
-
-            // set bin id
-            //setBinId(bin.id);
 
             if (bin.unit_id === unit_id) {
                 binArr.push(bin.category);
@@ -208,6 +211,7 @@ export default function TempTable1() {
                 compactionArr.push(bin.compaction_cycles);
                 batteryArr.push(bin.battery);
                 assignArr.push('collector');
+                colorArr.push(bin.color);
             }
         });
 
@@ -217,8 +221,9 @@ export default function TempTable1() {
             let compaction = compactionArr[i];
             let battery = batteryArr[i];
             let assign = assignArr[i];
-            let rowData = { unit_id, bin, fill_level, compaction, assign, location, battery };
-            console.log(rowData);
+            let color = colorArr[i];
+            let rowData = { unit_id, bin, fill_level, color, compaction, assign, location, battery };
+            //console.log(rowData);
             rows.push(rowData);
         }
 
@@ -255,8 +260,8 @@ export default function TempTable1() {
                                         return (
                                             <TableCell key={column.id} align={column.align} style={{ backgroundColor: setColor(column.id, value) }}>
                                                 {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
-                                                {column.id === 'fill_level' ? <b>{value}</b> : value}
-
+                                                {/* {column.id === 'fill_level' ? <b>{value}</b> : value} */}
+                                                {value}
                                                 {/* {setValue(column.id, value)} */}
 
                                             </TableCell>
