@@ -37,7 +37,7 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ## Solution Archtecture
 
 ### High Level Diagram
-![](https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/images/High_Level.png)
+![](https://github.com/cepdnaclk/e17-3yp-smart-garbage-collection/blob/main/docs/assets/images/High_Level.png)
 
 
 ## Team
