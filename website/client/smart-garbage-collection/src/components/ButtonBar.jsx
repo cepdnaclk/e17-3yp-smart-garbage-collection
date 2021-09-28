@@ -13,7 +13,7 @@ import ToggleButton from './ToggleButton';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    myroot: {
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
@@ -40,9 +40,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonBar(props) {
     const classes = useStyles();
 
+
+
     return (<div> <Grid container spacing={1} className={classes.main}>
         <Grid item xs={6}>
-            <Paper component="form" className={classes.root}>
+            <Paper component="form" className={classes.myroot}>
                 <IconButton className={classes.iconButton} aria-label="menu">
                     <MenuIcon />
                 </IconButton>
@@ -50,8 +52,10 @@ export default function ButtonBar(props) {
                     className={classes.input}
                     placeholder={props.placeholder}
                     inputProps={{ 'aria-label': 'search by unit id' }}
+
                 />
-                <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                <IconButton type="submit" className={classes.iconButton} aria-label="search"
+                >
                     <SearchIcon />
                 </IconButton>
                 <Divider className={classes.divider} orientation="vertical" />
@@ -59,6 +63,7 @@ export default function ButtonBar(props) {
 
             </Paper>
         </Grid>
+
         <Grid item xs={6}>
             {props.isView === 'yes' ? <ToggleButton /> : null}
 

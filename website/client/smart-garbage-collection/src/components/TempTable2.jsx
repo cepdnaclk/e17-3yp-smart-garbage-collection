@@ -11,6 +11,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Axios from 'axios';
+import Grid from '@material-ui/core/Grid';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const columns = [
@@ -64,7 +70,25 @@ const useStyles = makeStyles((theme) => ({
     },
     tableHead: {
         color: '#0F3057',
-    }
+    },
+    main: {
+        display: 'flex',
+        alignItems: 'center',
+
+    },
+    myroot: {
+        padding: '2px 4px',
+        display: 'flex',
+        alignItems: 'center',
+        width: 400,
+    },
+    input: {
+        marginLeft: theme.spacing(1),
+        flex: 1,
+    },
+    iconButton: {
+        padding: 10,
+    },
 }));
 
 function setColor(id, value) {
@@ -150,7 +174,32 @@ export default function TempTable2() {
         setPage(0);
     };
 
-    return (
+    return (<div>
+        <Grid container spacing={1} className={classes.main}>
+            <Grid item xs={6}>
+                <Paper component="form" className={classes.myroot}>
+                    <IconButton className={classes.iconButton} aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search by request Id"
+                        inputProps={{ 'aria-label': 'search by unit id' }}
+                    // take user input
+                    // onChange={(e) => {
+                    //     setSearchId(e.target.value);
+                    // }}
+                    />
+                    <IconButton type="submit" className={classes.iconButton} aria-label="search"
+                    >
+                        <SearchIcon />
+                    </IconButton>
+                    <Divider className={classes.divider} orientation="vertical" />
+
+
+                </Paper>
+            </Grid>
+        </Grid>
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -198,6 +247,7 @@ export default function TempTable2() {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
+    </div>
     );
 }
 

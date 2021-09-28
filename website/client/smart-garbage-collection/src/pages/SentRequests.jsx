@@ -4,7 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import TempTable2 from '../components/TempTable2';
-import ButtonBar from '../components/ButtonBar';
+// import ButtonBar from '../components/ButtonBar';
+
 
 
 const drawerWidth = 240;
@@ -41,7 +42,7 @@ export default function SentRequests() {
             <Sidebar />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <ButtonBar placeholder='Search by Request Id' isView='no' />
+                {/* <ButtonBar placeholder='Search by Request Id' isView='no' /> */}
                 <TempTable2 />
 
             </main>
