@@ -13,9 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -112,6 +110,7 @@ export default function TempTable2() {
     // fetch data from the api
     const [requests, setRequests] = useState([]);
     const [collectors, setCollector] = useState([]);
+    const [searchId, setSearchId] = useState('');
 
     // get collectors
     useEffect(() => {
@@ -174,28 +173,24 @@ export default function TempTable2() {
         setPage(0);
     };
 
+
+
     return (<div>
         <Grid container spacing={1} className={classes.main}>
             <Grid item xs={6}>
                 <Paper component="form" className={classes.myroot}>
-                    <IconButton className={classes.iconButton} aria-label="menu">
-                        <MenuIcon />
+                    <IconButton className={classes.iconButton} aria-label="search">
+                        <SearchIcon />
                     </IconButton>
                     <InputBase
                         className={classes.input}
                         placeholder="Search by request Id"
-                        inputProps={{ 'aria-label': 'search by unit id' }}
-                    // take user input
-                    // onChange={(e) => {
-                    //     setSearchId(e.target.value);
-                    // }}
+                        inputProps={{ 'aria-label': 'search by request id' }}
+                        // take user input
+                        onChange={(e) => {
+                            setSearchId(e.target.value);
+                        }}
                     />
-                    <IconButton type="submit" className={classes.iconButton} aria-label="search"
-                    >
-                        <SearchIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-
 
                 </Paper>
             </Grid>
@@ -217,7 +212,13 @@ export default function TempTable2() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).filter((row => {
+                            if (searchId === '') {
+                                return row;
+                            } else if (searchId == row.id) {
+                                return row;
+                            }
+                        })).map((row) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {
