@@ -18,6 +18,10 @@ import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const columns = [
@@ -94,6 +98,12 @@ const useStyles = makeStyles((theme) => ({
     iconButton: {
         padding: 10,
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 200,
+        backgroundColor: 'white'
+
+    },
 }));
 
 function setColor(id, value) {
@@ -150,6 +160,12 @@ export default function TempTable1() {
         setPage(0);
     };
 
+    // for toggle view button
+    const [view, setView] = React.useState('');
+
+    const handleChange = (event) => {
+        setView(event.target.value);
+    };
 
     // fetch data from the api
     const rows = [];
@@ -272,8 +288,25 @@ export default function TempTable1() {
 
                     </Paper>
                 </Grid>
+                <Grid item xs={6} >
+                    <FormControl className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-label">Select View</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={view}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"Table View"} >Table View</MenuItem>
+                            <MenuItem value={"Graph View"} >Graph View</MenuItem>
+
+                        </Select>
+                    </FormControl>
+                </Grid>
             </Grid>
-            <Paper className={classes.root}>
+
+
+            {view == 'Graph View' ? <div>Graph</div> : <div><Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >
@@ -326,7 +359,9 @@ export default function TempTable1() {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-            </Paper>
+            </Paper></div>}
+
+
         </div>
     );
 }
