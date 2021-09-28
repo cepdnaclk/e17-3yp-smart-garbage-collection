@@ -11,10 +11,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import SelectCollector from './SelectCollector';
-import IconButton from '@material-ui/core/IconButton';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
-import { Grid } from '@material-ui/core';
+//import { Grid } from '@material-ui/core';
 import Axios from 'axios';
+import Grid from '@material-ui/core/Grid';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const columns = [
@@ -72,7 +75,25 @@ const useStyles = makeStyles((theme) => ({
     },
     tableHead: {
         color: '#0F3057',
-    }
+    },
+    main: {
+        display: 'flex',
+        alignItems: 'center',
+
+    },
+    myroot: {
+        padding: '2px 4px',
+        display: 'flex',
+        alignItems: 'center',
+        width: 400,
+    },
+    input: {
+        marginLeft: theme.spacing(1),
+        flex: 1,
+    },
+    iconButton: {
+        padding: 10,
+    },
 }));
 
 function setColor(id, value) {
@@ -133,6 +154,7 @@ export default function TempTable1() {
     // fetch data from the api
     const [bins, setBins] = useState([]);
     const [units, setUnits] = useState([]);
+    const [searchId, setSearchId] = useState('');
     //const [collector, setCollector] = useState('');
     //const [binId, setBinId] = useState('');
 
@@ -232,57 +254,81 @@ export default function TempTable1() {
 
 
     return (
-        <Paper className={classes.root}>
+        <div>
+            <Grid container spacing={1} className={classes.main}>
+                <Grid item xs={6}>
+                    <Paper component="form" className={classes.myroot}>
+                        <IconButton className={classes.iconButton} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                        <InputBase
+                            className={classes.input}
+                            placeholder="Search by unit Id"
+                            inputProps={{ 'aria-label': 'search by unit id' }}
+                            // take user input
+                            onChange={(e) => {
+                                setSearchId(e.target.value);
+                            }}
+                        />
 
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead >
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <StyledTableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </StyledTableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).filter((row => {
+                                if (searchId === '') {
+                                    return row;
+                                } else if (searchId == row.unit_id) {
+                                    return row;
+                                }
+                            })).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align} style={{ backgroundColor: setColor(column.id, value) }}>
+                                                    {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
+                                                    {/* {column.id === 'fill_level' ? <b>{value}</b> : value} */}
+                                                    {value}
+                                                    {/* {setValue(column.id, value)} */}
 
-
-            <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead >
-                        <TableRow>
-                            {columns.map((column) => (
-                                <StyledTableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </StyledTableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
-                                        const value = row[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align} style={{ backgroundColor: setColor(column.id, value) }}>
-                                                {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
-                                                {/* {column.id === 'fill_level' ? <b>{value}</b> : value} */}
-                                                {value}
-                                                {/* {setValue(column.id, value)} */}
-
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
+        </div>
     );
 }
 
