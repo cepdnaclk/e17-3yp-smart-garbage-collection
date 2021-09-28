@@ -12,7 +12,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import SelectCollector from './SelectCollector';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
-//import { Grid } from '@material-ui/core';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
@@ -22,6 +21,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { Bar } from 'react-chartjs-2';
+import SelectBin from './SelectBin';
+import Button from '@material-ui/core/Button';
 
 
 const columns = [
@@ -104,6 +106,15 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white'
 
     },
+    graphroot: {
+        flexGrow: 1,
+    },
+    paper: {
+        marginTop: theme.spacing(3),
+        padding: theme.spacing(10),
+        textAlign: 'left',
+        backgroundColor: 'white',
+    },
 }));
 
 function setColor(id, value) {
@@ -172,6 +183,7 @@ export default function TempTable1() {
     const [bins, setBins] = useState([]);
     const [units, setUnits] = useState([]);
     const [searchId, setSearchId] = useState('');
+    const [searchedBins, setSearchedBins] = useState([]);
     //const [collector, setCollector] = useState('');
     //const [binId, setBinId] = useState('');
 
@@ -199,6 +211,42 @@ export default function TempTable1() {
             })
     }, []);
 
+    // get bins by unit Id
+    useEffect(() => {
+        Axios.get(`http://localhost:3002/Bins/getByUnitId?unitID=${searchId}`)
+            .then(res => {
+                console.log(res);
+                setSearchedBins(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [searchId]);
+
+
+    // for the Bar chart
+    const [chartData, setChartData] = useState({});
+
+    const chart = () => {
+        setChartData({
+            labels: ['Food', 'Paper', 'Polythene', 'Other'],
+            dataSets: [
+                {
+                    label: 'Fill levels of bins',
+                    data: [80, 60, 45, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderWidth: 4
+                }
+            ]
+        })
+    }
+
+    useEffect(() => {
+        chart()
+    }, [])
+
     // // get collector name by bin id if in sent or accepted statuses
     // const getAssignedCollector = ((id) => {
 
@@ -214,20 +262,7 @@ export default function TempTable1() {
 
     // });
 
-    // get collector name by bin id if in sent or accepted statuses
-    // useEffect(() => {
 
-    //     Axios.get("http://localhost:3002/Collectors/getByBinId?binId=" + binId)
-    //         .then(res => {
-    //             //console.log(res);
-    //             let collName = res.data[0].fname + ' ' + res.data[0].lname;
-    //             setCollector(collName);
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         });
-
-    // }, []);
 
     // push data to rows array
     units.map((unit) => {
@@ -305,8 +340,41 @@ export default function TempTable1() {
                 </Grid>
             </Grid>
 
+            {/* render the table view or graph view */}
 
-            {view == 'Graph View' ? <div>Graph</div> : <div><Paper className={classes.root}>
+            {view == 'Graph View' ? <div><div className={classes.graphroot}>
+                <Grid container spacing={3}>
+
+                    <Grid item xs={6}>
+                        <h2>Graph</h2>
+                        <Paper className={classes.paper}>
+
+                            <Bar data={chartData} options={{
+                                responsive: true
+                            }} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <h2>Unit Details</h2>
+                        <Paper className={classes.paper}>
+                            <p>Location: Miriswatta</p>
+                            <SelectBin />
+                            <SelectCollector />
+
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="medium"
+                                className={classes.button}
+                                startIcon={<SendRoundedIcon />}
+                            >
+                                Assign
+                            </Button>
+                        </Paper>
+                    </Grid>
+
+                </Grid>
+            </div></div> : <div><Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >
@@ -359,10 +427,11 @@ export default function TempTable1() {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-            </Paper></div>}
+            </Paper></div>
+            }
 
 
-        </div>
+        </div >
     );
 }
 
