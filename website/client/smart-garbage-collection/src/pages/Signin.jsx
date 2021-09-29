@@ -50,7 +50,10 @@ function Signin() {
             adminusername: usernameReg,
             adminpassword: passwordReg,
         }).then((response) => {
-            console.log(response.data);
+            if (response.data.error) alert(response.data.error);
+            else {
+                history.push("/Dashboard");
+            }
         });
     }
 

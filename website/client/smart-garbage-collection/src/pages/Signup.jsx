@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup() {
 
-    //let history = useHistory();
+    let history = useHistory();
     //let displayMsg;
 
     const classes = useStyles();
@@ -55,7 +56,10 @@ function Signup() {
             adminusername: usernameReg,
             adminpassword: passwordReg,
         }).then((response) => {
-            console.log(response);
+            if (response.data.error) alert(response.data.error);
+            else {
+                history.push("/Dashboard");
+            }
         });
     }
 

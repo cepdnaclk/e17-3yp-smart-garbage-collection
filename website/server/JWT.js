@@ -29,7 +29,7 @@ const validateToken = (req, res, next) => {
 
         // if token is not valid
     } catch (err) {
-        return res.status(400).send({ error: err });
+        return res.send({ error: err });
     }
 };
 

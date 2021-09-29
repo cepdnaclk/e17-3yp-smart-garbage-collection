@@ -17,11 +17,11 @@ Router.post("/", function (req, res) {
         [username],
         (err, result) => {
             if (err) {
-                res.send({ err: err });
+                res.send({ error: err });
                 //console.log(err);
             }
             if (result.length > 0) {
-                res.send({ message: 'Username already exists' });
+                res.send({ error: 'Username already exists' });
                 //console.log(result);
             }
             else {

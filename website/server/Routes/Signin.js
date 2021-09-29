@@ -17,7 +17,7 @@ Router.post("/", async function (req, res) {
         username,
         (err, result) => {
             if (err) {
-                res.send({ err: err });
+                res.send({ error: err });
 
             }
             if (result.length > 0) {
@@ -26,22 +26,25 @@ Router.post("/", async function (req, res) {
                     if (match) {
                         const accessToken = createTokens(result[0]);
                         res.cookie("access-token", accessToken, {
-                            maxAge: 60 * 60 * 5 * 1000,
+                            maxAge: 60 * 60 * 1 * 1000,
                             httpOnly: true // to save from attackers taking the token
 
                         });
 
-                        // cookie expire 5 hours
+                        // cookie expire 1 hours 
                         res.send({ message: 'successful' });
+
+                        // send the acess token to the front end
+                        //res.json(accessToken);
                     }
                     else {
-                        res.status(400).send({ message: 'Incorrect password' });
+                        res.send({ error: "Incorrect password" });
 
                     }
                 })
             }
             else {
-                res.send({ message: "User doesn't exist" });
+                res.send({ error: "User doesn't exist" });
 
             }
         });
