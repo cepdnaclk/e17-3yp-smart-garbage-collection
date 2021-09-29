@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 function Signup() {
 
     let history = useHistory();
-    let displayMsg;
+    //let displayMsg;
 
     const classes = useStyles();
 
@@ -46,7 +47,7 @@ function Signup() {
     const [lnameReg, setLameReg] = useState('');
     const [usernameReg, setUsernameReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
-    const [signupStatus, setSignupStatus] = useState('');
+    //const [signupStatus, setSignupStatus] = useState('');
 
     const register = () => {
         Axios.post("http://localhost:3002/Signup", {
@@ -55,19 +56,13 @@ function Signup() {
             adminusername: usernameReg,
             adminpassword: passwordReg,
         }).then((response) => {
-            setSignupStatus(response.data.message);
-            if (signupStatus === 'successful') {
-
-                history.push('/Dashboard');
+            if (response.data.error) alert(response.data.error);
+            else {
+                history.push("/Dashboard");
             }
-            // else {
-            //     displayMsg = signupStatus;
-            //     console.log(signupStatus);
-            //     alert("signupStatus"); // change
-            // }
-
         });
     }
+
 
     return (<Container component="main" maxWidth="xs" >
         <CssBaseline />
@@ -154,7 +149,7 @@ function Signup() {
                         label="Remember me"
                     /> */}
                 <Button
-                    type="submit"
+                    // type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
@@ -175,7 +170,7 @@ function Signup() {
                     <Grid item>
 
                         {/* DID NOT WORK */}
-                        {displayMsg}
+                        {/* {displayMsg} */}
 
                     </Grid>
                 </Grid>

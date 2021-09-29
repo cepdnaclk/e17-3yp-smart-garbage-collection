@@ -43,24 +43,20 @@ function Signin() {
 
     const [usernameReg, setUsernameReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
-    const [loginStatus, setLoginStatus] = useState('');
+    //const [loginStatus, setLoginStatus] = useState('');
 
     const login = () => {
         Axios.post("http://localhost:3002/Signin", {
             adminusername: usernameReg,
             adminpassword: passwordReg,
         }).then((response) => {
-            // changeeeeeeeeeeeeeee
-            setLoginStatus(response.data.message);
-            if (loginStatus === 'successful') {
-
-                history.push('/Dashboard');
-            }
+            if (response.data.error) alert(response.data.error);
             else {
-
+                history.push("/Dashboard");
             }
         });
     }
+
 
     return (<Container component="main" maxWidth="xs" >
         <CssBaseline />
@@ -112,7 +108,7 @@ function Signin() {
                         label="Remember me"
                     /> */}
                 <Button
-                    type="submit"
+                    // type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
@@ -136,7 +132,7 @@ function Signin() {
                     </Grid>
                     <Grid item>
 
-                        Don't have an account? Sign Up
+                        {/* Don't have an account? Sign Up */}
 
                     </Grid>
                 </Grid>
