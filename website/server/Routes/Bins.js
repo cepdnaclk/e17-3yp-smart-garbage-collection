@@ -1,8 +1,9 @@
 const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
+const { validateToken } = require('../JWT')
 
-Router.get("/get", (req, res) => {
+Router.get("/get", validateToken, (req, res) => {
 
     db.query("SELECT * FROM bin", (err, result) => {
         if (err) res.send({ err: err })

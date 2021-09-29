@@ -22,15 +22,15 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(session({ // NOT COMPLETED ////////////////////////////
-    key: "userId",
-    secret: "subscribe", // should change
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 60 * 60 * 2, // two hours expire
-    }
-}));
+// app.use(session({ // NOT COMPLETED ////////////////////////////
+//     key: "userId",
+//     secret: "subscribe", // should change
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         expires: 60 * 60 * 2, // two hours expire
+//     }
+// }));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
