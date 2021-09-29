@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup() {
 
-    let history = useHistory();
-    let displayMsg;
+    //let history = useHistory();
+    //let displayMsg;
 
     const classes = useStyles();
 
@@ -46,7 +46,7 @@ function Signup() {
     const [lnameReg, setLameReg] = useState('');
     const [usernameReg, setUsernameReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
-    const [signupStatus, setSignupStatus] = useState('');
+    //const [signupStatus, setSignupStatus] = useState('');
 
     const register = () => {
         Axios.post("http://localhost:3002/Signup", {
@@ -55,19 +55,10 @@ function Signup() {
             adminusername: usernameReg,
             adminpassword: passwordReg,
         }).then((response) => {
-            setSignupStatus(response.data.message);
-            if (signupStatus === 'successful') {
-
-                history.push('/Dashboard');
-            }
-            // else {
-            //     displayMsg = signupStatus;
-            //     console.log(signupStatus);
-            //     alert("signupStatus"); // change
-            // }
-
+            console.log(response);
         });
     }
+
 
     return (<Container component="main" maxWidth="xs" >
         <CssBaseline />
@@ -154,7 +145,7 @@ function Signup() {
                         label="Remember me"
                     /> */}
                 <Button
-                    type="submit"
+                    // type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
@@ -175,7 +166,7 @@ function Signup() {
                     <Grid item>
 
                         {/* DID NOT WORK */}
-                        {displayMsg}
+                        {/* {displayMsg} */}
 
                     </Grid>
                 </Grid>

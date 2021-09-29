@@ -5,7 +5,7 @@ const Router = express.Router();
 
 const saultRounds = 10; // for pw hashing
 
-Router.post("/", async function (req, res) {
+Router.post("/", function (req, res) {
 
     const fname = req.body.adminfname;
     const lname = req.body.adminlname;
