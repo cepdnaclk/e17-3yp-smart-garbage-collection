@@ -11,6 +11,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Axios from 'axios';
+import Grid from '@material-ui/core/Grid';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const columns = [
@@ -40,7 +44,7 @@ const columns = [
 //     createData('8', '2.00 p.m', "Collector1", 'Accepted'),
 // ];
 
-let rows = [];
+
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -64,7 +68,25 @@ const useStyles = makeStyles((theme) => ({
     },
     tableHead: {
         color: '#0F3057',
-    }
+    },
+    main: {
+        display: 'flex',
+        alignItems: 'center',
+
+    },
+    myroot: {
+        padding: '2px 4px',
+        display: 'flex',
+        alignItems: 'center',
+        width: 400,
+    },
+    input: {
+        marginLeft: theme.spacing(1),
+        flex: 1,
+    },
+    iconButton: {
+        padding: 10,
+    },
 }));
 
 function setColor(id, value) {
@@ -86,8 +108,10 @@ function setColor(id, value) {
 export default function TempTable2() {
 
     // fetch data from the api
+    const rows = [];
     const [requests, setRequests] = useState([]);
     const [collectors, setCollector] = useState([]);
+    const [searchId, setSearchId] = useState('');
 
     // get collectors
     useEffect(() => {
@@ -150,7 +174,28 @@ export default function TempTable2() {
         setPage(0);
     };
 
-    return (
+
+
+    return (<div>
+        <Grid container spacing={1} className={classes.main}>
+            <Grid item xs={6}>
+                <Paper component="form" className={classes.myroot}>
+                    <IconButton className={classes.iconButton} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search by request Id"
+                        inputProps={{ 'aria-label': 'search by request id' }}
+                        // take user input
+                        onChange={(e) => {
+                            setSearchId(e.target.value);
+                        }}
+                    />
+
+                </Paper>
+            </Grid>
+        </Grid>
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -168,7 +213,13 @@ export default function TempTable2() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).filter((row => {
+                            if (searchId === '') {
+                                return row;
+                            } else if (searchId == row.id) {
+                                return row;
+                            }
+                        })).map((row) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {
@@ -198,6 +249,7 @@ export default function TempTable2() {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
+    </div>
     );
 }
 
