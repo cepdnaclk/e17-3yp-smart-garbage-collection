@@ -971,6 +971,47 @@
     </section>
     <!-- end of UI designs -->
 
+    <!-- Security -->
+    <section class="security d-flex align-items-center text-light py-5" id="security">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    
+                    <div class="section-title" data-aos="fade-right">
+                        <h2><span class="home_text">Security</span></h2>
+                        <p>System Security Concerns</p>
+                    </div>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p><b>JSON Web Token(JWT)</b> - JWT is used to securely transmit messages  of communication between 
+                        Garbage bin and Administrator and communication between Garbage Collector and Administrator. By using JWT, the messages 
+                    can be verified and trusted as they are digitally signed.</p>
+                    </div><br>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p><b>Password Hashing</b> - When Administrator login to the website by entering username and 
+                            password, we use passwoord hashing to verify the integrity of the password. From this the actual password would never 
+                            be stored in the database.
+                        </p>
+                    </div><br>
+                    <div class="block d-flex align-items-center">
+                        <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
+                        <p><b>AWS RDS/EC2 Security Features</b> - We use SSL/TLS to communicate with AWS resources. And we setup the API 
+                            and logging details using AWS CloudTrail.
+                        </p>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-right">
+                    <img class="img-fluid" src="./assets/images/security_diagram.png" >
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of flow chart -->
+
     <!-- Testing Plans -->
     <section class="testing d-flex align-items-center text-light py-5" id="testing">
         <div class="container">
