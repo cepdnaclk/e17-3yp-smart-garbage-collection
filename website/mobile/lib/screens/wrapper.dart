@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
     //print(user);
     //return either home or authenticate
     
-    return const Mainui();
+    return const Authenticate();
     
 
   }

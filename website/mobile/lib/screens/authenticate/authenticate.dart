@@ -29,7 +29,7 @@ class Authenticate extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "SMART TRASH BOT",
+              "SMART TRASHBOT",
               style: TextStyle(foreground: new Paint()..shader = linearGradient,fontWeight: FontWeight.w700,
                     fontSize: 34),
             ),
