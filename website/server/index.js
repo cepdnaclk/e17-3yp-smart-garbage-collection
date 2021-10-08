@@ -9,6 +9,8 @@ const UnitRoute = require("./Routes/Units");
 const SystemRoute = require("./Routes/System");
 const CollectorsRoute = require("./Routes/Collectors");
 const RequestsRoute = require("./Routes/Requests");
+const MobSignupRoute = require("./Routes/MobSignup");
+const MobSigninRoute = require("./Routes/MobSignin");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -43,7 +45,9 @@ app.use("/Units", UnitRoute);
 app.use("/System", SystemRoute);
 app.use("/Collectors", CollectorsRoute);
 app.use("/Requests", RequestsRoute);
+app.use("/api", MobSignupRoute);
+app.use("/Signin", MobSigninRoute);
 
-app.listen(3002, function () {
+app.listen(8000, function() {
     console.log('server running');
 });

@@ -150,6 +150,12 @@ li {
     background-color: var(--primary-light);
 }
 
+.security {
+    height: 70vh;
+    position: relative;
+    background-color: var(--primary-light);
+}
+
 .contactus{
     height: 20vh;
 }
