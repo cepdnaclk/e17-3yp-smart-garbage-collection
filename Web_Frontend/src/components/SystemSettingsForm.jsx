@@ -26,7 +26,7 @@ export default function SystemSettingsForm() {
     const [greenRange, setGreenRange] = useState('');
 
     const updateBinHeight = () => {
-        Axios.put("http://localhost:3002/System/update/binHeight", {
+        Axios.put("http://localhost:3003/System/update/binHeight", {
             binHeight: binHeight,
         }).then(res => {
             console.log(res);
@@ -37,7 +37,7 @@ export default function SystemSettingsForm() {
     }
 
     const updateRedRange = () => {
-        Axios.put("http://localhost:3002/System/update/redRange", {
+        Axios.put("http://localhost:3003/System/update/redRange", {
             red_range: redRange
         }).then(res => {
             console.log(res);
@@ -48,7 +48,7 @@ export default function SystemSettingsForm() {
     }
 
     const updateYellowRange = () => {
-        Axios.put("http://localhost:3002/System/update/yellowRange", {
+        Axios.put("http://localhost:3003/System/update/yellowRange", {
             yellow_range: yellowRange
         }).then(res => {
             console.log(res);
@@ -59,7 +59,7 @@ export default function SystemSettingsForm() {
     }
 
     const updateGreenRange = () => {
-        Axios.put("http://localhost:3002/System/update/greenRange", {
+        Axios.put("http://localhost:3003/System/update/greenRange", {
             green_range: greenRange
         }).then(res => {
             console.log(res);
