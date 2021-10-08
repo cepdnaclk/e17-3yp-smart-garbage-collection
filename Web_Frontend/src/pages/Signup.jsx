@@ -50,7 +50,7 @@ function Signup() {
     //const [signupStatus, setSignupStatus] = useState('');
 
     const register = () => {
-        Axios.post("http://localhost:3003/Signup", {
+        Axios.post("http://localhost:3001/Signup", {
             adminfname: fnameReg,
             adminlname: lnameReg,
             adminusername: usernameReg,
