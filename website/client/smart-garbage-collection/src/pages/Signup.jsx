@@ -58,7 +58,7 @@ function Signup() {
         }).then((response) => {
             if (response.data.error) alert(response.data.error);
             else {
-                history.push("/Dashboard");
+                history.push("/Signin");
             }
         });
     }
