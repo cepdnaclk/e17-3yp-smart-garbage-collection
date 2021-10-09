@@ -40,24 +40,16 @@ export default function AddRemoveForm() {
         let url = "http://localhost:3001/Units/add?unitID=" + unitIdAdd;
         Axios.post(url, {
             unitLocation: location
-        }).then(res => {
-            console.log(res);
-        })
-            .catch(err => {
-                console.log(err)
-            })
+        }).then((response) => {
+            if (response.data.error) alert(response.data.error);
+        });
     }
 
     const delUnit = () => {
         Axios.delete(`http://localhost:3001/Units/delete/${unitIdDel}`, {
-        }).then(res => {
-            console.log(res);
-
-        })
-            .catch(err => {
-                console.log(err)
-
-            })
+        }).then((response) => {
+            if (response.data.error) alert(response.data.error);
+        });
     }
 
 

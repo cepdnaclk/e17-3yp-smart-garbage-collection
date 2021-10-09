@@ -10,62 +10,56 @@ Router.post("/add", (req, res) => {
 
     const binCategories = ["Food", "Paper", "Polythene", "Other"];
 
-    // if location field is empty
-    if (location == '') {
-        res.send({ message: 'Please enter location' });
-    }
 
-    else {
+    // checking if location exists
+    db.query("SELECT * FROM unit WHERE location = ?",
+        [location],
+        (err, result) => {
+            if (err) {
+                res.send({ err: err });
+                //console.log(err);
+            }
+            if (result.length > 0) {
+                res.send({ error: 'Location already exists' });
 
-        // checking if location exists
-        db.query("SELECT * FROM unit WHERE location = ?",
-            [location],
-            (err, result) => {
-                if (err) {
-                    res.send({ err: err });
-                    //console.log(err);
-                }
-                if (result.length > 0) {
-                    res.send({ message: 'Same location already exists' });
+            }
+            else {
 
-                }
-                else {
+                // succesfully add
 
-                    // succesfully add
-
-                    // initially add a new unit
-                    db.query("INSERT INTO unit (id,location) VALUES (?,?)",
-                        [id, location],
-                        (err, result) => {
-                            if (err) {
-                                res.send({ err: err });
-                            }
-                            else {
+                // initially add a new unit
+                db.query("INSERT INTO unit (id,location) VALUES (?,?)",
+                    [id, location],
+                    (err, result) => {
+                        if (err) {
+                            res.send({ err: err });
+                        }
+                        else {
 
 
-                                // add four bins for the added unit
-                                for (let i = 0; i < 4; i++) {
+                            // add four bins for the added unit
+                            for (let i = 0; i < 4; i++) {
 
-                                    db.query("INSERT INTO bin (category, unit_id) VALUES (?,?)",
-                                        [binCategories[i], id], (err, result) => {
-                                            if (err) {
-                                                res.send({ err: err });
-                                            }
-                                        });
+                                db.query("INSERT INTO bin (category, unit_id) VALUES (?,?)",
+                                    [binCategories[i], id], (err, result) => {
+                                        if (err) {
+                                            res.send({ err: err });
+                                        }
+                                    });
 
-                                }
-
-                                // if both the unit and four bins added succesfully
-                                res.send({ message: 'successful' });
                             }
 
-                        });
+                            // if both the unit and four bins added succesfully
+                            res.send({ message: 'successful' });
+                        }
 
-                }
+                    });
+
+            }
 
 
-            });
-    }
+        });
+
 });
 
 
@@ -75,9 +69,6 @@ Router.delete("/delete/:id", (req, res) => {
     //const id = parseInt(req.body.unitID);
     const id = req.params.id;
 
-
-    // checking if id is a number -----------> try 
-    //if (typeof (id) === 'number') {
 
     // check if Id exists
     db.query("SELECT * FROM unit WHERE id = ?",
@@ -120,15 +111,12 @@ Router.delete("/delete/:id", (req, res) => {
 
             // id does not exist
             else {
-                res.send({ message: 'Unit Id does not exist' });
+                res.send({ error: 'Unit Id does not exist' });
             }
 
         });
 
-    //}
-    // else {
-    //     res.send({ message: 'Enter a number as Id' });
-    // }
+
 });
 
 
