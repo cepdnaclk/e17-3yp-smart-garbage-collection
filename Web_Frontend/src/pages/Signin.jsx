@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { signinSchema } from '../Validations/SigninValidation';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,14 +44,32 @@ function Signin() {
 
     const classes = useStyles();
 
-    const [usernameReg, setUsernameReg] = useState('');
-    const [passwordReg, setPasswordReg] = useState('');
-    //const [loginStatus, setLoginStatus] = useState('');
+    // const [usernameReg, setUsernameReg] = useState('');
+    // const [passwordReg, setPasswordReg] = useState('');
 
-    const login = () => {
+
+    // const login = () => {
+    //     Axios.post("http://localhost:3001/Signin", {
+    //         adminusername: usernameReg,
+    //         adminpassword: passwordReg,
+    //     }).then((response) => {
+    //         if (response.data.error) alert(response.data.error);
+    //         else {
+    //             history.push("/Dashboard");
+    //         }
+    //     });
+    // }
+
+    // connect yup and react-hook-form
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(signinSchema),
+    });
+
+    // if validations are passed
+    const submitForm = (data) => {
         Axios.post("http://localhost:3001/Signin", {
-            adminusername: usernameReg,
-            adminpassword: passwordReg,
+            adminusername: data['username'],
+            adminpassword: data['password'],
         }).then((response) => {
             if (response.data.error) alert(response.data.error);
             else {
@@ -56,6 +77,7 @@ function Signin() {
             }
         });
     }
+
 
 
     return (<Container component="main" maxWidth="xs" >
@@ -68,7 +90,7 @@ function Signin() {
                 Sign in
             </Typography>
 
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -80,11 +102,13 @@ function Signin() {
                     autoComplete="username"
                     autoFocus
 
-                    onChange={(e) => {
-                        setUsernameReg(e.target.value);
-                    }}
+                    // onChange={(e) => {
+                    //     setUsernameReg(e.target.value);
+                    // }}
+                    {...register('username')}
 
                 />
+                <div className='error'>{errors.username?.message}</div>
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -96,45 +120,34 @@ function Signin() {
                     id="password"
                     autoComplete="current-password"
 
-                    onChange={(e) => {
-                        setPasswordReg(e.target.value);
-                    }}
+                    // onChange={(e) => {
+                    //     setPasswordReg(e.target.value);
+                    // }}
+                    {...register('password')}
 
                 />
+                <div className='error'>{errors.password?.message}</div>
 
-
-                {/* <FormControlLabel ### REMEMBER ME
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    /> */}
                 <Button
-                    // type="submit"
+                    type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    // href="/Dashboard"
 
-                    onClick={login}
+
+                // onClick={login}
                 >
                     Sign in
                 </Button>
                 <Grid container>
-                    {/* <Grid item xs> ### FORGOT PW
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid> */}
+
                     <Grid item>
                         <Link href="/Signup" variant="body2">
                             Don't have an account? Sign Up
                         </Link>
                     </Grid>
-                    <Grid item>
 
-                        {/* Don't have an account? Sign Up */}
-
-                    </Grid>
                 </Grid>
             </form>
 
