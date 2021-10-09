@@ -64,53 +64,62 @@ export default function AddRemoveForm() {
     return (
         <div className={classes.margin}>
             <FormControl>
-                <FormControl>
-                    <InputLabel htmlFor="my-input">Unit ID: {unitIdAdd}</InputLabel>
-                    <Input id="bin-id-add" aria-describedby="my-helper-text" disabled="True" />
+                <form>
+                    <FormControl>
+                        <InputLabel htmlFor="my-input">Unit ID: {unitIdAdd}</InputLabel>
+                        <Input id="bin-id-add" aria-describedby="my-helper-text" disabled="True" />
 
-                </FormControl>
-                <FormControl>
-                    <InputLabel htmlFor="my-input">Enter Location</InputLabel>
-                    <Input id="bin-id-loc" aria-describedby="my-helper-text"
-                        // take user input
-                        onChange={(e) => {
-                            setLocation(e.target.value);
-                        }}
-                    />
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="my-input">Enter Location</InputLabel>
+                        <Input id="bin-id-loc" aria-describedby="my-helper-text" name="location"
+                            // take user input
+                            onChange={(e) => {
+                                setLocation(e.target.value);
+                            }}
+                        />
 
-                </FormControl>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    size="medium"
-                    className={classes.button}
-                    startIcon={<SaveIcon />}
-                    onClick={addUnit}
-                >
-                    Add
-                </Button>
-                <FormControl>
-                    <InputLabel htmlFor="my-input">Enter Unit ID</InputLabel>
-                    <Input id="bin-id-del" aria-describedby="my-helper-text"
-                        // take user input
-                        onChange={(e) => {
-                            setUnitIdDel(e.target.value);
-                        }}
-                    />
+                    </FormControl><br></br>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        className={classes.button}
+                        startIcon={<SaveIcon />}
+                        onClick={addUnit}
+                    >
+                        Add Unit
+                    </Button>
 
-                </FormControl>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    size="medium"
-                    className={classes.button}
-                    startIcon={<DeleteIcon />}
-                    // onClick={() => delUnit()}
-                    onClick={delUnit}
-                >
-                    Remove
-                </Button>
+                </form>
+                <form>
+                    <FormControl>
+                        <InputLabel htmlFor="my-input">Enter Unit ID</InputLabel>
+                        <Input id="bin-id-del" aria-describedby="my-helper-text" name="unitId"
+                            // take user input
+                            onChange={(e) => {
+                                setUnitIdDel(e.target.value);
+                            }}
+                        />
+
+                    </FormControl><br></br>
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                        // onClick={() => delUnit()}
+                        onClick={delUnit}
+                    >
+                        Remove
+                    </Button>
+
+                </form>
+
+
 
             </FormControl>
         </div>
