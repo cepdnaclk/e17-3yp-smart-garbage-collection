@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { signupSchema } from '../Validations/SignupValidation';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -63,17 +65,26 @@ function Signup() {
     // }
 
 
-    const onSubmit = async (event) => {
-        event.preventDefault()
-        let formData = {
-            firstName: event.target[0].value,
-            lastName: event.target[2].value,
-            username: event.target[4].value,
-            password: event.target[6].value
-        }
-        console.log(formData);
-        const isValid = await signupSchema.isValid(formData);
-        console.log(isValid);
+    // const onSubmit = async (event) => {
+    //     event.preventDefault()
+    //     let formData = {
+    //         firstName: event.target[0].value,
+    //         lastName: event.target[2].value,
+    //         username: event.target[4].value,
+    //         password: event.target[6].value
+    //     }
+    //     console.log(formData);
+    //     const isValid = await signupSchema.isValid(formData);
+    //     console.log(isValid);
+    // }
+
+    // connect yup and react-hook-form
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(signupSchema),
+    });
+
+    const submitForm = (data) => {
+        console.log(data);
     }
 
     return (<Container component="main" maxWidth="xs" >
@@ -86,7 +97,7 @@ function Signup() {
                 Sign Up
             </Typography>
 
-            <form className={classes.form} onSubmit={onSubmit}>
+            <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
 
                 <Grid container spacing={2} className={classes.form}>
                     <Grid item xs={12} sm={6}>
@@ -95,19 +106,21 @@ function Signup() {
                             autoComplete="fname"
                             name="firstName"
                             variant="outlined"
-                            required
+                            // required
                             fullWidth
                             id="firstName"
                             label="First Name"
                             autoFocus
 
-                        // take user input
-                        // onChange={(e) => {
-                        //     setFameReg(e.target.value);
-                        // }}
+                            // take user input
+                            // onChange={(e) => {
+                            //     setFameReg(e.target.value);
+                            // }}
+
+                            {...register('firstName')}
 
                         />
-
+                        <div className='error'>{errors.firstName?.message}</div>
 
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -120,12 +133,15 @@ function Signup() {
                             name="lastName"
                             autoComplete="lname"
 
-                        // take user input
-                        // onChange={(e) => {
-                        //     setLameReg(e.target.value);
-                        // }}
+                            // take user input
+                            // onChange={(e) => {
+                            //     setLameReg(e.target.value);
+                            // }}
+
+                            {...register('lastName')}
 
                         />
+                        <div className='error'>{errors.lastName?.message}</div>
 
                     </Grid></Grid>
 
@@ -134,7 +150,7 @@ function Signup() {
                 <TextField
                     variant="outlined"
                     margin="normal"
-                    required
+                    // required
                     fullWidth
                     id="username"
                     label="Username"
@@ -142,18 +158,21 @@ function Signup() {
                     autoComplete="username"
                     autoFocus
 
-                // onChange={(e) => {
-                //     setUsernameReg(e.target.value);
-                // }}
+                    // onChange={(e) => {
+                    //     setUsernameReg(e.target.value);
+                    // }}
+
+                    {...register('username')}
 
 
                 />
+                <div className='error'>{errors.username?.message}</div>
 
 
                 <TextField
                     variant="outlined"
                     margin="normal"
-                    required
+                    // required
                     fullWidth
                     name="password"
                     label="Password"
@@ -161,11 +180,13 @@ function Signup() {
                     id="password"
                     autoComplete="current-password"
 
-                // onChange={(e) => {
-                //     setPasswordReg(e.target.value);
-                // }}
-                />
+                    // onChange={(e) => {
+                    //     setPasswordReg(e.target.value);
+                    // }}
 
+                    {...register('password')}
+                />
+                <div className='error'>{errors.password?.message}</div>
 
 
                 <Button
