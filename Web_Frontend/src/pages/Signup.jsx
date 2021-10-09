@@ -27,13 +27,17 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#00587A',
     },
     form: {
-        // width: '100%',
+
         marginTop: theme.spacing(1),
+
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
         backgroundColor: '#00587A',
     },
+    textFields: {
+        marginTop: theme.spacing(3),
+    }
 
 
 }));
@@ -83,8 +87,19 @@ function Signup() {
         resolver: yupResolver(signupSchema),
     });
 
+    // if validations are passed
     const submitForm = (data) => {
-        console.log(data);
+        Axios.post("http://localhost:3001/Signup", {
+            adminfname: data['firstName'],
+            adminlname: data['lastName'],
+            adminusername: data['username'],
+            adminpassword: data['password'],
+        }).then((response) => {
+            if (response.data.error) alert(response.data.error);
+            else {
+                history.push("/Signin");
+            }
+        });
     }
 
     return (<Container component="main" maxWidth="xs" >
@@ -147,7 +162,7 @@ function Signup() {
 
 
 
-                <TextField
+                <TextField className={classes.textFields}
                     variant="outlined"
                     margin="normal"
                     // required
@@ -169,7 +184,7 @@ function Signup() {
                 <div className='error'>{errors.username?.message}</div>
 
 
-                <TextField
+                <TextField className={classes.textFields}
                     variant="outlined"
                     margin="normal"
                     // required
