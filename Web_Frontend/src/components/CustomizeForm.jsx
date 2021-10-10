@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AddRemoveForm from './AddRemoveForm';
 import SystemSettingsForm from './SystemSettingsForm';
-
+import UpdateSettingsForm from './UpdateSettingsForm';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,17 +25,22 @@ export default function CustomizeForm() {
         <div className={classes.root}>
             <Grid container spacing={3}>
 
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                     <h2>Add or Remove Units</h2>
                     <Paper className={classes.paper}>
 
                         <AddRemoveForm />
                     </Paper>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={8}>
                     <h2>System Settings</h2>
                     <Paper className={classes.paper}>
-                        <SystemSettingsForm />
+                        <Grid container>
+                            <Grid item xs={6}> <SystemSettingsForm /></Grid>
+                            <Grid item xs={6}> <UpdateSettingsForm /></Grid>
+                        </Grid>
+
+
                     </Paper>
                 </Grid>
 

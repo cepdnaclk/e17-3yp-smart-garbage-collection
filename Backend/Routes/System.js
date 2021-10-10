@@ -5,7 +5,6 @@ const Router = express.Router();
 Router.put("/update/binHeight", (req, res) => {
 
     const binHeight = req.body.binHeight;
-    //const binHeight = parseInt(req.body.binHeight);
 
     if (binHeight != '') {
         db.query("UPDATE systemsettings SET bin_height = ? WHERE id = 1",
@@ -18,53 +17,75 @@ Router.put("/update/binHeight", (req, res) => {
     }
 });
 
-Router.put("/update/redRange", (req, res) => {
+Router.put("/update/lowBound", (req, res) => {
 
-    const red_range = req.body.red_range;
+    const low_bound = req.body.low_bound;
 
-    if (red_range != '') {
-        db.query("UPDATE systemsettings SET red_range = ? WHERE id = 1",
-            red_range, (err, result) => {
+    if (low_bound != '') {
+        db.query("UPDATE systemsettings SET low_bound = ? WHERE id = 1",
+            low_bound, (err, result) => {
                 if (err) res.send({ err: err });
                 else {
-                    res.send({ message4: 'Red range updated' })
+                    res.send({ message4: 'Low bound updated' })
                 }
             });
     }
 
 });
 
-Router.put("/update/yellowRange", (req, res) => {
+Router.put("/update/highBound", (req, res) => {
 
-    const yellow_range = req.body.yellow_range;
+    const high_bound = req.body.high_bound;
 
-    if (yellow_range != '') {
-        db.query("UPDATE systemsettings SET yellow_range = ? WHERE id = 1",
-            yellow_range, (err, result) => {
+    if (high_bound != '') {
+        db.query("UPDATE systemsettings SET high_bound = ? WHERE id = 1",
+            high_bound, (err, result) => {
                 if (err) res.send({ err: err });
                 else {
-                    res.send({ message4: 'yellow range updated' })
+                    res.send({ message4: 'High bound updated' })
                 }
             });
     }
 
 });
 
-Router.put("/update/greenRange", (req, res) => {
+Router.get("/getBinHeight", (req, res) => {
 
-    const green_range = req.body.green_range;
 
-    if (green_range != '') {
-        db.query("UPDATE systemsettings SET green_range = ? WHERE id = 1",
-            green_range, (err, result) => {
-                if (err) res.send({ err: err });
-                else {
-                    res.send({ message4: 'green range updated' })
-                }
-            });
-
-    }
+    db.query("SELECT bin_height FROM systemsettings WHERE id = 1", (err, result) => {
+        if (err) res.send({ error: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
 });
+
+Router.get("/getLowBound", (req, res) => {
+
+
+    db.query("SELECT low_bound FROM systemsettings WHERE id = 1", (err, result) => {
+        if (err) res.send({ error: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
+});
+
+Router.get("/getHighBound", (req, res) => {
+
+
+    db.query("SELECT high_bound FROM systemsettings WHERE id = 1", (err, result) => {
+        if (err) res.send({ error: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
+});
+
+
 
 
 module.exports = Router;
