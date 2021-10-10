@@ -10,55 +10,59 @@ Router.post("/add", (req, res) => {
 
     const binCategories = ["Food", "Paper", "Polythene", "Other"];
 
+    // check if a location was given
+    if (location != '') {
+        // checking if location exists
+        db.query("SELECT * FROM unit WHERE location = ?",
+            [location],
+            (err, result) => {
+                if (err) {
+                    res.send({ err: err });
+                    //console.log(err);
+                }
+                if (result.length > 0) {
+                    res.send({ error: 'Location already exists' });
 
-    // checking if location exists
-    db.query("SELECT * FROM unit WHERE location = ?",
-        [location],
-        (err, result) => {
-            if (err) {
-                res.send({ err: err });
-                //console.log(err);
-            }
-            if (result.length > 0) {
-                res.send({ error: 'Location already exists' });
+                }
+                else {
 
-            }
-            else {
+                    // succesfully add
 
-                // succesfully add
-
-                // initially add a new unit
-                db.query("INSERT INTO unit (id,location) VALUES (?,?)",
-                    [id, location],
-                    (err, result) => {
-                        if (err) {
-                            res.send({ err: err });
-                        }
-                        else {
+                    // initially add a new unit
+                    db.query("INSERT INTO unit (id,location) VALUES (?,?)",
+                        [id, location],
+                        (err, result) => {
+                            if (err) {
+                                res.send({ err: err });
+                            }
+                            else {
 
 
-                            // add four bins for the added unit
-                            for (let i = 0; i < 4; i++) {
+                                // add four bins for the added unit
+                                for (let i = 0; i < 4; i++) {
 
-                                db.query("INSERT INTO bin (category, unit_id) VALUES (?,?)",
-                                    [binCategories[i], id], (err, result) => {
-                                        if (err) {
-                                            res.send({ err: err });
-                                        }
-                                    });
+                                    db.query("INSERT INTO bin (category, unit_id) VALUES (?,?)",
+                                        [binCategories[i], id], (err, result) => {
+                                            if (err) {
+                                                res.send({ err: err });
+                                            }
+                                        });
 
+                                }
+
+                                // if both the unit and four bins added succesfully
+                                res.send({ message: 'successful' });
                             }
 
-                            // if both the unit and four bins added succesfully
-                            res.send({ message: 'successful' });
-                        }
+                        });
 
-                    });
-
-            }
+                }
 
 
-        });
+            });
+
+    }
+
 
 });
 
