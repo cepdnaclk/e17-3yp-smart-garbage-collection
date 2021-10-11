@@ -10,13 +10,8 @@ Router.post("/add", (req, res) => {
 
     const binCategories = ["Food", "Paper", "Polythene", "Other"];
 
-    // if location field is empty
-    if (location == '') {
-        res.send({ message: 'Please enter location' });
-    }
-
-    else {
-
+    // check if a location was given
+    if (location != '') {
         // checking if location exists
         db.query("SELECT * FROM unit WHERE location = ?",
             [location],
@@ -26,7 +21,7 @@ Router.post("/add", (req, res) => {
                     //console.log(err);
                 }
                 if (result.length > 0) {
-                    res.send({ message: 'Same location already exists' });
+                    res.send({ error: 'Location already exists' });
 
                 }
                 else {
@@ -65,7 +60,10 @@ Router.post("/add", (req, res) => {
 
 
             });
+
     }
+
+
 });
 
 
@@ -75,9 +73,6 @@ Router.delete("/delete/:id", (req, res) => {
     //const id = parseInt(req.body.unitID);
     const id = req.params.id;
 
-
-    // checking if id is a number -----------> try 
-    //if (typeof (id) === 'number') {
 
     // check if Id exists
     db.query("SELECT * FROM unit WHERE id = ?",
@@ -120,15 +115,12 @@ Router.delete("/delete/:id", (req, res) => {
 
             // id does not exist
             else {
-                res.send({ message: 'Unit Id does not exist' });
+                res.send({ error: 'Unit Id does not exist' });
             }
 
         });
 
-    //}
-    // else {
-    //     res.send({ message: 'Enter a number as Id' });
-    // }
+
 });
 
 

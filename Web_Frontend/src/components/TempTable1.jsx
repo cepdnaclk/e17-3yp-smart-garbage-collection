@@ -189,7 +189,7 @@ export default function TempTable1() {
 
     // get bins data
     useEffect(() => {
-        Axios.get("http://localhost:3002/Bins/get")
+        Axios.get("http://localhost:3001/Bins/get")
             .then(res => {
                 console.log(res);
                 setBins(res.data)
@@ -201,7 +201,7 @@ export default function TempTable1() {
 
     // get units data
     useEffect(() => {
-        Axios.get("http://localhost:3002/Units/getAll")
+        Axios.get("http://localhost:3001/Units/getAll")
             .then(res => {
                 //console.log(res);
                 setUnits(res.data)
@@ -213,7 +213,7 @@ export default function TempTable1() {
 
     // get bins by unit Id
     useEffect(() => {
-        Axios.get(`http://localhost:3002/Bins/getByUnitId?unitID=${searchId}`)
+        Axios.get(`http://localhost:3001/Bins/getByUnitId?unitID=${searchId}`)
             .then(res => {
                 console.log(res);
                 setSearchedBins(res.data)
