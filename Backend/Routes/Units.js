@@ -162,6 +162,7 @@ Router.get("/maxId", (req, res) => {
     });
 });
 
+// DID NOT WORRRRKKKKKK
 // to get unit id, unit location,unit latitude, unit longitude, bin category, bin fill level, bin color
 // this was used for the map 
 Router.get("/get", (req, res) => {

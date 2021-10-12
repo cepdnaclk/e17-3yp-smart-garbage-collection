@@ -62,23 +62,25 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import Axios from 'axios';
 import binImg from '../images/bin.png';
+import collectorImg from '../images/collector.png';
 //import * as parkDate from "./data/skateboard-parks.json";
 
 export default function TempMap() {
     {
 
         const [units, setUnits] = useState([]);
+        const [collectors, setCollectors] = useState([]);
         // fetching system latitude and longitude from server - didn't
         let [systemLat, setSystemLat] = useState(0);
         let [systemLong, setSystemLong] = useState(0);
         systemLat = 6.8014;
-        systemLong = 79.9229;
+        //systemLong = 79.9229;
+        systemLong = 79.9240;
 
         // get units data
         useEffect(() => {
             Axios.get("http://localhost:3001/Units/getAll")
                 .then(res => {
-                    //console.log(res.data[0]['location']);
                     setUnits(res.data)
                 })
                 .catch(err => {
@@ -86,7 +88,18 @@ export default function TempMap() {
                 })
         }, []);
 
-        // get system coordinates
+        // get collectors data
+        useEffect(() => {
+            Axios.get("http://localhost:3001/Collectors/getLocation")
+                .then(res => {
+                    setCollectors(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }, []);
+
+        // get system coordinates - did not work
         useEffect(() => {
             Axios.get("http://localhost:3001/System/getCoordinates")
                 .then(res => {
@@ -105,10 +118,11 @@ export default function TempMap() {
             height: "100vh",
             latitude: systemLat,
             longitude: systemLong,
-            zoom: 17
+            zoom: 16.5
         });
 
-        const [selectedPark, setSelectedPark] = useState(null);
+        const [selectedUnit, setSelectedUnit] = useState(null);
+        const [selectedCollector, setSelectedCollector] = useState(null);
 
         return (
             <div>
@@ -131,7 +145,8 @@ export default function TempMap() {
                                 className="marker-btn"
                                 onClick={e => {
                                     e.preventDefault();
-                                    setSelectedPark(unit);
+                                    setSelectedUnit(unit);
+
                                 }}
                             >
                                 <img src={binImg} alt="Skate Park Icon" width="25px" height="25px" />
@@ -139,20 +154,55 @@ export default function TempMap() {
                         </Marker>
                     ))}
 
-                    {selectedPark ? (
+                    {collectors.map(collector => (
+                        <Marker
+                            key={collector.id}
+                            latitude={collector.latitude}
+                            longitude={collector.longitude}
+                        >
+                            <button
+                                className="marker-btn"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    setSelectedCollector(collector);
+
+                                }}
+                            >
+                                <img src={collectorImg} alt="Collector Icon" width="25px" height="25px" />
+                            </button>
+                        </Marker>
+                    ))}
+
+                    {selectedUnit ? (
                         <Popup
-                            latitude={selectedPark.latitude}
-                            longitude={selectedPark.longitude}
+                            latitude={selectedUnit.latitude}
+                            longitude={selectedUnit.longitude}
                             onClose={() => {
-                                setSelectedPark(null);
+                                setSelectedUnit(null);
                             }}
                         >
                             <div>
-                                <h2>{selectedPark.location}</h2>
-                                <p>{selectedPark.location}</p>
+                                <p>Unit ID: {selectedUnit.id}</p>
+                                <p>Unit Location: {selectedUnit.location}</p>
                             </div>
                         </Popup>
                     ) : null}
+
+                    {selectedCollector ? (
+                        <Popup
+                            latitude={selectedCollector.latitude}
+                            longitude={selectedCollector.longitude}
+                            onClose={() => {
+                                setSelectedCollector(null);
+                            }}
+                        >
+                            <div>
+                                <p>Collector ID: {selectedCollector.id}</p>
+                                <p>Collector Name: {selectedCollector.fname} {selectedCollector.lname}</p>
+                            </div>
+                        </Popup>
+                    ) : null}
+
                 </ReactMapGL>
             </div>
         );
