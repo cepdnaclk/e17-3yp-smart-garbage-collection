@@ -42,4 +42,15 @@ Router.get("/getByBinId", (req, res) => {
         });
 });
 
+// to get collector id, name, location
+Router.get("/getLocation", (req, res) => {
+    db.query("SELECT id, fname, lname, latitude, longitude FROM collector", (err, result) => {
+        if (err) res.send({ err: err })
+        else {
+            res.send(result);
+        }
+    })
+})
+
+
 module.exports = Router;

@@ -191,7 +191,7 @@ export default function TempTable1() {
     useEffect(() => {
         Axios.get("http://localhost:3001/Bins/get")
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 setBins(res.data)
             })
             .catch(err => {
@@ -203,8 +203,9 @@ export default function TempTable1() {
     useEffect(() => {
         Axios.get("http://localhost:3001/Units/getAll")
             .then(res => {
-                //console.log(res);
-                setUnits(res.data)
+
+                setUnits(res.data);
+                //console.log(units);
             })
             .catch(err => {
                 console.log(err)

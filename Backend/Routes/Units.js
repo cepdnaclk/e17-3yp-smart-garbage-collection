@@ -162,6 +162,58 @@ Router.get("/maxId", (req, res) => {
     });
 });
 
+// DID NOT WORRRRKKKKKK
+// to get unit id, unit location,unit latitude, unit longitude, bin category, bin fill level, bin color
+// this was used for the map 
+Router.get("/get", (req, res) => {
+
+    db.query("SELECT id, location, latitude, longitude FROM unit", (err, result) => {
+        if (err) res.send({ err: err });
+        else {
+            let rows = [];
+            result.map((unit) => {
+                let id = unit.id;
+                let location = unit.location;
+                let latitude = unit.latitude;
+                let longitude = unit.longitude;
+                let binArr = [];
+                let fill_levelArr = [];
+                let colorArr = []
+                db.query("SELECT category, fill_level, color FROM bin WHERE unit_id = ?", id,
+                    (err, result) => {
+                        if (err) res.send({ err: err });
+                        else {
+
+                            for (let i = 0; i < 4; i++) {
+                                binArr.push(result[i].category);
+                                fill_levelArr.push(result[i].fill_level);
+                                colorArr.push(result[i].color);
+                            }
+                            let dataRow = {
+                                "id": id,
+                                "location": location,
+                                "latitude": latitude,
+                                "longitude": longitude,
+                                "categories": binArr,
+                                "fills": fill_levelArr,
+                                "colors": colorArr
+                            }
+                            rows.push(dataRow);
+
+                        }
+
+                    })
+                // res.send(rows);
+
+            })
+            res.send(rows);
+
+        }
+    })
+
+
+})
+
 
 
 module.exports = Router;

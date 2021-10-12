@@ -85,7 +85,16 @@ Router.get("/getHighBound", (req, res) => {
     });
 });
 
+Router.get("/getCoordinates", (req, res) => {
+    db.query("SELECT latitude, longitude FROM systemsettings WHERE id = 1", (err, result) => {
+        if (err) res.send({ error: err })
+        else {
+            res.send(result);
+            //res.send(result[0].category);
+        }
+    });
 
+});
 
 
 module.exports = Router;
