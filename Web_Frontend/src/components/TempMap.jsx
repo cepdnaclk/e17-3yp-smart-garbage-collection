@@ -114,8 +114,10 @@ export default function TempMap() {
         const [viewport, setViewport] = useState({
             // width: window.innerWidth,
             // height: window.innerHeight,
-            width: "100vw",
-            height: "100vh",
+            // width: "100vw",
+            // height: "100vh",
+            width: "1100px",
+            height: "570px",
             latitude: systemLat,
             longitude: systemLong,
             zoom: 16.5
