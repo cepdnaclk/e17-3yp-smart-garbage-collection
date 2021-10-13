@@ -27,21 +27,35 @@ class _RegisterState extends State<Register>{
   var fname= '';
   var lname='';
   String response = '';
+  final success = SnackBar(content: Text('Registration succeded!'));
+  final error = SnackBar(content: Text('Invalid username or password!'));
+  final serverError = SnackBar(content: Text('Can\'t connect to the server!'));
 
   createUser() async {
-    var result = await http_post("api/Signup", {
-      "collectorfname": fname, "collectorlname": lname, "collectorusername": username, "collectorpassword": password
-    });
-    //var url = Uri.parse("http://192.168.93.1:8000/api/Signup");
-    //var result = await http.post(url,body: {"collectorfname": fname, "collectorlname": lname, "collectorusername": username, "collectorpassword": password});
-    //print(result.body);
+    try{
+      var result = await http_post("api/Signup", {
+        "collectorfname": fname, "collectorlname": lname, "collectorusername": username, "collectorpassword": password
+     });
+      if (result.ok) {
+          ScaffoldMessenger.of(context).showSnackBar(success);
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => SignIn()));
+        } else {
+         //print(result.statusCode);
+          ScaffoldMessenger.of(context).showSnackBar(error);
+        }
+    }
+    catch (err) {
+       // print(err);
+        ScaffoldMessenger.of(context).showSnackBar(serverError);
+      }
     
-    if(result.ok)
+    /*if(result.ok)
     { 
       setState(() {
         response = result.data['status'];
       });
-    }
+    }*/
   }
 
   @override
