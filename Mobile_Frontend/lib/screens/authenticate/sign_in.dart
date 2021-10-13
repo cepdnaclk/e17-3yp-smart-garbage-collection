@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/components/header_widget.dart';
+import 'package:mobile/models/http.dart';
 import 'package:mobile/screens/authenticate/register.dart';
+import 'package:mobile/screens/home/mainui.dart';
 import 'package:mobile/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -21,14 +23,28 @@ class _SignInState extends State<SignIn> {
   // text field state
   var username = '';
   var password = '';
+  String response = '';
+  final success = SnackBar(content: Text('Login succeded!'));
+  final error = SnackBar(content: Text('Invalid username or password!'));
+  final serverError = SnackBar(content: Text('Can\'t connect to the server!'));
 
   addUser() async {
-    //var result = await http_post("Signup", {
-      //"collectorfname": fname, "collectorlname": lname, "collectorusername": username, "collectorpassword": password
-    //});
-    var url = Uri.parse("http://192.168.93.1:8000/Signin");
-    var result = await http.post(url,body: {"collectorusername": username, "collectorpassword": password});
-    print(result.body);
+    try{
+      var result = await http_post("Signin", {
+        "collectorusername": username, "collectorpassword": password
+      });
+      if (result.ok) {
+            Navigator.of(context).push( //pushReplacement
+                MaterialPageRoute(builder: (context) => Mainui()));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(error);
+          }
+    }
+    catch (err) {
+         
+      ScaffoldMessenger.of(context).showSnackBar(serverError);
+    }
+    
  /*if(result.ok)
     { 
       setState(() {
