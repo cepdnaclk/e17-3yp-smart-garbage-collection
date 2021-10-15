@@ -1,3 +1,4 @@
+import 'package:mobile/screens/authenticate/app.dart';
 import 'package:mobile/screens/authenticate/background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -48,7 +49,7 @@ class Authenticate extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignIn();
+                      return LoginPage();
                     },
                   ),
                 );

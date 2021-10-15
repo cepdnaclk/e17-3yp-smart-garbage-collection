@@ -15,11 +15,11 @@ router.post('/Signup', function(req, res) {
     const password = req.body.collectorpassword;
 
     //if first name is not entered
-    if (fname == '' && lname == '') res.json({ status: 'Please enter your name' })
+    //if (fname == '' && lname == '') res.json({ status: 'Please enter your name' })
 
-    else if ((username == '' || password == '')) res.json({ status: 'Username or Password is missing' });
+    //else if ((username == '' || password == '')) res.json({ status: 'Username or Password is missing' });
 
-    else {
+    //else {
 
         // checking if username already exists
         db.query("SELECT * FROM collector WHERE username = ?", [username],
@@ -59,7 +59,7 @@ router.post('/Signup', function(req, res) {
 
                 }
             });
-    }
+   // }
 });
 
 module.exports = router;

@@ -39,14 +39,14 @@ class _RegisterState extends State<Register>{
       if (result.ok) {
           ScaffoldMessenger.of(context).showSnackBar(success);
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => SignIn()));
+             MaterialPageRoute(builder: (context) => SignIn()));
         } else {
          //print(result.statusCode);
           ScaffoldMessenger.of(context).showSnackBar(error);
         }
     }
     catch (err) {
-       // print(err);
+        //print(err);
         ScaffoldMessenger.of(context).showSnackBar(serverError);
       }
     
