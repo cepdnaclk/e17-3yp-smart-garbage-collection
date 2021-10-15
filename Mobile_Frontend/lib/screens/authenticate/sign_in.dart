@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:async';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/components/header_widget.dart';
 import 'package:mobile/models/http.dart';
@@ -10,6 +14,12 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/components/rounded_btn/rounded_btn.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const SERVER_IP = 'http://192.168.1.167:5000';
+final storage = FlutterSecureStorage();
+
 
 class SignIn extends StatefulWidget {
   @override
@@ -27,7 +37,25 @@ class _SignInState extends State<SignIn> {
   final success = SnackBar(content: Text('Login succeded!'));
   final error = SnackBar(content: Text('Invalid username or password!'));
   final serverError = SnackBar(content: Text('Can\'t connect to the server!'));
+  bool _isloading =false;
 
+  void displayDialog(context, title, text) => showDialog(
+      context: context,
+      builder: (context) =>
+        AlertDialog(
+          title: Text(title),
+          content: Text(text)
+        ),
+    );
+
+  signIn(username,password) async {
+    var url = Uri.parse("http://localhost:8000/Signin");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map body = {"collectorusername": username, "collectorpassword": password};
+    var jsonResponse;
+    var res = await http.post(url, body: body);
+  }
+  
   addUser() async {
     try{
       var result = await http_post("Signin", {
@@ -36,6 +64,7 @@ class _SignInState extends State<SignIn> {
       if (result.ok) {
             Navigator.of(context).push( //pushReplacement
                 MaterialPageRoute(builder: (context) => Mainui()));
+           
           } else {
             ScaffoldMessenger.of(context).showSnackBar(error);
           }
