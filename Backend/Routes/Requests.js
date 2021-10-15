@@ -46,6 +46,20 @@ Router.delete("/clearAll", (req, res) => {
     });
 });
 
+// get assigned collector by bin Id - didn't work
+Router.get("/getByBinId", (req, res) => {
+    const id = req.query.binID;
+
+    db.query("SELECT collector_id FROM assign WHERE bin_id = ? AND status = Sent OR status = Accepted", id, (err, result) => {
+        if (err) res.send({ error: err })
+        else {
+            res.send(result);
+
+        }
+    });
+
+})
+
 
 
 

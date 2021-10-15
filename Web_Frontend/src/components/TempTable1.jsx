@@ -38,26 +38,6 @@ const columns = [
 
 ];
 
-// function createData(unit_id, bin, fill_level, compaction, assign, location, battery) {
-//     return { unit_id, bin, fill_level, compaction, assign, location, battery };
-// }
-
-// const rows = [
-//     createData('1', 'Food', "10%", 'None', null, 'Locaction 1', 'HIGH'),
-//     createData('1', 'Paper', "91%", 3, 'Collector1', 'Location 1', 'HIGH'),
-//     createData('1', 'Polythene', "60%", 2, 'Collector1', 'Location 1', 'MEDIUM'),
-//     createData('1', 'Other', "20%", 'None', null, 'Location 1', 'HIGH'),
-//     createData('2', 'Food', "10%", 'None', null, 'Loc2', 'LOW'),
-//     createData('2', 'Paper', "91%", 3, 'Collector2', 'Loc1', 'MEDIUM'),
-//     createData('2', 'Polythene', "60%", 1, 'Collector2', 'Loc1', 'HIGH'),
-//     createData('2', 'Other', "20%", 'None', null, 'Loc2', 'HIGH'),
-//     createData('3', 'Food', "10%", 'None', null, 'Loc3', 'HIGH'),
-//     createData('3', 'Paper', "91%", 3, 'Collector1', 'Loc3', 'HIGH'),
-//     createData('3', 'Polythene', "60%", 3, 'Collector1', 'Loc3', 'MEDIUM'),
-//     createData('3', 'Other', "20%", 'None', null, 'Loc3', 'HIGH'),
-// ];
-
-// const rows = [];
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -121,12 +101,6 @@ function setColor(id, value) {
 
     //var val = parseInt(value);
     var val = value;
-    // if (id === 'fill_level') {
-    //     if (val < 50) return '#54E346'; //green
-    //     else if (val < 80) return 'yellow';
-    //     else if (val >= 80) return '#F92727'; //red
-    // }
-
     if (id === 'color') {
         if (val === 'g') return '#54E346'; //green
         else if (val === 'y') return 'yellow';
@@ -134,28 +108,6 @@ function setColor(id, value) {
     }
 
 }
-
-function setValue(id, value) {
-
-    if (id === 'fill_level') return <b>{value}</b>;
-    else if (id === 'assign') {
-        return <div>
-            <Grid container >
-                <Grid item xs={6}>
-                    <SelectCollector />
-                </Grid>
-                <Grid item xs={6}>
-                    <IconButton aria-label="send">
-                        <SendRoundedIcon />
-                    </IconButton>
-                </Grid>
-
-
-            </Grid></div>
-    };
-    return value;
-}
-
 
 export default function TempTable1() {
     const classes = useStyles();
@@ -216,7 +168,7 @@ export default function TempTable1() {
     useEffect(() => {
         Axios.get(`http://localhost:3001/Bins/getByUnitId?unitID=${searchId}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setSearchedBins(res.data)
             })
             .catch(err => {
@@ -224,29 +176,53 @@ export default function TempTable1() {
             })
     }, [searchId]);
 
+    // chart data 
+    //const [searchBinId, setSearchBinId] = useState(null);
+    let binCategory = [];
+    let binLevel = [];
+    let binColor = [];
+    let binBattery = [];
+    let binCompaction = [];
 
-    // for the Bar chart
-    const [chartData, setChartData] = useState({});
+    // get assigned collector by bin Id
+    // useEffect(() => {
+    //     Axios.get(`http://localhost:3001/Requests/getByBinId?binID=${searchBinId}`)
+    //         .then(res => {
+    //             console.log(res);
 
-    const chart = () => {
-        setChartData({
-            labels: ['Food', 'Paper', 'Polythene', 'Other'],
-            dataSets: [
-                {
-                    label: 'Fill levels of bins',
-                    data: [80, 60, 45, 10],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderWidth: 4
-                }
-            ]
-        })
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }, []);
+
+
+    searchedBins.map((bin) => {
+        //setSearchBinId(bin.id);
+        binCategory.push(bin.category);
+        binLevel.push(bin.fill_level);
+        binBattery.push(bin.battery);
+        binCompaction.push(bin.compaction_cycles);
+        if (bin.color == 'r') binColor.push('rgba(249, 39, 39, 1)');
+        if (bin.color == 'y') binColor.push('rgba(255, 255, 0, 1)');
+        if (bin.color == 'g') binColor.push('rgba(84, 227, 70, 1)');
+    })
+
+    let chartData = {
+
+        labels: [binCategory[0], binCategory[1], binCategory[2], binCategory[3]],
+        datasets: [
+            {
+                label: 'Fill levels of bins',
+                data: [binLevel[0], binLevel[1], binLevel[2], binLevel[3]],
+                backgroundColor: [
+                    binColor[0], binColor[1], binColor[2], binColor[3]
+                ],
+                // borderWidth: 4
+            }
+        ]
+
     }
-
-    useEffect(() => {
-        chart()
-    }, [])
 
     // // get collector name by bin id if in sent or accepted statuses
     // const getAssignedCollector = ((id) => {
@@ -346,20 +322,39 @@ export default function TempTable1() {
             {view == 'Graph View' ? <div><div className={classes.graphroot}>
                 <Grid container spacing={3}>
 
-                    <Grid item xs={6}>
-                        <h2>Graph</h2>
+                    <Grid item xs={7}>
+                        <h2>Unit ID: {searchId}</h2>
                         <Paper className={classes.paper}>
 
                             <Bar data={chartData} options={{
-                                responsive: true
+                                responsive: true,
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                min: 0,
+                                                max: 100,
+                                                stepSize: 1
+                                            }
+                                        }
+                                    ]
+                                }
                             }} />
                         </Paper>
                     </Grid>
-                    <Grid item xs={6}>
-                        <h2>Unit Details</h2>
-                        <Paper className={classes.paper}>
-                            <p>Location: Miriswatta</p>
-                            <SelectBin />
+                    <Grid item xs={5}>
+                        <h2>Bin Details</h2>
+                        <Paper className={classes.paper} marginBottom="10px">
+
+                            <p>1. Food Bin</p>
+                            <p>- Battery({binBattery[0]}) Compaction Cycles({binCompaction[0]}) </p>
+                            <p>2. Paper Bin</p>
+                            <p>- Battery({binBattery[1]}) Compaction Cycles({binCompaction[1]}) </p>
+                            <p>3. Polythene Bin</p>
+                            <p>- Battery({binBattery[2]}) Compaction Cycles({binCompaction[2]}) </p>
+                            <p>4. Other Bin</p>
+                            <p>- Battery({binBattery[3]}) Compaction Cycles({binCompaction[3]}) </p>
+                            {/* <SelectBin />
                             <SelectCollector />
 
                             <Button
@@ -370,12 +365,14 @@ export default function TempTable1() {
                                 startIcon={<SendRoundedIcon />}
                             >
                                 Assign
-                            </Button>
+                            </Button> */}
+
+
                         </Paper>
                     </Grid>
 
                 </Grid>
-            </div></div> : <div><Paper className={classes.root}>
+            </div></div > : <div><Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >
