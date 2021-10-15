@@ -177,12 +177,32 @@ export default function TempTable1() {
     }, [searchId]);
 
     // chart data 
+    //const [searchBinId, setSearchBinId] = useState(null);
     let binCategory = [];
     let binLevel = [];
     let binColor = [];
+    let binBattery = [];
+    let binCompaction = [];
+
+    // get assigned collector by bin Id
+    // useEffect(() => {
+    //     Axios.get(`http://localhost:3001/Requests/getByBinId?binID=${searchBinId}`)
+    //         .then(res => {
+    //             console.log(res);
+
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }, []);
+
+
     searchedBins.map((bin) => {
+        //setSearchBinId(bin.id);
         binCategory.push(bin.category);
         binLevel.push(bin.fill_level);
+        binBattery.push(bin.battery);
+        binCompaction.push(bin.compaction_cycles);
         if (bin.color == 'r') binColor.push('rgba(249, 39, 39, 1)');
         if (bin.color == 'y') binColor.push('rgba(255, 255, 0, 1)');
         if (bin.color == 'g') binColor.push('rgba(84, 227, 70, 1)');
@@ -302,8 +322,8 @@ export default function TempTable1() {
             {view == 'Graph View' ? <div><div className={classes.graphroot}>
                 <Grid container spacing={3}>
 
-                    <Grid item xs={6}>
-                        <h2>Graph</h2>
+                    <Grid item xs={7}>
+                        <h2>Unit ID: {searchId}</h2>
                         <Paper className={classes.paper}>
 
                             <Bar data={chartData} options={{
@@ -322,11 +342,19 @@ export default function TempTable1() {
                             }} />
                         </Paper>
                     </Grid>
-                    <Grid item xs={6}>
-                        <h2>Unit Details</h2>
-                        <Paper className={classes.paper}>
-                            <p>Location: Miriswatta</p>
-                            <SelectBin />
+                    <Grid item xs={5}>
+                        <h2>Bin Details</h2>
+                        <Paper className={classes.paper} marginBottom="10px">
+
+                            <p>1. Food Bin</p>
+                            <p>- Battery({binBattery[0]}) Compaction Cycles({binCompaction[0]}) </p>
+                            <p>2. Paper Bin</p>
+                            <p>- Battery({binBattery[1]}) Compaction Cycles({binCompaction[1]}) </p>
+                            <p>3. Polythene Bin</p>
+                            <p>- Battery({binBattery[2]}) Compaction Cycles({binCompaction[2]}) </p>
+                            <p>4. Other Bin</p>
+                            <p>- Battery({binBattery[3]}) Compaction Cycles({binCompaction[3]}) </p>
+                            {/* <SelectBin />
                             <SelectCollector />
 
                             <Button
@@ -337,12 +365,14 @@ export default function TempTable1() {
                                 startIcon={<SendRoundedIcon />}
                             >
                                 Assign
-                            </Button>
+                            </Button> */}
+
+
                         </Paper>
                     </Grid>
 
                 </Grid>
-            </div></div> : <div><Paper className={classes.root}>
+            </div></div > : <div><Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >

@@ -34,7 +34,8 @@ h4 {
 
 p {
     color: #0F3057;
-    font-family: 'Righteous', cursive;
+    /* font-family: 'Righteous', cursive; */
+    font-size: 0.8rem;
 }
 
 .error{
