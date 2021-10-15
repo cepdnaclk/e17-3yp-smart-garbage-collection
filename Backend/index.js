@@ -50,6 +50,6 @@ app.use("/api", MobSignupRoute);
 app.use("/api", MobSigninRoute);
 app.use("/api", CollectorProfile);
 
-app.listen(8000, function() {
+app.listen(3001, function () {
     console.log('server running');
 });
