@@ -49,7 +49,7 @@ class Authenticate extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginPage();
+                      return SignIn();
                     },
                   ),
                 );

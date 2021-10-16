@@ -4,7 +4,9 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:mobile/components/header_widget.dart';
+import 'package:mobile/components/submitbutton.dart';
 import 'package:mobile/models/http.dart';
+import 'package:mobile/screens/api_provider.dart';
 import 'package:mobile/screens/authenticate/register.dart';
 import 'package:mobile/screens/home/mainui.dart';
 import 'package:mobile/services/auth.dart';
@@ -13,7 +15,7 @@ import 'package:flutter/rendering.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/components/rounded_btn/rounded_btn.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,12 +33,17 @@ class _SignInState extends State<SignIn> {
   //final AuthService _auth = AuthService();
   bool showSpinner = false;
   // text field state
-  var username = '';
-  var password = '';
+  //String username = '';
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _username = TextEditingController();
+  //String password = '';
+  TextEditingController _password = TextEditingController();
   String response = '';
   final success = SnackBar(content: Text('Login succeded!'));
   final error = SnackBar(content: Text('Invalid username or password!'));
   final serverError = SnackBar(content: Text('Can\'t connect to the server!'));
+
+  //ApiProvider apiProvider = ApiProvider();
   bool _isloading =false;
 
   void displayDialog(context, title, text) => showDialog(
@@ -47,19 +54,88 @@ class _SignInState extends State<SignIn> {
           content: Text(text)
         ),
     );
-
-  signIn(username,password) async {
-    var url = Uri.parse("http://localhost:8000/Signin");
+  
+  Future signIn(String username,String password) async {
+    //var url = Uri.parse("http://localhost:8000/Signin");
+    var token;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map body = {"collectorusername": username, "collectorpassword": password};
-    var jsonResponse;
-    var res = await http.post(url, body: body);
+    try {
+      final response = await post(
+        Uri.parse('http://localhost:8000/api/authenticate'),
+        
+        body: {
+          'collectorusername': username,
+          'collectorpassword': password,
+        },
+      );
+      if (response.statusCode == 200) {
+        token = jsonDecode(response.body);
+        setState(() {
+          // _isLoading = false;
+          sharedPreferences.setString("token", token['token']);
+        });
+      }
+      print(response.statusCode);
+      print(response.body );
+      return response.statusCode;
+      // return 200;
+    } catch (err) {}
+  }
+
+  Widget _submitButton() {
+    return InkWell(
+        onTap: () async {
+          if (_formKey.currentState?.validate() ?? false) {
+            _formKey.currentState?.save();
+            print(_username.text);
+            print(_password.text);
+            // setState(() {
+            //   _isLoading = true;
+            // });
+            var statusCode = await signIn(_username.text, _password.text);
+            if (statusCode == 200) {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Login Successfully!!!'),
+                  content: const Text(''),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Mainui(),
+                        ),
+                      ),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Something Went Wrong!!!'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Try Again'),
+                    ),
+                  ],
+                ),
+              );
+            }
+          }
+        },
+        child: SubmitButton(buttontext: "Login"));
   }
   
-  addUser() async {
+ 
+  /*addUser() async {
     try{
       var result = await http_post("Signin", {
-        "collectorusername": username, "collectorpassword": password
+        "collectorusername": _username, "collectorpassword": _password
       });
       if (result.ok) {
             Navigator.of(context).push( //pushReplacement
@@ -73,18 +149,14 @@ class _SignInState extends State<SignIn> {
          
       ScaffoldMessenger.of(context).showSnackBar(serverError);
     }
-    
- /*if(result.ok)
-    { 
-      setState(() {
-        response = result.data['status'];
-      });
-    }*/
-  }
   
+ 
+  }
+  */
   @override
   Widget build(BuildContext context) {
     double _headerHeight = 90;
+    final height = MediaQuery.of(context).size.height;
 
     final Shader linearGradient = LinearGradient(
       colors: <Color>[Color(0xff0f3057), Color(0xff008891)],
@@ -150,11 +222,17 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextField(
+                        TextFormField(
                           style: (TextStyle(
                            color: Colors.white,
                            fontWeight: FontWeight.w400
                           )),
+                          validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Insert an Username!';
+                                }
+                              },
+                          controller: _username,
                           keyboardType: TextInputType.emailAddress,
                             cursorColor: Colors.white,
                             obscureText: false,
@@ -168,9 +246,9 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                               ),
                         ),
-                          onChanged: (value) {
-                            username = value;
-                          },
+                          /*onChanged: (value) {
+                            _username.text = value;
+                          },*/
                         ),
                       ],
                     ),
@@ -188,11 +266,17 @@ class _SignInState extends State<SignIn> {
                       SizedBox(
                         height: 10,
                       ),
-                      TextField(
+                      TextFormField(
                         style: (TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w400
                         )),
+                        validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Insert a Password!';
+                                }
+                              },
+                        controller: _password,
                         obscureText: true,
                         cursorColor: Colors.white,
                         decoration: InputDecoration(
@@ -205,26 +289,31 @@ class _SignInState extends State<SignIn> {
                             borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           ),
                         ),
-                        onChanged: (value) {
-                          password = value;
-                        },
+                        /*onChanged: (value) {
+                          _password.text = value;
+                        },*/
                       ),
                     ],
                   ),
                 ),
-                Padding(
+                //SizedBox(height: height * 0.31),
+                _submitButton(),
+                /*Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: RoundedButton(
                       btnText: 'LOGIN',
                       color: Color(0xff008891),
-                      onPressed: () async {
+                      /*onPressed: () async {
                         // Add login code
                         addUser();
-                      },
+                      },*/
+                      onPressed: () => _submitButton(),
                     ),
+                    
                   ),
-                ),
+                  
+                ),*/
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

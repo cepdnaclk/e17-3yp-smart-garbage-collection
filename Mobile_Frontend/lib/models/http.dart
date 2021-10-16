@@ -10,7 +10,7 @@ class RequestResult
 }
 
 const PROTOCOL = "http";
-const DOMAIN = "localhost:60854";
+const DOMAIN = "localhost:8000";
 // 192.168.43.56
 Future<RequestResult> http_get(String route, [dynamic data]) async
 {
@@ -24,7 +24,7 @@ Future<RequestResult> http_post(String route, [dynamic data]) async
 {
   var url = Uri.parse("$PROTOCOL://$DOMAIN/$route");
   var dataStr = jsonEncode(data);
-  var result = await http.post(url, body: dataStr, headers:{"Content-Type":"application/json"});
+  var result = await http.post(url, body: dataStr, headers:{"Accept":"application/json","Access-Control-Allow-Origin": "*"});
   //return RequestResult(true,result);
   /*var res;
   if (result.body.isNotEmpty){
