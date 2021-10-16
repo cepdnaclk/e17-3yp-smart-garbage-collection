@@ -11,7 +11,7 @@ const CollectorsRoute = require("./Routes/Collectors");
 const RequestsRoute = require("./Routes/Requests");
 const MobSignupRoute = require("./Routes/MobSignup");
 const MobSigninRoute = require("./Routes/MobSignin");
-const CollectorProfile = require("./Routes/collectorProfile");
+//const CollectorProfile = require("./Routes/collectorProfile");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -22,7 +22,8 @@ app.use(express.json());
 
 //app.use(function (req, res, next))
 app.use(cors({
-    origin: ["http://localhost:55556"],
+    // origin: ["http://localhost:55556"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"], // change
     credentials: true
 }));
@@ -50,7 +51,7 @@ app.use("/Collectors", CollectorsRoute);
 app.use("/Requests", RequestsRoute);
 app.use("/api", MobSignupRoute);
 app.use("/api", MobSigninRoute);
-app.use("/api", CollectorProfile);
+//app.use("/api", CollectorProfile);
 
 app.listen(3001, function () {
     console.log('server running');
