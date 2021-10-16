@@ -4,10 +4,12 @@ const Router = express.Router();
 const bcrypt = require('bcrypt');
 //const { response, application } = require('express');
 const { createTokens, validateToken } = require('../JWT')
+const validation = require('../Middlewares/validationMiddleware')
+const signinSchema = require('../Validations/signinValidation');
 
 const saultRounds = 10; // for pw hashing
 
-Router.post("/", async function (req, res) {
+Router.post("/", validation(signinSchema), async function (req, res) {
 
 
     const username = req.body.adminusername;

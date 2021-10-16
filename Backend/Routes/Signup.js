@@ -2,10 +2,12 @@ const express = require('express');
 const db = require("../connection");
 const bcrypt = require('bcrypt');
 const Router = express.Router();
+const validation = require('../Middlewares/validationMiddleware')
+const signupSchema = require('../Validations/signupValidation');
 
 const saultRounds = 10; // for pw hashing
 
-Router.post("/", function (req, res) {
+Router.post("/", validation(signupSchema), function (req, res) {
 
     const fname = req.body.adminfname;
     const lname = req.body.adminlname;
