@@ -141,7 +141,11 @@ export default function TempTable1() {
 
     // get bins data
     useEffect(() => {
-        Axios.get("http://localhost:3001/Bins/get")
+        Axios.get("http://localhost:3001/Bins/get", {
+            headers: {
+                "x-access-token": localStorage.getItem("token")
+            }
+        })
             .then(res => {
                 //console.log(res);
                 setBins(res.data)
@@ -344,7 +348,7 @@ export default function TempTable1() {
                     </Grid>
                     <Grid item xs={5}>
                         <h2>Bin Details</h2>
-                        <Paper className={classes.paper} marginBottom="10px">
+                        <Paper className={classes.paper} >
 
                             <p>1. Food Bin</p>
                             <p>- Battery({binBattery[0]}) Compaction Cycles({binCompaction[0]}) </p>

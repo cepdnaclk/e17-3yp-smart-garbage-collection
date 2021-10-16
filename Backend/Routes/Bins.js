@@ -3,10 +3,10 @@ const db = require("../connection");
 const Router = express.Router();
 const { validateToken } = require('../JWT')
 
-//Router.get("/get", validateToken, (req, res) => {
+Router.get("/get", validateToken, (req, res) => {
 
-Router.get("/get", (req, res) => {
-
+    //Router.get("/get", (req, res) => {
+    //console.log(req.admin) -> grab user id wh sends the request
 
     db.query("SELECT * FROM bin", (err, result) => {
         if (err) res.send({ error: err })

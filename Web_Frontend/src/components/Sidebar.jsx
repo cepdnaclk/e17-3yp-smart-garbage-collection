@@ -62,7 +62,7 @@ export default function Sidebar() {
     >
         {/* <div className={classes.toolbar} /> */}
         {/* name must be passed */}
-        <User name="Isara" />
+        <User name={localStorage.getItem("name")} />
         <Divider />
         <List>
             {['Overview', 'Customize', 'Sent Requests', 'Map view'].map((text, index) => (

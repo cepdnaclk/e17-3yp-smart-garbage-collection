@@ -73,6 +73,9 @@ function Signin() {
         }).then((response) => {
             if (response.data.error) alert(response.data.error);
             else {
+                //console.log(response);
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("name", response.data.name);
                 history.push("/Dashboard");
             }
         });

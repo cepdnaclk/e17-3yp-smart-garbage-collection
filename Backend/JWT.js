@@ -1,36 +1,75 @@
-const { sign, verify } = require("jsonwebtoken");
+//const { sign, verify } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const createTokens = (user) => {
-    const accessToken = sign({ username: user.username, id: user.id },
-        "jwtsecret",
-    );
+// const createTokens = (user) => {
+//     const accessToken = sign({ username: user.username, id: user.id },
+//         "jwtsecret",
+//     );
 
-    return accessToken;
-};
+//     return accessToken;
+// };
 
 // create middle wear
 
 const validateToken = (req, res, next) => {
-    const accessToken = req.cookies["access-token"];
 
-    // if access token is not in cookies
-    if (!accessToken) {
-        return res.status(400).send({ error: "User not authenticated!" });
+    const token = req.headers["x-access-token"]
+    if (!token) {
+        res.status(400).send({ error: "User not authenticated!" });
     }
+    else {
+        // jwt.verify(token, "jwtsecret", (err, decoded) => {
+        //     if (err) {
+        //         res.json({ auth: false, error: "Authentication failed" })
+        //     } else {
+        //         req.userId = decoded.id; // check
+        //         next();
+        //     }
+        // })
 
-    // if access token is available
-    // check if valid
-    try {
-        const validToken = verify(accessToken, "jwtsecret");
-        if (validToken) {
-            req.authenticated = true;
-            return next();
+        try {
+            const validToken = jwt.verify(token, "jwtsecret");
+            //console.log(validToken.id)
+            //req.admin = validToken.id; -> user who sent the request
+            if (validToken) {
+                return next();
+            }
+        }
+        catch (err) {
+            res.json({ auth: false, error: err })
         }
 
-        // if token is not valid
-    } catch (err) {
-        return res.send({ error: err });
     }
-};
 
-module.exports = { createTokens, validateToken };
+}
+
+// jwt validate attempt 1
+
+// const validateToken = (req, res, next) => {
+
+
+//     const accessToken = req.cookies["access-token"];
+
+//     // if access token is not in cookies
+//     if (!accessToken) {
+//         return res.status(400).send({ error: "User not authenticated!" });
+//     }
+
+//     // if access token is available
+//     // check if valid
+//     try {
+//         const validToken = verify(accessToken, "jwtsecret");
+//         if (validToken) {
+//             req.authenticated = true;
+//             return next();
+//         }
+
+//         // if token is not valid
+//     } catch (err) {
+//         return res.send({ error: err });
+//     }
+
+// }
+
+
+module.exports = { validateToken };
