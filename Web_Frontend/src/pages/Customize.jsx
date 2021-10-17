@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import CustomizeForm from '../components/CustomizeForm';
-
+import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Customize() {
+function Customize() {
     const classes = useStyles();
 
     return (
@@ -45,3 +45,5 @@ export default function Customize() {
         </div>
     );
 }
+
+export default withRouter(Customize);
