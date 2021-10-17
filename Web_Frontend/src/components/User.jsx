@@ -1,8 +1,10 @@
+//import React, { useState, useContext } from 'react';
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import userImg from '../images/user.png'
 import { auto } from 'async';
+//import { AuthContext } from '../helpers/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -26,7 +28,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function User(props) {
+    //const { authState } = useContext(AuthContext);
     const classes = useStyles();
+    // if (authState) {
+    //     return (<div><Avatar className={classes.user} alt={props.name} src={userImg} />
+    //         <h3 className={classes.text}>{props.name}</h3></div >);
+    // }
+    // else {
+    //     return null;
+    // }
     return (<div><Avatar className={classes.user} alt={props.name} src={userImg} />
         <h3 className={classes.text}>{props.name}</h3></div >);
 }
