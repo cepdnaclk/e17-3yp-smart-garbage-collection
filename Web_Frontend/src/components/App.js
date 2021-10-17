@@ -8,6 +8,7 @@ import Overview from '../pages/Overview.jsx';
 import Customize from '../pages/Customize.jsx';
 import MapView from '../pages/MapView.jsx';
 import SentRequests from '../pages/SentRequests.jsx';
+import PageNotFound from '../pages/PageNotFound.jsx';
 import TempOverview from '../pages/TempOverview'; // temporary one -remove this
 import { AuthContext } from '../helpers/AuthContext';
 import { useState, useEffect } from 'react';
@@ -47,6 +48,7 @@ function App() {
                     <Route exact path="/SentRequests"><SentRequests /></Route>
                     {/* temporary */}
                     <Route exact path="/TempOverview"><TempOverview /></Route>
+                    <Route path="*"><PageNotFound /></Route>
 
                 </Switch>
             </Router>
