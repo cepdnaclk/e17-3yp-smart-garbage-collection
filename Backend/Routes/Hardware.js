@@ -5,6 +5,7 @@ const Router = express.Router();
 // 1. bin color & fill level (green, yellow, red)
 // 2. compaction cycles
 // 3. Automated assigning (red)
+// 4. complete task (when red becomes -> zero or lower than some value request status must be changed to completed) ***NOT SURE
 
 // 1. bin color & fill level (green, yellow, red)
 Router.put("/update/bin", (req, res) => {
@@ -32,8 +33,6 @@ Router.put("/update/bin", (req, res) => {
             res.send({ error: "Invalid bin Id" })
         }
     })
-
-
 });
 
 // 2. compaction cycles
@@ -65,6 +64,31 @@ Router.put("/update/binCompaction", (req, res) => {
 
 });
 
+
 // 3. Automated assigning (red)
+
+// ASSIGNING AUTOMATION ALGORITHM
+
+// steps for criteria 1
+
+// a) take max_tasks from db
+// b) take the list of collectors with id & tasks from db
+// c) create a list of eligible collectors
+//      - calculate tasks/max_tasks for each collector
+//      - take the ones with min value
+
+// steps for criteria 2
+
+// a) take coordinates of eligible collectors from db
+// b) take the unit_id of the bin from db
+// c) take coordinates of that unit
+// d) calculate distances using geometry library google maps 
+// e) find the least distance -> nearest collector -> send the request (add to assign table)
+// f) if multiple collectors gave same distances -> go for criteria 3
+
+// steps for criteria 3
+
+// a) take the zone of the bin
+// b) select a collector of the same zone -> send the request (add to assign table)
 
 module.exports = Router;

@@ -18,6 +18,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+// let x = 18;
+// let y = 10;
+// let z = Math.floor(x / y);
+// console.log(z);
 
 app.use(express.json());
 //app.use(cors());
