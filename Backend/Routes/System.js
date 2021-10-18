@@ -9,7 +9,7 @@ Router.put("/update/binHeight", (req, res) => {
     if (binHeight != '') {
         db.query("UPDATE systemsettings SET bin_height = ? WHERE id = 1",
             binHeight, (err, result) => {
-                if (err) res.send({ err: err });
+                if (err) res.send({ error: err });
                 else {
                     res.send({ message4: 'Bin height updated' })
                 }
@@ -24,7 +24,7 @@ Router.put("/update/lowBound", (req, res) => {
     if (low_bound != '') {
         db.query("UPDATE systemsettings SET low_bound = ? WHERE id = 1",
             low_bound, (err, result) => {
-                if (err) res.send({ err: err });
+                if (err) res.send({ error: err });
                 else {
                     res.send({ message4: 'Low bound updated' })
                 }
@@ -40,7 +40,7 @@ Router.put("/update/highBound", (req, res) => {
     if (high_bound != '') {
         db.query("UPDATE systemsettings SET high_bound = ? WHERE id = 1",
             high_bound, (err, result) => {
-                if (err) res.send({ err: err });
+                if (err) res.send({ error: err });
                 else {
                     res.send({ message4: 'High bound updated' })
                 }
