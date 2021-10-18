@@ -30,7 +30,7 @@ const validateToken = (req, res, next) => {
         try {
             const validToken = jwt.verify(token, "jwtsecret");
             //console.log(validToken.id)
-            //req.admin = validToken.id; -> user who sent the request
+            req.admin = validToken.id; // -> user who sent the request
             if (validToken) {
                 return next();
             }

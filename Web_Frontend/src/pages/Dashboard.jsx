@@ -4,8 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import TempTable1 from '../components/TempTable1';
-import ButtonBar from '../components/ButtonBar';
-import { Redirect } from 'react-router-dom'; // check
+import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dashboard() {
+function Dashboard() {
     const classes = useStyles();
 
     return (
@@ -47,3 +46,5 @@ export default function Dashboard() {
         </div>
     );
 }
+
+export default withRouter(Dashboard);

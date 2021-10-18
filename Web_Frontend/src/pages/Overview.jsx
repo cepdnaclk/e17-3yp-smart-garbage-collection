@@ -5,6 +5,7 @@ import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import TempTable1 from '../components/TempTable1';
 import ButtonBar from '../components/ButtonBar';
+import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function Overview() {
+function Overview() {
     const classes = useStyles();
 
     return (
@@ -48,3 +49,5 @@ export default function Overview() {
         </div>
     );
 }
+
+export default withRouter(Overview);

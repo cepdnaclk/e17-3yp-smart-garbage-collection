@@ -5,7 +5,7 @@ import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import TempTable2 from '../components/TempTable2';
 // import ButtonBar from '../components/ButtonBar';
-
+import { withRouter } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SentRequests() {
+function SentRequests() {
     const classes = useStyles();
 
     return (
@@ -49,3 +49,5 @@ export default function SentRequests() {
         </div>
     );
 }
+
+export default withRouter(SentRequests);

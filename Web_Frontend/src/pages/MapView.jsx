@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Appbar from '../components/Appbar'
 import Sidebar from '../components/Sidebar'
 import TempMap from '../components/TempMap';
-
+import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MapView() {
+function MapView() {
     const classes = useStyles();
 
     return (
@@ -46,3 +46,6 @@ export default function MapView() {
         </div>
     );
 }
+
+
+export default withRouter(MapView);

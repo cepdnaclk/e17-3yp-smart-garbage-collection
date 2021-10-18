@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { signinSchema } from '../Validations/SigninValidation';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { AuthContext } from '../helpers/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Signin() {
 
+    const { setAuthState } = useContext(AuthContext);
     let history = useHistory();
 
     const classes = useStyles();
@@ -76,6 +78,7 @@ function Signin() {
                 //console.log(response);
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("name", response.data.name);
+                setAuthState(true);
                 history.push("/Dashboard");
             }
         });
