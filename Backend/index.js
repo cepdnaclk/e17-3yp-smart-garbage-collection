@@ -11,6 +11,7 @@ const CollectorsRoute = require("./Routes/Collectors");
 const RequestsRoute = require("./Routes/Requests");
 const MobSignupRoute = require("./Routes/MobSignup");
 const MobSigninRoute = require("./Routes/MobSignin");
+const BinRequestRoute = require("./Routes/MobRequest");
 const AuthRoute = require("./Routes/Auth");
 //const CollectorProfile = require("./Routes/collectorProfile");
 const cors = require('cors');
@@ -24,7 +25,7 @@ app.use(express.json());
 //app.use(function (req, res, next))
 app.use(cors({
     // origin: ["http://localhost:55556"],
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:8000"],
     methods: ["GET", "POST", "PUT", "DELETE"], // change
     credentials: true
 }));
@@ -53,8 +54,9 @@ app.use("/Requests", RequestsRoute);
 app.use("/Auth", AuthRoute);
 app.use("/api", MobSignupRoute);
 app.use("/api", MobSigninRoute);
+app.use("/api", BinRequestRoute);
 //app.use("/api", CollectorProfile);
 
-app.listen(3001, function () {
+app.listen(8000, function() {
     console.log('server running');
 });

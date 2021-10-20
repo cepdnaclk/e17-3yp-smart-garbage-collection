@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-const saultRounds = 10; // for pw hashing
+const saultRounds = 15; // for pw hashing
 
 router.use(express.json());
 
@@ -30,36 +30,36 @@ router.post('/Signup', function(req, res) {
             }
             if (result.length > 0) {
                 res.send({ message: 'Username already exists' });
-                console.log(result);
+                //console.log(result);
             } else {
 
                 // succesfull signup 
 
                 // hash password
-                //bcrypt.hash(password, saultRounds, (err, hash) => {
+                bcrypt.hash(password, saultRounds, (err, hash) => {
 
-                //if (err) console.log(err);
+                    if (err) console.log(err);
 
-                db.query("INSERT INTO collector (fname, lname, username, password) VALUES (?,?,?,?)", [fname, lname, username, password],
-                    (err, result) => {
-                        if (err) {
-                            res.json({ err: err });
-                            //console.log(err);
-                        } else {
-                            res.json({ status: 'successful' });
+                    db.query("INSERT INTO collector (fname, lname, username, password) VALUES (?,?,?,?)", [fname, lname, username, hash],
+                        (err, result) => {
+                            if (err) {
+                                res.json({ err: err });
+                                //console.log(err);
+                            } else {
+                                res.json({ status: 'successful' });
 
-                        }
+                            }
 
-                    });
+                        });
 
 
-
+                })
 
 
 
             }
         });
-
+    // }
 });
 
 module.exports = router;
