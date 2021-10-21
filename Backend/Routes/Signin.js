@@ -20,7 +20,7 @@ Router.post("/", validation(signinSchema), async function (req, res) {
         username,
         (err, result) => {
             if (err) {
-                res.send({ error: err, auth: false });
+                res.status(400).send({ error: err, auth: false });
 
             }
             if (result.length > 0) {
@@ -47,7 +47,7 @@ Router.post("/", validation(signinSchema), async function (req, res) {
 
                         const id = result[0].id;
                         const token = jwt.sign({ id }, "jwtsecret", {
-                            expiresIn: 300,
+                            expiresIn: 300 * 6,
                         })
                         res.send({ auth: true, token: token, name: result[0].fname });
 

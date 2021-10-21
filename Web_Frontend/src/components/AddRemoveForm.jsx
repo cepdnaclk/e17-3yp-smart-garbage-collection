@@ -44,14 +44,29 @@ export default function AddRemoveForm() {
         Axios.post(url, {
             unitLocation: location
         }).then((response) => {
-            if (response.data.error) alert(response.data.error);
+            if (response.data.error) {
+                alert(response.data.error);
+                window.location.reload(true);
+            }
+            else {
+                alert(response.data.message);
+                window.location.reload(true);
+            }
+
         });
     }
 
     const delUnit = () => {
         Axios.delete(`http://localhost:3001/Units/delete/${unitIdDel}`, {
         }).then((response) => {
-            if (response.data.error) alert(response.data.error);
+            if (response.data.error) {
+                alert(response.data.error);
+                window.location.reload(true);
+            }
+            else {
+                alert(response.data.message);
+                window.location.reload(true);
+            }
         });
     }
 
@@ -89,7 +104,7 @@ export default function AddRemoveForm() {
                 {/* <form onSubmit={handleSubmit(submitAddForm)}> */}
                 <FormControl>
                     <InputLabel htmlFor="my-input">Unit ID: {unitIdAdd}</InputLabel>
-                    <Input id="bin-id-add" aria-describedby="my-helper-text" disabled="True" />
+                    <Input id="bin-id-add" aria-describedby="my-helper-text" disabled={true} />
 
                 </FormControl>
                 <FormControl>

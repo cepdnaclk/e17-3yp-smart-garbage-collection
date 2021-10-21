@@ -19,7 +19,7 @@ Router.post("/", validation(signupSchema), function (req, res) {
         [username],
         (err, result) => {
             if (err) {
-                res.send({ error: err });
+                res.status(400).send({ error: err });
                 //console.log(err);
             }
             if (result.length > 0) {
@@ -39,7 +39,7 @@ Router.post("/", validation(signupSchema), function (req, res) {
                         [fname, lname, username, hash],
                         (err, result) => {
                             if (err) {
-                                res.send({ err: err });
+                                res.status(400).send({ err: err });
                                 //console.log(err);
                             }
                             else {

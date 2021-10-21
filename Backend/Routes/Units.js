@@ -17,7 +17,7 @@ Router.post("/add", (req, res) => {
             [location],
             (err, result) => {
                 if (err) {
-                    res.send({ err: err });
+                    res.status(400).send({ err: err });
                     //console.log(err);
                 }
                 if (result.length > 0) {
@@ -33,7 +33,7 @@ Router.post("/add", (req, res) => {
                         [id, location],
                         (err, result) => {
                             if (err) {
-                                res.send({ err: err });
+                                res.status(400).send({ error: err });
                             }
                             else {
 
@@ -44,7 +44,7 @@ Router.post("/add", (req, res) => {
                                     db.query("INSERT INTO bin (category, unit_id) VALUES (?,?)",
                                         [binCategories[i], id], (err, result) => {
                                             if (err) {
-                                                res.send({ err: err });
+                                                res.status(400).send({ error: err });
                                             }
                                         });
 
@@ -80,7 +80,7 @@ Router.delete("/delete/:id", (req, res) => {
         (err, result) => {
 
             if (err) {
-                res.send({ err: err });
+                res.send({ error: err });
             }
 
             // id found
@@ -91,7 +91,7 @@ Router.delete("/delete/:id", (req, res) => {
                     id,
                     (err, result) => {
                         if (err) {
-                            res.send({ err: err });
+                            res.send({ error: err });
                         }
                         else {
 
@@ -100,7 +100,7 @@ Router.delete("/delete/:id", (req, res) => {
                                 id,
                                 (err, result) => {
                                     if (err) {
-                                        res.send({ err: err });
+                                        res.send({ error: err });
                                     }
                                     else {
                                         res.send({ message: "Successfully deleted" });
@@ -128,7 +128,7 @@ Router.delete("/delete/:id", (req, res) => {
 Router.get("/getAll", (req, res) => {
 
     db.query("SELECT * FROM unit", (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ error: err })
         else {
             res.send(result);
             //res.send(result[0].category);
@@ -142,7 +142,7 @@ Router.get("/getById", (req, res) => {
     const id = req.body.unitID;
 
     db.query("SELECT * FROM unit WHERE id = ?", id, (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ error: err })
         else {
             res.send(result);
             //res.send(result[0].category);
@@ -154,7 +154,7 @@ Router.get("/getById", (req, res) => {
 Router.get("/maxId", (req, res) => {
 
     db.query("SELECT MAX(id) AS nextId FROM unit", (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ error: err })
         else {
             res.send(result);
 
@@ -181,7 +181,7 @@ Router.get("/get", (req, res) => {
                 let colorArr = []
                 db.query("SELECT category, fill_level, color FROM bin WHERE unit_id = ?", id,
                     (err, result) => {
-                        if (err) res.send({ err: err });
+                        if (err) res.status(400).send({ error: err });
                         else {
 
                             for (let i = 0; i < 4; i++) {

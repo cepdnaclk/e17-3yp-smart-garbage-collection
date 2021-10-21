@@ -119,7 +119,7 @@ export default function SystemSettingsForm() {
             <FormControl>
                 <FormControl>
                     <InputLabel htmlFor="my-input">Bin Height: {currentBinHeight} cm </InputLabel>
-                    <Input id="bin-height" aria-describedby="my-helper-text" disabled="True"
+                    <Input id="bin-height" aria-describedby="my-helper-text" disabled={true}
                     // take user input
                     // onChange={(e) => {
                     //     setBinHeight(e.target.value);
@@ -129,7 +129,7 @@ export default function SystemSettingsForm() {
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="my-input">Red Range: {currentHighBound}-100</InputLabel>
-                    <Input id="red-range" aria-describedby="my-helper-text" disabled="True"
+                    <Input id="red-range" aria-describedby="my-helper-text" disabled={true}
                     // take user input
                     // onChange={(e) => {
                     //     setRedRange(e.target.value);
@@ -140,7 +140,7 @@ export default function SystemSettingsForm() {
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="my-input">Yellow Range: {currentLowBound}-{currentHighBound}</InputLabel>
-                    <Input id="yellow-range" aria-describedby="my-helper-text" disabled="True"
+                    <Input id="yellow-range" aria-describedby="my-helper-text" disabled={true}
                     // take user input
                     // onChange={(e) => {
                     //     setYellowRange(e.target.value);
@@ -150,7 +150,7 @@ export default function SystemSettingsForm() {
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="my-input">Green Range: 0-{currentLowBound}</InputLabel>
-                    <Input id="green-range" aria-describedby="my-helper-text" disabled="True"
+                    <Input id="green-range" aria-describedby="my-helper-text" disabled={true}
                     // take user input 
                     // onChange={(e) => {
                     //     setGreenRange(e.target.value);

@@ -6,7 +6,7 @@ const Router = express.Router();
 Router.get("/getAll", (req, res) => {
 
     db.query("SELECT * FROM assign", (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ err: err })
         else {
             res.send(result);
             //res.send(result[0].category);
@@ -26,7 +26,7 @@ Router.post("/add", (req, res) => {
 
     db.query("INSERT INTO assign (admin_id, bin_id, collector_id, status, time) VALUES (?,?,?,?,?)",
         [adminId, binId, collectorId, status, time], (err, result) => {
-            if (err) res.send({ err: err })
+            if (err) res.status(400).send({ error: err })
             else {
                 res.send({ message: 'Request sent succesfully' });
             }
@@ -39,7 +39,7 @@ Router.post("/add", (req, res) => {
 Router.delete("/clearAll", (req, res) => {
 
     db.query("TRUNCATE TABLE assign", (err, result) => {
-        if (err) res.send({ err: err });
+        if (err) res.status(400).send({ error: err });
         else {
             res.send({ message: 'All requests cleared' });
         }
@@ -51,7 +51,7 @@ Router.get("/getByBinId", (req, res) => {
     const id = req.query.binID;
 
     db.query("SELECT collector_id FROM assign WHERE bin_id = ? AND status = Sent OR status = Accepted", id, (err, result) => {
-        if (err) res.send({ error: err })
+        if (err) res.status(400).send({ error: err })
         else {
             res.send(result);
 

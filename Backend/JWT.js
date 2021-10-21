@@ -15,7 +15,7 @@ const validateToken = (req, res, next) => {
 
     const token = req.headers["x-access-token"]
     if (!token) {
-        res.status(400).send({ error: "User not authenticated!" });
+        res.status(401).send({ error: "User not authenticated!" });
     }
     else {
         // jwt.verify(token, "jwtsecret", (err, decoded) => {

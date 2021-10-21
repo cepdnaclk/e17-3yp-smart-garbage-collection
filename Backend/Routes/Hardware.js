@@ -18,12 +18,12 @@ Router.put("/update/bin", (req, res) => {
     // check if a bin exists with the given id
     db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
         if (err) {
-            res.send({ error: err });
+            res.status(400).send({ error: err });
         }
         if (result.length > 0) {
             db.query("UPDATE bin SET fill_level = ?, color = ? WHERE id = ?",
                 [fillLevel, color, id], (err, result) => {
-                    if (err) res.send({ error: err });
+                    if (err) res.status(400).send({ error: err });
                     else {
                         res.send({ message: 'Color & fill level updated' })
                     }
@@ -31,7 +31,7 @@ Router.put("/update/bin", (req, res) => {
 
         }
         else {
-            res.send({ error: "Invalid bin Id" })
+            res.status(400).send({ error: "Invalid bin Id" })
         }
     })
 });
@@ -45,12 +45,12 @@ Router.put("/update/binCompaction", (req, res) => {
     // check if a bin exists with the given id
     db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
         if (err) {
-            res.send({ error: err });
+            res.status(400).send({ error: err });
         }
         if (result.length > 0) {
             db.query("UPDATE bin SET compaction_cycles = ? WHERE id = ?",
                 [compaction, id], (err, result) => {
-                    if (err) res.send({ error: err });
+                    if (err) res.status(400).send({ error: err });
                     else {
                         res.send({ message: 'Compaction updated' })
                     }
@@ -58,7 +58,7 @@ Router.put("/update/binCompaction", (req, res) => {
 
         }
         else {
-            res.send({ error: "Invalid bin Id" })
+            res.status(400).send({ error: "Invalid bin Id" })
         }
     })
 

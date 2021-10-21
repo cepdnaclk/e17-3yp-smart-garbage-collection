@@ -95,8 +95,8 @@ export default function Sidebar() {
         </List>
         {authState === true ? <Button
             variant="contained"
-            color="white"
-            size="sm"
+            color="default"
+            size="small"
             startIcon={<PowerSettingsNewRoundedIcon />}
             className={classes.button}
             onClick={signout}
