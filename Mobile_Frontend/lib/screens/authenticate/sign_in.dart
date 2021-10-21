@@ -59,12 +59,13 @@ class _SignInState extends State<SignIn> {
     //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       var response = await post(
-          Uri.parse('http://192.168.8.148:8000/api/authenticate'),
+          Uri.parse('http://192.168.1.11:8000/api/authenticate'),
           body: data);
       print(response);
       if (response.statusCode == 200) {
         jsonData = json.decode(response.body);
         await storage.write(key: "token", value: jsonData["token"]);
+        print(jsonData['token']);
         setState(() {
           _isLoading = false;
           validate = true;
@@ -399,4 +400,3 @@ Widget _goBackButton(BuildContext context) {
         Navigator.of(context).pop(true);
       });
 }
-  

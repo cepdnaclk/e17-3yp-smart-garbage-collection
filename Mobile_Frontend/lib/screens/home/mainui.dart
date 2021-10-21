@@ -9,6 +9,8 @@ import 'package:mobile/components/rounded_btn/rounded_btn.dart';
 import 'package:mobile/screens/authenticate/register.dart';
 import 'package:mobile/screens/authenticate/sign_in.dart';
 import 'package:mobile/screens/home/horizontal_table.dart';
+import 'package:mobile/screens/home/location.dart';
+import 'package:mobile/screens/home/map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Mainui extends StatefulWidget {
@@ -24,23 +26,23 @@ class _MainuiState extends State<Mainui> {
   @override
   void initState() {
     super.initState();
-    checkLogin();
+    //checkLogin();
   }
 
-  checkLogin() async {
+  /*checkLogin() async {
     var token = await storage.read(key: "token");
     if (token == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => SignIn()),
           (Route<dynamic> route) => false);
-    }
-    /*SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    }*/
+  /*SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => SignIn()),
           (Route<dynamic> route) => false);
     }*/
-  }
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,7 @@ class _MainuiState extends State<Mainui> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return SignIn();
+                        return Location();
                       },
                     ),
                   );

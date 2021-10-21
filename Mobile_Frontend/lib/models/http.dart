@@ -9,7 +9,7 @@ class RequestResult {
 }
 
 const PROTOCOL = "http";
-const DOMAIN = "192.168.8.148:8000";
+const DOMAIN = "192.168.1.11:8000";
 // 192.168.1.11 vi
 // 192.168.43.56
 Future<RequestResult> http_get(String route, [dynamic data]) async {

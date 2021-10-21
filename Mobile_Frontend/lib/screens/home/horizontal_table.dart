@@ -25,10 +25,11 @@ class _HorizontalTableState extends State<HorizontalTable> {
   void initState() {
     // user.initData(10);
     super.initState();
-    checkLoginStatus();
+    //checkLoginStatus();
     getRequestList();
   }
 
+/*
   checkLoginStatus() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
@@ -37,14 +38,14 @@ class _HorizontalTableState extends State<HorizontalTable> {
           (Route<dynamic> route) => false);
     }
   }
-
+*/
   getRequestList() async {
     var requestList;
     Map data = {'collector_ID': 8};
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       var response = await get(
-          Uri.parse('http://192.168.8.148:8000/api/request?collector_ID=8'));
+          Uri.parse('http://192.168.1.11:8000/api/request?collector_ID=8'));
       sharedPreferences.getString("token");
       //print(sharedPreferences.getString("token"));
 
@@ -74,7 +75,7 @@ class _HorizontalTableState extends State<HorizontalTable> {
     //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       var response = await post(
-          Uri.parse('http://192.168.8.148:8000/api/accept'),
+          Uri.parse('http://192.168.1.11:8000/api/accept'),
           body: data);
       print(response);
       if (response.statusCode == 200) {
@@ -100,7 +101,7 @@ class _HorizontalTableState extends State<HorizontalTable> {
     //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       var response = await post(
-          Uri.parse('http://192.168.8.148:8000/api/decline'),
+          Uri.parse('http://192.168.1.11:8000/api/decline'),
           body: data);
       print(response);
       if (response.statusCode == 200) {
@@ -397,9 +398,7 @@ class StudentInfo {
   StudentInfo(
       this.name, this.status, this.roll_no, this.start_time, this.end_time);
 }
- 
 
- 
 /*import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
