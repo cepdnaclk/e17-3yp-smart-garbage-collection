@@ -6,7 +6,7 @@ const Router = express.Router();
 Router.get("/", (req, res) => {
 
     db.query("SELECT id, fname, lname FROM collector", (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ err: err })
         else {
             res.send(result);
             //res.send(result[0].category);
@@ -24,7 +24,7 @@ Router.get("/getByBinId", (req, res) => {
 
     db.query("SELECT collector_id FROM assign WHERE bin_id = ? AND (status = 'Sent' OR status = 'Accepted')",
         binId, (err, result) => {
-            if (err) res.send({ err: err })
+            if (err) res.status(400).send({ err: err })
             else {
                 //res.send(result);
 
@@ -33,7 +33,7 @@ Router.get("/getByBinId", (req, res) => {
 
                 db.query("SELECT fname, lname FROM collector WHERE id = ?",
                     collectorId, (err, result) => {
-                        if (err) res.send({ err: err })
+                        if (err) res.status(400).send({ err: err })
                         else {
                             res.send(result);
                         }
@@ -45,7 +45,7 @@ Router.get("/getByBinId", (req, res) => {
 // to get collector id, name, location
 Router.get("/getLocation", (req, res) => {
     db.query("SELECT id, fname, lname, latitude, longitude FROM collector", (err, result) => {
-        if (err) res.send({ err: err })
+        if (err) res.status(400).send({ error: err })
         else {
             res.send(result);
         }

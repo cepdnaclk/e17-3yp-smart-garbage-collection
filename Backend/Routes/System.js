@@ -11,7 +11,7 @@ Router.put("/update/binHeight", (req, res) => {
             binHeight, (err, result) => {
                 if (err) res.send({ error: err });
                 else {
-                    res.send({ message4: 'Bin height updated' })
+                    res.send({ message: 'Bin height updated' })
                 }
             });
     }
@@ -26,7 +26,7 @@ Router.put("/update/lowBound", (req, res) => {
             low_bound, (err, result) => {
                 if (err) res.send({ error: err });
                 else {
-                    res.send({ message4: 'Low bound updated' })
+                    res.send({ message: 'Low bound updated' })
                 }
             });
     }
@@ -42,7 +42,7 @@ Router.put("/update/highBound", (req, res) => {
             high_bound, (err, result) => {
                 if (err) res.send({ error: err });
                 else {
-                    res.send({ message4: 'High bound updated' })
+                    res.send({ message: 'High bound updated' })
                 }
             });
     }

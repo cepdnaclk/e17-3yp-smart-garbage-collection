@@ -40,22 +40,38 @@ export default function UpdateSettingsForm() {
         console.log(data);
         if (data['lowBound'] > data['highBound']) {
             alert("Low bound must be smaller than high bound")
+            window.location.reload(true);
         }
         else if (data['lowBound'] === data['highBound']) {
             alert("Low bound and High bound cannot be same")
+            window.location.reload(true);
         }
 
         else {
             Axios.put("http://localhost:3001/System/update/lowBound", {
                 low_bound: data['lowBound'],
             }).then((response) => {
-                if (response.data.error) alert(response.data.error);
+                if (response.data.error) {
+                    alert(response.data.error);
+                    window.location.reload(true);
+                }
+                else {
+                    alert(response.data.message);
+                    window.location.reload(true);
+                }
             });
 
             Axios.put("http://localhost:3001/System/update/highBound", {
                 high_bound: data['highBound'],
             }).then((response) => {
-                if (response.data.error) alert(response.data.error);
+                if (response.data.error) {
+                    alert(response.data.error);
+                    window.location.reload(true);
+                }
+                else {
+                    alert(response.data.message);
+                    window.location.reload(true);
+                }
             });
         }
 
