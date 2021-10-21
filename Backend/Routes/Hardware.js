@@ -174,6 +174,7 @@ Router.post('/assign', (req, res) => {
                                                             let status = 'sent';
                                                             let collector_id = eligibleColIds[0];
                                                             let time = '21:15' // HARD CODED ------------------------
+                                                            // add to assign table
                                                             db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
                                                                 [binId, collector_id, status, time], (err, result) => {
                                                                     if (err) res.send({ error: err })
@@ -191,9 +192,41 @@ Router.post('/assign', (req, res) => {
                                                                 });
 
                                                         }
-                                                        // if a single selector could not be found from above criterias
+                                                        // CRITERIA 3 - IMPLEMENTED BUT DID NOT CHECK (CHECK 3)
+                                                        // if a single selector could not be found from above criterias - go for criteria 3
                                                         else if (eligibleColIds.length > 1) {
-                                                            console.log("no")
+                                                            db.query("SELECT zone_id FROM unit WHERE id = ?", unit_id,
+                                                                (err, result) => {
+                                                                    if (err) res.send({ error: err })
+                                                                    else {
+                                                                        let zone_id = result[0].zone_id;
+                                                                        db.query("SELECT collectorid FROM allocate WHERE zoneid = ?", zone_id,
+                                                                            (err, result) => {
+                                                                                if (err) res.send({ error: err })
+                                                                                else {
+                                                                                    let col_id = result[0].collectorid;
+                                                                                    let status = 'sent';
+                                                                                    let time = '21:15' // HARD CODED ------------------------
+                                                                                    db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
+                                                                                        [binId, col_id, status, time], (err, result) => {
+                                                                                            if (err) res.send({ error: err })
+                                                                                            else {
+                                                                                                //res.send({ message: 'Request sent succesfully' });
+                                                                                                // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                                                db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
+                                                                                                    col_id, (err, result) => {
+                                                                                                        if (err) res.send({ error: err })
+                                                                                                        else {
+                                                                                                            res.send({ message: 'Request sent succesfully' });
+                                                                                                        }
+                                                                                                    })
+                                                                                            }
+                                                                                        });
+
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                })
                                                         }
 
                                                     }
