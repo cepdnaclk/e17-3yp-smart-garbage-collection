@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
+const { criteriaTasks } = require('../assignAutomation');
 
 // 1. bin color & fill level (green, yellow, red)
 // 2. compaction cycles
@@ -90,5 +91,45 @@ Router.put("/update/binCompaction", (req, res) => {
 
 // a) take the zone of the bin
 // b) select a collector of the same zone -> send the request (add to assign table)
+
+
+Router.post('/assign', (req, res) => {
+
+    const id = req.query.binId;
+
+    // steps for criteria 1
+    // take max_tasks from db
+    db.query("SELECT max_tasks FROM systemsettings WHERE id = 1", (err, result) => {
+        if (err) {
+            res.send({ error: err });
+        } else {
+            const max_tasks = result[0].max_tasks;
+
+            // take the list of collectors with id & tasks from db
+            db.query("SELECT id, tasks FROM collector", (err, result) => {
+                if (err) {
+                    res.send({ error: err });
+                } else {
+                    let collectors = [];
+                    result.map((collector) => {
+                        let collectorObj = {
+                            "id": collector.id,
+                            "tasks": collector.tasks
+                        }
+                        collectors.push(collectorObj);
+                    })
+
+                    // create a list of eligible collectors
+                    //let eligibleColIds = criteriaTasks(max_tasks, collectors);
+                    console.log(criteriaTasks(max_tasks, collectors));
+
+                }
+            })
+
+        }
+    })
+
+
+})
 
 module.exports = Router;
