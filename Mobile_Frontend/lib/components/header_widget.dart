@@ -5,7 +5,7 @@ class HeaderWidget extends StatefulWidget {
   final bool _showIcon;
   final IconData _icon;
 
-  const HeaderWidget(this._height, this._showIcon, this._icon, {Key? key}) : super(key: key);
+  const HeaderWidget(this._height, this._showIcon, this._icon, {Key key}) : super(key: key);
 
   @override
   _HeaderWidgetState createState() => _HeaderWidgetState(_height, _showIcon, _icon);

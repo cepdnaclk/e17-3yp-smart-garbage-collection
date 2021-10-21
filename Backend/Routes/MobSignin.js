@@ -30,11 +30,14 @@ Router.post('/authenticate', async(req, res) => {
         }
         if (result.length <= 0) return res.status(400).send("not registered");
         else {
-            bcrypt.compare(password, result[0].password).then((result) => {
-                if (!result) return res.status(400).send("invalid username or password");
+            bcrypt.compare(password, result[0].password).then((match) => {
+                if (!match) return res.status(400).send("invalid username or password");
                 else {
-                    const rtoken = jwt.sign({ username: username }, "jwtsecret");
-                    return res.send(rtoken);
+                    const id = result[0].id;
+                    const rtoken = jwt.sign({ id }, "jwtsecret", {
+                        expiresIn: 300,
+                    });
+                    res.status(200).send({ auth: true, token: rtoken, name: result[0].fname });
                 }
             });
         }

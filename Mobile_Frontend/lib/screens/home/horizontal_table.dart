@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mobile/components/header_widget.dart';
+import 'package:mobile/screens/authenticate/sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class HorizontalTable extends StatefulWidget {
-
-
-
   @override
   _HorizontalTableState createState() => _HorizontalTableState();
 }
 
 class _HorizontalTableState extends State<HorizontalTable> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var listData = [];
+
   static const int sortName = 0;
   static const int sortStatus = 1;
   bool isAscending = true;
@@ -17,35 +23,140 @@ class _HorizontalTableState extends State<HorizontalTable> {
 
   @override
   void initState() {
-    user.initData(10);
+    // user.initData(10);
     super.initState();
+    checkLoginStatus();
+    getRequestList();
+  }
+
+  checkLoginStatus() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString("token") == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => SignIn()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
+  getRequestList() async {
+    var requestList;
+    Map data = {'collector_ID': 8};
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      var response = await get(
+          Uri.parse('http://192.168.8.148:8000/api/request?collector_ID=8'));
+      sharedPreferences.getString("token");
+      //print(sharedPreferences.getString("token"));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          print(json.decode(response.body));
+          requestList = json.decode(response.body) as List;
+
+          listData = requestList;
+        });
+        print(listData);
+        return listData;
+      }
+    } catch (err) {}
+  }
+
+  getToken() async {
+    SharedPreferences collectorToken = await SharedPreferences.getInstance();
+    String token = collectorToken.getString('token');
+    return token;
+  }
+
+  acceptRequest(String id) async {
+    Map data = {'request_ID': id};
+    //var jsonData = null;
+
+    //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      var response = await post(
+          Uri.parse('http://192.168.8.148:8000/api/accept'),
+          body: data);
+      print(response);
+      if (response.statusCode == 200) {
+        //jsonData = json.decode(response.body);
+        //await storage.write(key: "token", value: jsonData["token"]);
+        print('ok');
+      }
+      //print(response.statusCode);
+      else {
+        print("not");
+      }
+      //return response.statusCode;
+      // return 200;
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  declineRequest(String id) async {
+    Map data = {'request_ID': id};
+    //var jsonData = null;
+
+    //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      var response = await post(
+          Uri.parse('http://192.168.8.148:8000/api/decline'),
+          body: data);
+      print(response);
+      if (response.statusCode == 200) {
+        //jsonData = json.decode(response.body);
+        //await storage.write(key: "token", value: jsonData["token"]);
+        print('ok');
+      }
+      //print(response.statusCode);
+      else {
+        print("not");
+      }
+      //return response.statusCode;
+      // return 200;
+    } catch (err) {
+      print(err);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff0f3057),
         title: Text("New Requests"),
       ),
-     
-        
-      
-      body:  _getBodyWidget(),
+      body: _getBodyWidget(),
+      /*ListView.builder(
+          itemCount: listData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+              child: Card(
+                color: Colors.white,
+                child: ListTile(
+                  leading: Text(listData[index]['admin_id'].toString()),
+                  title: Text(listData[index]['time'].toString()),
+                  subtitle: Text(listData[index]['fname']),
+                  trailing:
+                      ElevatedButton(onPressed: () {}, child: Text('Accept')),
+                ),
+              ),
+            );
+          }),*/
     );
   }
 
   Widget _getBodyWidget() {
     return Container(
-      child:  HorizontalDataTable(
+      child: HorizontalDataTable(
         leftHandSideColumnWidth: 120,
         rightHandSideColumnWidth: 600,
         isFixedHeader: true,
         headerWidgets: _getTitleWidget(),
         leftSideItemBuilder: _generateFirstColumnRow,
         rightSideItemBuilder: _generateRightHandSideColumnRow,
-        itemCount: user.userInfo.length,
+        itemCount: listData.length,
         rowSeparatorWidget: const Divider(
           color: Colors.black54,
           height: 1.0,
@@ -54,63 +165,66 @@ class _HorizontalTableState extends State<HorizontalTable> {
         leftHandSideColBackgroundColor: Color(0xFFFFFFFF),
         rightHandSideColBackgroundColor: Color(0xFFFFFFFF),
       ),
-      height: MediaQuery
-          .of(context)
-          .size
-          .height,
+      height: MediaQuery.of(context).size.height,
     );
   }
 
   List<Widget> _getTitleWidget() {
     return [
-      FlatButton(
-
+      /* FlatButton(
         padding: EdgeInsets.all(0),
         child: _getTitleItemWidget(
-            'Request' + (sortType == sortName ? (isAscending ? '  ↓' : '  ↑') : ''),
-            120,Color(0xff008891)),
+            'Request coming at(Time)' +
+                (sortType == sortName ? (isAscending ? '  ↓' : '  ↑') : ''),
+            200,
+            Color(0xff008891)),
         onPressed: () {
           sortType = sortName;
           isAscending = !isAscending;
           user.sortName(isAscending);
-          setState(() {
-
-          });
+          setState(() {});
         },
       ),
-      //Container(width: 2,height: 56,color: Colors.white,),
-      //_getTitleItemWidget('Rool No', 100,Colors.red),
-      //Container(width: 2,height: 56,color: Colors.white,),
-     /* FlatButton(
-        padding: EdgeInsets.all(0),
-        child: _getTitleItemWidget('Attendance' +
-            (sortType == sortStatus ? (isAscending ? '↓' : '↑') : ''), 100,Colors.red),
-        onPressed: () {
-          sortType = sortStatus;
-          isAscending = !isAscending;
-          user.sortStatus(isAscending);
-          setState(() {
-
-          });
-        },
+      Container(
+        width: 2,
+        height: 70,
+        color: Colors.white,
       ),*/
-      Container(width: 2,height: 56,color: Colors.white,),
-      _getTitleItemWidget('Time', 100,Color(0xff008891)),
-     Container(width: 2,height: 56,color: Colors.white,),
-      _getTitleItemWidget('Admin ID', 100,Color(0xff008891)),
-      Container(width: 2,height: 56,color: Colors.white,),
-      _getTitleItemWidget('Accept', 100,Color(0xff008891)),
-      Container(width: 2,height: 56,color: Colors.white,),
-      _getTitleItemWidget('Decline', 100,Color(0xff008891)),
+      _getTitleItemWidget('Request coming at (Time)', 400, Color(0xff008891)),
+      Container(
+        width: 2,
+        height: 56,
+        color: Colors.white,
+      ),
+      _getTitleItemWidget('By Admin (Name)', 110, Color(0xff008891)),
+      Container(
+        width: 2,
+        height: 56,
+        color: Colors.white,
+      ),
+      _getTitleItemWidget('Accept', 100, Color(0xff008891)),
+      Container(
+        width: 2,
+        height: 56,
+        color: Colors.white,
+      ),
+      _getTitleItemWidget('Decline', 100, Color(0xff008891)),
+      Container(
+        width: 2,
+        height: 56,
+        color: Colors.white,
+      ),
     ];
   }
 
-  Widget _getTitleItemWidget(String label, double width,color) {
+  Widget _getTitleItemWidget(String label, double width, color) {
     return Container(
       color: color,
-      child: Text(label, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white)),
+      child: Text(label,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
       width: width,
-      height: 56,
+      height: 60,
       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
       alignment: Alignment.centerLeft,
     );
@@ -119,7 +233,11 @@ class _HorizontalTableState extends State<HorizontalTable> {
   Widget _generateFirstColumnRow(BuildContext context, int index) {
     return Container(
       color: Colors.blueGrey,
-      child: Text(user.userInfo[index].name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
+      child: Text(
+        listData[index]['time'].toString(),
+        style: TextStyle(
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+      ),
       width: 120,
       height: 52,
       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -131,23 +249,30 @@ class _HorizontalTableState extends State<HorizontalTable> {
     return Row(
       children: <Widget>[
         Container(
-          child: Text(user.userInfo[index].roll_no,style: TextStyle(fontSize: 18),),
-          width: 100,
+          child: Text(
+            listData[index]['fname'],
+            style: TextStyle(fontSize: 18),
+          ),
+          width: 111,
           height: 52,
           padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.centerLeft,
         ),
-        Container(width: 2,height: 56,color: Colors.blueGrey,),
-        Container(
+        /*Container(
+          width: 2,
+          height: 56,
+          color: Colors.blueGrey,
+        ),*/
+        /*Container(
           child: Row(
             children: <Widget>[
-              Icon(
-                  user.userInfo[index].status
-                      ? Icons.clear
-                      : Icons.check,
-                  color: user.userInfo[index].status ? Colors.red : Colors
-                      .green),
-              Text(user.userInfo[index].status ? 'absent' : 'present',style: TextStyle(fontSize: 18),)
+              Icon(user.userInfo[index].status ? Icons.clear : Icons.check,
+                  color:
+                      user.userInfo[index].status ? Colors.red : Colors.green),
+              Text(
+                user.userInfo[index].status ? 'absent' : 'present',
+                style: TextStyle(fontSize: 18),
+              )
             ],
           ),
           width: 100,
@@ -155,20 +280,60 @@ class _HorizontalTableState extends State<HorizontalTable> {
           padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.centerLeft,
         ),
-        Container(width: 2,height: 56,color: Colors.blueGrey,),
         Container(
-          child: Text(user.userInfo[index].start_time,style: TextStyle(fontSize: 18),),
+          width: 2,
+          height: 56,
+          color: Colors.blueGrey,
+        ),*/
+        /*Container(
+          child: Text(
+            listData[index]['fname'],
+            style: TextStyle(fontSize: 18),
+          ),
           width: 100,
           height: 52,
           padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.centerLeft,
-        ),
-        Container(width: 2,height: 56,color: Colors.blueGrey,),
+        ),*/
         Container(
-          child: Text(user.userInfo[index].end_time,style: TextStyle(fontSize: 18),),
-          width: 200,
+          width: 2,
+          height: 56,
+          color: Colors.blueGrey,
+        ),
+        Container(
+          child: IconButton(
+              icon: Icon(Icons.add_box),
+              color: Colors.black,
+              highlightColor: Colors.yellow,
+              hoverColor: Colors.green,
+              onPressed: () {
+                acceptRequest(listData[index]['request_id'].toString());
+              }),
+          width: 100,
           height: 52,
-          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+          //padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.centerLeft,
+        ),
+        Container(
+          width: 2,
+          height: 56,
+          color: Colors.blueGrey,
+        ),
+        Container(
+          child: IconButton(
+              icon: Icon(Icons.delete),
+              color: Colors.black,
+              highlightColor: Colors.yellow,
+              hoverColor: Colors.green,
+              onPressed: () {
+                declineRequest(listData[index]['request_id'].toString());
+                setState(() {
+                  listData.remove(listData[index]);
+                });
+              }),
+          width: 100,
+          height: 52,
+          //padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.centerLeft,
         ),
       ],
@@ -199,9 +364,9 @@ class Student {
   /// Single sort, sort Name's id
   void sortName(bool isAscending) {
     _userInfo.sort((a, b) {
-      int? aId = int.tryParse(a.name.replaceFirst('Student_', ''));
-      int? bId = int.tryParse(b.name.replaceFirst('Student_', ''));
-      return (aId! - bId!) * (isAscending ? 1 : -1);
+      int aId = int.tryParse(a.name.replaceFirst('Student_', ''));
+      int bId = int.tryParse(b.name.replaceFirst('Student_', ''));
+      return (aId - bId) * (isAscending ? 1 : -1);
     });
   }
 
@@ -210,9 +375,9 @@ class Student {
   void sortStatus(bool isAscending) {
     _userInfo.sort((a, b) {
       if (a.status == b.status) {
-        int? aId = int.tryParse(a.name.replaceFirst('User_', ''));
-        int? bId = int.tryParse(b.name.replaceFirst('User_', ''));
-        return (aId! - bId!);
+        int aId = int.tryParse(a.name.replaceFirst('User_', ''));
+        int bId = int.tryParse(b.name.replaceFirst('User_', ''));
+        return (aId - bId);
       } else if (a.status) {
         return isAscending ? 1 : -1;
       } else {
@@ -229,8 +394,8 @@ class StudentInfo {
   String start_time;
   String end_time;
 
-  StudentInfo(this.name, this.status, this.roll_no, this.start_time,
-      this.end_time);
+  StudentInfo(
+      this.name, this.status, this.roll_no, this.start_time, this.end_time);
 }
  
 
