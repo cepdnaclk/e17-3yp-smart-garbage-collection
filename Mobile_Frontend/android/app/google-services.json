@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705609538352",
+    "project_id": "trashbot-31afe",
+    "storage_bucket": "trashbot-31afe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705609538352:android:748571e4572df8697b86f5",
+        "android_client_info": {
+          "package_name": "com.trashbot.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705609538352-psqfpvm0lltmruveepm3cv160r02lms7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDri44KJ9JLPA-DCASI4FAvSEnvrk12dTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705609538352-psqfpvm0lltmruveepm3cv160r02lms7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

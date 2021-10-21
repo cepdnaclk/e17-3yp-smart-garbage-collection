@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 
-/*class Mappage extends StatefulWidget {
+class Mappage extends StatefulWidget {
   Mappage({Key key, this.title}) : super(key: key);
   final String title;
 
@@ -16,66 +16,58 @@ import 'package:geolocator/geolocator.dart';
 }
 
 class _MappageState extends State<Mappage> {
-  final TextEditingController _searchController = TextEditingController();
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
-
-  BitmapDescriptor _mapMarkerIcon;
-  BitmapDescriptor _selectedMarkerIcon;
-  //StoreLocation previousLocation;
-
-  bool _isLoading = true;
-
-  final Map<String, Marker> _markers = {};
-  //List<StoreLocation> _storeLocations = [];
-  //List<StoreLocation> _tempStoreLocations = [];
-
+  GoogleMapController newGoogleMapController;
+  Position currentposition;
+  var geolocator = Geolocator();
+  double bottomPaddingofMap = 0;
   static final CameraPosition _cameraPosition =
-      CameraPosition(target: LatLng(-7.4122619, 144.2398217), zoom: 5);
+      CameraPosition(target: LatLng(6.270763, 80.093856), zoom: 5);
+
+  void locatebins() async {
+    Position position = await Geolocator.getCurrentPosition();
+    currentposition = position;
+    LatLng latlng = LatLng(position.latitude, position.longitude);
+    print(position.latitude);
+    print(position.longitude);
+    CameraPosition cameraposition =
+        new CameraPosition(target: latlng, zoom: 14);
+    newGoogleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraposition));
+  }
 
   @override
-  void initState() {
-    getUserLocation();
-    super.initState();
-  }
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Locate Bins"),
+        ),
+        body: Stack(children: [
+          GoogleMap(
+            padding: EdgeInsets.only(bottom: bottomPaddingofMap),
+            mapType: MapType.normal,
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
+            initialCameraPosition: _cameraPosition,
+            //markers: Set.of((marker != null) ? [marker] : []),
+            //circles: Set.of((circle != null) ? [circle] : []),
 
-  void getUserLocation() async {
-    _determinePosition().then((value) {
-      Future.delayed(Duration(milliseconds: 300), () {
-        getStores();
-      });
-    }).onError((error, stackTrace) {
-      log("Location Error: " + error.toString());
-    });
-  }
+            onMapCreated: (GoogleMapController controller) {
+              _controllerGoogleMap.complete(controller);
+              newGoogleMapController = controller;
+              setState(() {
+                bottomPaddingofMap = 300.0;
+              });
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    return await Geolocator.getCurrentPosition();
+              locatebins();
+            },
+          ),
+        ]));
   }
-}*/
-class Mappage extends StatefulWidget {
-  Mappage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MappageState createState() => _MappageState();
 }
+/*
 
 class _MappageState extends State<Mappage> {
   StreamSubscription _locationSubscription;
@@ -91,6 +83,12 @@ class _MappageState extends State<Mappage> {
     zoom: 14.4746,
   );
 
+  @override
+  void initState() {
+    getCurrentLocation();
+    super.initState();
+  }
+
   Future<Uint8List> getMarker() async {
     ByteData byteData =
         await DefaultAssetBundle.of(context).load("images/garbage.png");
@@ -99,7 +97,7 @@ class _MappageState extends State<Mappage> {
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
-   // LatLng latlng = LatLng(newLocalData!.latitude!, newLocalData!.longitude!);
+    // LatLng latlng = LatLng(newLocalData!.latitude!, newLocalData!.longitude!);
     // ignore: unnecessary_this
     this.setState(() {
       marker = Marker(
@@ -107,7 +105,7 @@ class _MappageState extends State<Mappage> {
           position: latlng,
           rotation: newLocalData.heading,
           draggable: false,
-          zIndex: 2, 
+          zIndex: 2,
           flat: true,
           anchor: Offset(0.5, 0.5),
           icon: BitmapDescriptor.fromBytes(imageData));
@@ -120,7 +118,7 @@ class _MappageState extends State<Mappage> {
           fillColor: Colors.blue.withAlpha(70));
     });
   }
-  @override
+
   void getCurrentLocation() async {
     try {
       Uint8List imageData = await getMarker();
@@ -132,7 +130,7 @@ class _MappageState extends State<Mappage> {
         _locationSubscription.cancel();
       }
 
-       _locationSubscription =
+      _locationSubscription =
           _locationTracker.onLocationChanged.listen((newLocalData) {
         if (_controller != null) {
           _controller.animateCamera(CameraUpdate.newCameraPosition(
@@ -159,10 +157,6 @@ class _MappageState extends State<Mappage> {
     super.dispose();
   }
 
-  /*void _onMapCreated(GoogleMapController controller) {
-    _controllerGoogleMap.complete(controller);
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +164,7 @@ class _MappageState extends State<Mappage> {
         title: Text(widget.title),
       ),
       body: GoogleMap(
-        mapType: MapType.hybrid,
+        mapType: MapType.normal,
         initialCameraPosition: initialLocation,
         markers: Set.of((marker != null) ? [marker] : []),
         circles: Set.of((circle != null) ? [circle] : []),
@@ -186,3 +180,4 @@ class _MappageState extends State<Mappage> {
     );
   }
 }
+*/

@@ -63,7 +63,7 @@ class Authenticate extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return Mappage(title: 'Locate Bins'  );
+                        return Register();
                       },
                     ),
                   );
