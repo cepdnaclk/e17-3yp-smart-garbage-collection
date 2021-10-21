@@ -13,11 +13,16 @@ const MobSignupRoute = require("./Routes/MobSignup");
 const MobSigninRoute = require("./Routes/MobSignin");
 const BinRequestRoute = require("./Routes/MobRequest");
 const AuthRoute = require("./Routes/Auth");
+const HardwareRoute = require("./Routes/Hardware");
 //const CollectorProfile = require("./Routes/collectorProfile");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+// let x = 18;
+// let y = 10;
+// let z = Math.floor(x / y);
+// console.log(z);
 
 app.use(express.json());
 //app.use(cors());
@@ -25,7 +30,8 @@ app.use(express.json());
 //app.use(function (req, res, next))
 app.use(cors({
     // origin: ["http://localhost:55556"],
-    origin: ["http://localhost:8000"],
+    //origin: ["http://localhost:8000"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"], // change
     credentials: true
 }));
@@ -52,11 +58,12 @@ app.use("/System", SystemRoute);
 app.use("/Collectors", CollectorsRoute);
 app.use("/Requests", RequestsRoute);
 app.use("/Auth", AuthRoute);
+app.use("/Hardware", HardwareRoute);
 app.use("/api", MobSignupRoute);
 app.use("/api", MobSigninRoute);
 app.use("/api", BinRequestRoute);
 //app.use("/api", CollectorProfile);
 
-app.listen(8000, function() {
+app.listen(3001, function () {
     console.log('server running');
 });

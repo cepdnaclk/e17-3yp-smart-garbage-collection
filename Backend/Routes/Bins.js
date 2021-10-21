@@ -8,6 +8,8 @@ Router.get("/get", validateToken, (req, res) => {
     //Router.get("/get", (req, res) => {
     //console.log(req.admin) -> grab user id wh sends the request
 
+    //const id = req.admin; // -> grab user id wh sends the request
+
     db.query("SELECT * FROM bin", (err, result) => {
         if (err) res.send({ error: err })
         else {
