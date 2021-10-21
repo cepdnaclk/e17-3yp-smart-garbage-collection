@@ -178,8 +178,15 @@ Router.post('/assign', (req, res) => {
                                                                 [binId, collector_id, status, time], (err, result) => {
                                                                     if (err) res.send({ error: err })
                                                                     else {
-                                                                        res.send({ message: 'Request sent succesfully' });
-                                                                        // IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                        //res.send({ message: 'Request sent succesfully' });
+                                                                        // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                        db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
+                                                                            collector_id, (err, result) => {
+                                                                                if (err) res.send({ error: err })
+                                                                                else {
+                                                                                    res.send({ message: 'Request sent succesfully' });
+                                                                                }
+                                                                            })
                                                                     }
                                                                 });
 
