@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.0",
+    "node-geometry-library": "^1.2.5",
     "nodemon": "^2.0.12",
     "yup": "^0.32.11"
   }
