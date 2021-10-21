@@ -73,10 +73,10 @@ Router.put("/update/binCompaction", (req, res) => {
 
 // steps for criteria 1
 
-// a) take max_tasks from db
+// a) take tasks_per_round from db
 // b) take the list of collectors with id & tasks from db
 // c) create a list of eligible collectors
-//      - calculate tasks/max_tasks for each collector
+//      - calculate tasks/tasks_per_round for each collector
 //      - take the ones with min value
 
 // steps for criteria 2
@@ -99,12 +99,12 @@ Router.post('/assign', (req, res) => {
     const binId = req.query.binId;
 
     // steps for criteria 1
-    // take max_tasks from db
-    db.query("SELECT max_tasks FROM systemsettings WHERE id = 1", (err, result) => {
+    // take tasks_per_round from db
+    db.query("SELECT tasks_per_round FROM systemsettings WHERE id = 1", (err, result) => {
         if (err) {
             res.send({ error: err });
         } else {
-            const max_tasks = result[0].max_tasks;
+            const tasks_per_round = result[0].tasks_per_round;
 
             // take the list of collectors with id & tasks from db
             db.query("SELECT id, tasks FROM collector", (err, result) => {
@@ -115,7 +115,7 @@ Router.post('/assign', (req, res) => {
                     result.map((collector) => {
                         let collectorObj = {
                             "id": collector.id,
-                            "rounds": Math.floor(collector.tasks / max_tasks)
+                            "rounds": Math.floor(collector.tasks / tasks_per_round)
                         }
                         collectors.push(collectorObj);
                     })
@@ -124,7 +124,7 @@ Router.post('/assign', (req, res) => {
                     eligibleColIds = criteriaTasks(...collectors);
 
                     // take coordinates of eligible collectors from db
-                    db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?, ?, ?, ?)", // HARD CODED -----------
+                    db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?, ?, ?, ?)", // HARD CODED ----------- (CHECK 1)
                         eligibleColIds, (err, result) => {
                             if (err) {
                                 res.send({ error: err });
@@ -162,11 +162,32 @@ Router.post('/assign', (req, res) => {
                                                         collectors.map((collector) => {
                                                             collector.distance = SphericalUtil.computeDistanceBetween({ 'lat': latBin, 'lng': longBin }, { 'lat': collector.lat, 'lng': collector.long });
                                                         })
-                                                        console.log(collectors);
 
-                                                        //eligibleColIds = [] // empty the list
-                                                        //eligibleColIds = criteriaDistance(...collectors);
-                                                        console.log(criteriaDistance(...collectors));
+
+                                                        eligibleColIds = [] // empty the previous list
+
+                                                        // find the nearest collector
+                                                        eligibleColIds = criteriaDistance(...collectors);
+
+                                                        // if a single collector was selected from above criterias -> add to assign table
+                                                        if (eligibleColIds.length === 1) {
+                                                            let status = 'sent';
+                                                            let collector_id = eligibleColIds[0];
+                                                            let time = '21:15' // HARD CODED ------------------------
+                                                            db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
+                                                                [binId, collector_id, status, time], (err, result) => {
+                                                                    if (err) res.send({ error: err })
+                                                                    else {
+                                                                        res.send({ message: 'Request sent succesfully' });
+                                                                        // IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                    }
+                                                                });
+
+                                                        }
+                                                        // if a single selector could not be found from above criterias
+                                                        else if (eligibleColIds.length > 1) {
+                                                            console.log("no")
+                                                        }
 
                                                     }
                                                 })

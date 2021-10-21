@@ -15,7 +15,7 @@ Router.get("/getAll", (req, res) => {
 });
 
 
-// add a request
+// add a request // NOT USED BECAUSE OF AUTOMATION
 Router.post("/add", (req, res) => {
 
     const adminId = req.body.adminId;
