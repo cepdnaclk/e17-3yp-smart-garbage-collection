@@ -154,6 +154,8 @@ Router.post('/assign', (req, res) => {
                                     // case 2: active tasks (requests) from this unit are not available
                                     else {
 
+                                        // GOING FOR THREE CRITERIA SELECTION
+
                                         // steps for criteria 1
                                         // take tasks_per_round from db
                                         db.query("SELECT tasks_per_round FROM systemsettings WHERE id = 1", (err, result) => {
