@@ -14,7 +14,12 @@ const MobSigninRoute = require("./Routes/MobSignin");
 const BinRequestRoute = require("./Routes/MobRequest");
 const AuthRoute = require("./Routes/Auth");
 const HardwareRoute = require("./Routes/Hardware");
-//const CollectorProfile = require("./Routes/collectorProfile");
+const CollectorProfile = require("./Routes/collectorProfile");
+
+const auth = require('./middlewares/auth');
+const errors = require('./middlewares/errors');
+const unless = require('express-unless');
+
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -23,6 +28,17 @@ const session = require('express-session');
 // let y = 10;
 // let z = Math.floor(x / y);
 // console.log(z);
+
+/*auth.authenticateToken.unless = unless;
+app.use(
+    auth.authenticateToken.unless({
+        path: [
+            { url: "/api/Signup", methods: [POST] },
+            { url: "/api/authenticate", methods: [POST] },
+
+        ],
+    })
+);*/
 
 app.use(express.json());
 //app.use(cors());
@@ -62,7 +78,9 @@ app.use("/Hardware", HardwareRoute);
 app.use("/api", MobSignupRoute);
 app.use("/api", MobSigninRoute);
 app.use("/api", BinRequestRoute);
-//app.use("/api", CollectorProfile);
+
+app.use(errors.errorHandler);
+app.use("/api", CollectorProfile);
 
 app.listen(8000, function() {
     console.log('server running');

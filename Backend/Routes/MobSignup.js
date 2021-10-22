@@ -1,14 +1,14 @@
 const express = require('express');
 const db = require("../connection");
 const bcrypt = require('bcrypt');
-
+const auth = require("../middlewares/auth");
 const router = express.Router();
 
 const saultRounds = 15; // for pw hashing
 
 router.use(express.json());
 
-router.post('/Signup', function(req, res) {
+router.post('/Signup', function(req, res, next) {
     const fname = req.body.collectorfname;
     const lname = req.body.collectorlname;
     const username = req.body.collectorusername;
@@ -40,7 +40,7 @@ router.post('/Signup', function(req, res) {
                                 res.json({ err: err });
                                 //console.log(err);
                             } else {
-                                res.json({ status: 'successful' });
+                                res.status(200).send({ message: 'successful', data: result });
 
                             }
 

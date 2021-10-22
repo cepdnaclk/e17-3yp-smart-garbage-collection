@@ -20,16 +20,16 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   bool showSpinner = false;
-  bool _validate = false;
+  bool _validate1 = false;
+  bool _validate2 = false;
+  bool _validate3 = false;
+  bool hidePassword;
   // text field state
   final _username = TextEditingController();
   final _password = TextEditingController();
   final _fname = TextEditingController();
   final _lname = TextEditingController();
-  //var username = '';
-  //var password = '';
-  //var fname = '';
-  //var lname = '';
+  
   String response = '';
   final success = SnackBar(content: Text('Registration succeded!'));
   final error = SnackBar(content: Text('Invalid username or password!'));
@@ -55,8 +55,6 @@ class _RegisterState extends State<Register> {
       //print(err);
       ScaffoldMessenger.of(context).showSnackBar(serverError);
     }
-
-    
   }
 
   @override
@@ -124,7 +122,8 @@ class _RegisterState extends State<Register> {
                       obscureText: false,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        errorText: _validate ? 'First Name Can\'t Be Empty' : null,
+                        errorText:
+                            _validate1 ? 'First Name Can\'t Be Empty' : null,
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -136,7 +135,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                       ),
-                      
+
                       /*onChanged: (value) {
                         fname = value;
                       },*/
@@ -208,7 +207,8 @@ class _RegisterState extends State<Register> {
                       obscureText: false,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        errorText: _validate ? 'Username Can\'t Be Empty' : null,
+                        errorText:
+                            _validate2 ? 'Username Can\'t Be Empty' : null,
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -245,10 +245,24 @@ class _RegisterState extends State<Register> {
                       controller: _password,
                       style: (TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400)),
-                      obscureText: true,
+                      obscureText: hidePassword,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        errorText: _validate ? 'Password Can\'t Be Empty' : null,
+                        errorText:
+                            _validate3 ? 'Password Can\'t Be Empty' : null,
+                        suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hidePassword = !hidePassword;
+                                });
+                              },
+                              color: Colors.white,
+                              icon: Icon(
+                                hidePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -274,14 +288,20 @@ class _RegisterState extends State<Register> {
                     color: Color(0xff008891),
                     onPressed: () {
                       setState(() {
-                        _username.text.isEmpty ? _validate = true : _validate = false;
-                        _password.text.isEmpty ? _validate = true : _validate = false;
-                        _fname.text.isEmpty ? _validate = true : _validate = false;
+                        _username.text.isEmpty
+                            ? _validate2 = true
+                            : _validate2 = false;
+                        _password.text.isEmpty
+                            ? _validate3 = true
+                            : _validate3 = false;
+                        _fname.text.isEmpty
+                            ? _validate1 = true
+                            : _validate1 = false;
                       });
-                      
-                      createUser();
+                      if (!_validate1 && !_validate2 && !_validate3) {
+                        createUser();
+                      }
                       print(response);
-                      
                     },
                   ),
                   //Text(response),
@@ -319,5 +339,3 @@ class _RegisterState extends State<Register> {
     );
   }
 }
-
-

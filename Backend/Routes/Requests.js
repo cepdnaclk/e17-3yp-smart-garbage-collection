@@ -24,13 +24,12 @@ Router.post("/add", (req, res) => {
     const status = 'Sent';
     const time = req.body.time;
 
-    db.query("INSERT INTO assign (admin_id, bin_id, collector_id, status, time) VALUES (?,?,?,?,?)",
-        [adminId, binId, collectorId, status, time], (err, result) => {
-            if (err) res.status(400).send({ error: err })
-            else {
-                res.send({ message: 'Request sent succesfully' });
-            }
-        });
+    db.query("INSERT INTO assign (admin_id, bin_id, collector_id, status, time) VALUES (?,?,?,?,?)", [adminId, binId, collectorId, status, time], (err, result) => {
+        if (err) res.status(400).send({ error: err })
+        else {
+            res.send({ message: 'Request sent succesfully' });
+        }
+    });
 
 });
 
@@ -50,7 +49,7 @@ Router.delete("/clearAll", (req, res) => {
 Router.get("/getByBinId", (req, res) => {
     const id = req.query.binID;
 
-    db.query("SELECT collector_id FROM assign WHERE bin_id = ? AND status = Sent OR status = Accepted", id, (err, result) => {
+    db.query("SELECT collector_id FROM assign WHERE bin_id = ? AND status = Sent OR status = Accepted", (err, result) => {
         if (err) res.status(400).send({ error: err })
         else {
             res.send(result);

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const Router = express.Router();
 const bcrypt = require('bcrypt');
+const auth = require("../middlewares/auth");
 //const { response } = require('express');
 const { createTokens, validateToken } = require('../JWT');
 
@@ -34,9 +35,10 @@ Router.post('/authenticate', async(req, res) => {
                 if (!match) return res.status(400).send("invalid username or password");
                 else {
                     const id = result[0].id;
-                    const rtoken = jwt.sign({ id }, "jwtsecret", {
+                    const rtoken = auth.generateAccessToken(id);
+                    /*const rtoken = jwt.sign({ id }, "jwtsecret", {
                         expiresIn: 300,
-                    });
+                    });*/
                     res.status(200).send({ auth: true, token: rtoken, name: result[0].fname });
                 }
             });

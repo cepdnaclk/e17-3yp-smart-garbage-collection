@@ -1,4 +1,25 @@
-import 'dart:core' as collector;
+class User {
+  User({
+    this.collectorusername,
+    this.collectorpassword,
+  });
+  String collectorusername;
+  String collectorpassword;
+  
+  User.fromJson(Map<String, dynamic> json){
+    collectorusername = json['collectorusername'];
+    collectorpassword = json['collectorpassword'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['collectorusername'] = collectorusername;
+    _data['collectorpassword'] = collectorpassword;
+    return _data;
+  }
+}
+
+/*import 'dart:core' as collector;
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
@@ -13,3 +34,4 @@ class Users {
       this.lname,
       this.username});
 }
+*/
