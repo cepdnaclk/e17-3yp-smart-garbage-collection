@@ -12,29 +12,42 @@ const { SphericalUtil } = require('node-geometry-library');
 // 1. bin color & fill level (green, yellow, red)
 Router.put("/update/bin", (req, res) => {
 
-    const id = req.query.binId;
-    const fillLevel = req.query.binFillLevel;
-    const color = req.query.binColor;
+    // const id = req.query.binId;
+    // const fillLevel = req.query.binFillLevel;
+    // const color = req.query.binColor;
+
+    // testing purpose
+    const id = req.body.binId;
+    const fillLevel = req.body.binFillLevel;
+    const color = req.body.binColor;
+    // res.send({ message: 'Color & fill level updated' })
+    db.query("UPDATE bin SET fill_level = ?, color = ? WHERE id = ?",
+        [fillLevel, color, id], (err, result) => {
+            if (err) res.status(400).send({ error: err });
+            else {
+                res.send({ message: 'Color & fill level updated' })
+            }
+        });
 
     // check if a bin exists with the given id
-    db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
-        if (err) {
-            res.status(400).send({ error: err });
-        }
-        if (result.length > 0) {
-            db.query("UPDATE bin SET fill_level = ?, color = ? WHERE id = ?",
-                [fillLevel, color, id], (err, result) => {
-                    if (err) res.status(400).send({ error: err });
-                    else {
-                        res.send({ message: 'Color & fill level updated' })
-                    }
-                });
+    // db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
+    //     if (err) {
+    //         res.status(400).send({ error: err });
+    //     }
+    //     if (result.length > 0) {
+    //         db.query("UPDATE bin SET fill_level = ?, color = ? WHERE id = ?",
+    //             [fillLevel, color, id], (err, result) => {
+    //                 if (err) res.status(400).send({ error: err });
+    //                 else {
+    //                     res.send({ message: 'Color & fill level updated' })
+    //                 }
+    //             });
 
-        }
-        else {
-            res.status(400).send({ error: "Invalid bin Id" })
-        }
-    })
+    //     }
+    //     else {
+    //         res.status(400).send({ error: "Invalid bin Id" })
+    //     }
+    // })
 });
 
 // 2. compaction cycles
@@ -96,9 +109,10 @@ Router.put("/update/binCompaction", (req, res) => {
 // b) select a collector of the same zone -> send the request (add to assign table) -> update tasks
 
 
-Router.post('/assign', (req, res) => {
+Router.post('/assign/:binId', (req, res) => {
 
-    const binId = req.query.binId;
+    // const binId = req.query.binId;
+    const binId = req.params.binId;
 
     // FIRST CHECK IF A BIN FROM THE SAME UNIT IS ALREADY ASSIGNED TO SOMEONE -> IF SO CHOOSE THAT COLLECTOR
 
@@ -138,13 +152,14 @@ Router.post('/assign', (req, res) => {
                                             [binId, colId, status, time], (err, result) => {
                                                 if (err) res.send({ error: err })
                                                 else {
-                                                    //res.send({ message: 'Request sent succesfully' });
+
                                                     // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
                                                     db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
                                                         colId, (err, result) => {
                                                             if (err) res.send({ error: err })
                                                             else {
-                                                                res.send({ message: 'Request sent succesfully' });
+                                                                res.status(201).send({ message: "Request sent succesfully", selectedColId: colId, criteria: 0 }); // state 0
+
                                                             }
                                                         })
                                                 }
@@ -180,6 +195,8 @@ Router.post('/assign', (req, res) => {
 
                                                         // create a list of eligible collectors from criteria 1
                                                         eligibleColIds = criteriaTasks(...collectors);
+
+                                                        // if only one collector selected from this assign to him -> haven't checked that here (CHECK)
 
                                                         // take coordinates of eligible collectors from db
                                                         db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?, ?, ?, ?)", // HARD CODED ----------- (CHECK 1)
@@ -244,7 +261,7 @@ Router.post('/assign', (req, res) => {
                                                                                                                     if (err) res.send({ error: err })
                                                                                                                     else {
                                                                                                                         console.log("hi")
-                                                                                                                        res.send({ message: 'Request sent succesfully' });
+                                                                                                                        res.status(201).send({ message: 'Request sent succesfully', selectedColId: collector_id, criteria: 2 }); // state 2
                                                                                                                     }
                                                                                                                 })
                                                                                                         }
@@ -276,7 +293,7 @@ Router.post('/assign', (req, res) => {
                                                                                                                                         col_id, (err, result) => {
                                                                                                                                             if (err) res.send({ error: err })
                                                                                                                                             else {
-                                                                                                                                                res.send({ message: 'Request sent succesfully' });
+                                                                                                                                                res.status(201).send({ message: 'Request sent succesfully', selectedColId: col_id, criteria: 3 }); // state 3
                                                                                                                                             }
                                                                                                                                         })
                                                                                                                                 }

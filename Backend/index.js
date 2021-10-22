@@ -19,10 +19,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-// let x = 18;
-// let y = 10;
-// let z = Math.floor(x / y);
-// console.log(z);
 
 app.use(express.json());
 //app.use(cors());
@@ -64,6 +60,8 @@ app.use("/api", MobSigninRoute);
 app.use("/api", BinRequestRoute);
 //app.use("/api", CollectorProfile);
 
-app.listen(3001, function () {
+var server = app.listen(3001, function () { // changed for testing purpose
     console.log('server running');
 });
+
+module.exports = server;
