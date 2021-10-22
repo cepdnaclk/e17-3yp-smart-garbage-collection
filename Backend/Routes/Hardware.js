@@ -73,7 +73,7 @@ Router.put("/update/binCompaction", (req, res) => {
 
 // FIRST CHECK IF A BIN FROM THE SAME UNIT IS ALREADY ASSIGNED TO SOMEONE -> IF SO CHOOSE THAT COLLECTOR
 
-// steps for criteria 1
+// steps for criteria 1 
 
 // a) take tasks_per_round from db
 // b) take the list of collectors with id & tasks from db
