@@ -20,11 +20,16 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   bool showSpinner = false;
+  bool _validate = false;
   // text field state
-  var username = '';
-  var password = '';
-  var fname = '';
-  var lname = '';
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+  final _fname = TextEditingController();
+  final _lname = TextEditingController();
+  //var username = '';
+  //var password = '';
+  //var fname = '';
+  //var lname = '';
   String response = '';
   final success = SnackBar(content: Text('Registration succeded!'));
   final error = SnackBar(content: Text('Invalid username or password!'));
@@ -33,10 +38,10 @@ class _RegisterState extends State<Register> {
   createUser() async {
     try {
       var result = await http_post("api/Signup", {
-        "collectorfname": fname,
-        "collectorlname": lname,
-        "collectorusername": username,
-        "collectorpassword": password
+        "collectorfname": _fname.text,
+        "collectorlname": _lname.text,
+        "collectorusername": _username.text,
+        "collectorpassword": _password.text
       });
       if (result.ok) {
         ScaffoldMessenger.of(context).showSnackBar(success);
@@ -51,12 +56,7 @@ class _RegisterState extends State<Register> {
       ScaffoldMessenger.of(context).showSnackBar(serverError);
     }
 
-    /*if(result.ok)
-    { 
-      setState(() {
-        response = result.data['status'];
-      });
-    }*/
+    
   }
 
   @override
@@ -70,11 +70,6 @@ class _RegisterState extends State<Register> {
       inAsyncCall: showSpinner,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        /*appBar: AppBar(
-          elevation: 0,
-            leading: _goBackButton(context),
-          backgroundColor: Color(0xff008891),
-        ),*/
         backgroundColor: Color(0xffE7E7DE),
         body: SingleChildScrollView(
           child: Column(
@@ -122,12 +117,14 @@ class _RegisterState extends State<Register> {
                       height: 10,
                     ),
                     TextField(
+                      controller: _fname,
                       style: (TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400)),
                       keyboardType: TextInputType.name,
                       obscureText: false,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
+                        errorText: _validate ? 'First Name Can\'t Be Empty' : null,
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -139,9 +136,10 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                       ),
-                      onChanged: (value) {
+                      
+                      /*onChanged: (value) {
                         fname = value;
-                      },
+                      },*/
                     ),
                   ],
                 ),
@@ -162,6 +160,7 @@ class _RegisterState extends State<Register> {
                       height: 10,
                     ),
                     TextField(
+                      controller: _lname,
                       style: (TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400)),
                       keyboardType: TextInputType.name,
@@ -179,9 +178,9 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                       ),
-                      onChanged: (value) {
+                      /*onChanged: (value) {
                         lname = value;
-                      },
+                      },*/
                     ),
                   ],
                 ),
@@ -202,12 +201,14 @@ class _RegisterState extends State<Register> {
                       height: 10,
                     ),
                     TextField(
+                      controller: _username,
                       style: (TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400)),
                       keyboardType: TextInputType.name,
                       obscureText: false,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
+                        errorText: _validate ? 'Username Can\'t Be Empty' : null,
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -218,9 +219,9 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                       ),
-                      onChanged: (value) {
+                      /*onChanged: (value) {
                         username = value;
-                      },
+                      },*/
                     ),
                   ],
                 ),
@@ -241,11 +242,13 @@ class _RegisterState extends State<Register> {
                       height: 10,
                     ),
                     TextField(
+                      controller: _password,
                       style: (TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400)),
                       obscureText: true,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
+                        errorText: _validate ? 'Password Can\'t Be Empty' : null,
                         border: InputBorder.none,
                         fillColor: Color(0xfff0F3057),
                         filled: true,
@@ -256,9 +259,9 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                       ),
-                      onChanged: (value) {
+                      /*onChanged: (value) {
                         password = value;
-                      },
+                      },*/
                     ),
                   ],
                 ),
@@ -270,11 +273,15 @@ class _RegisterState extends State<Register> {
                     btnText: 'SIGN UP',
                     color: Color(0xff008891),
                     onPressed: () {
-                      print(username);
-                      print(password);
+                      setState(() {
+                        _username.text.isEmpty ? _validate = true : _validate = false;
+                        _password.text.isEmpty ? _validate = true : _validate = false;
+                        _fname.text.isEmpty ? _validate = true : _validate = false;
+                      });
+                      
                       createUser();
                       print(response);
-                      //signup(fname,lname,username,password);
+                      
                     },
                   ),
                   //Text(response),
@@ -313,10 +320,4 @@ class _RegisterState extends State<Register> {
   }
 }
 
-Widget _goBackButton(BuildContext context) {
-  return IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.grey[350]),
-      onPressed: () {
-        Navigator.of(context).pop(true);
-      });
-}
+
