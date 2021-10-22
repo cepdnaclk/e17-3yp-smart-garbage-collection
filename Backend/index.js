@@ -24,10 +24,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-// let x = 18;
-// let y = 10;
-// let z = Math.floor(x / y);
-// console.log(z);
 
 /*auth.authenticateToken.unless = unless;
 app.use(
@@ -46,8 +42,8 @@ app.use(express.json());
 //app.use(function (req, res, next))
 app.use(cors({
     // origin: ["http://localhost:55556"],
+    origin: ["http://localhost:3000"],
     //origin: ["http://localhost:8000"],
-    origin: ["http://localhost:8000"],
     methods: ["GET", "POST", "PUT", "DELETE"], // change
     credentials: true
 }));
@@ -82,6 +78,8 @@ app.use("/api", BinRequestRoute);
 app.use(errors.errorHandler);
 app.use("/api", CollectorProfile);
 
-app.listen(8000, function() {
+var server = app.listen(3001, function () { // changed for testing purpose
     console.log('server running');
 });
+
+module.exports = server;

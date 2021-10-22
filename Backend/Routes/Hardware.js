@@ -12,18 +12,23 @@ const { SphericalUtil } = require('node-geometry-library');
 // 1. bin color & fill level (green, yellow, red)
 Router.put("/update/bin", (req, res) => {
 
-    const id = req.query.binId;
-    const fillLevel = req.query.binFillLevel;
-    const color = req.query.binColor;
+    // const id = req.query.binId;
+    // const fillLevel = req.query.binFillLevel;
+    // const color = req.query.binColor;
+
+    // testing purpose
+    const binId = req.query.binId;
+    const binFillLevel = req.query.binFillLevel;
+    const binColor = req.query.binColor;
 
     // check if a bin exists with the given id
-    db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
+    db.query("SELECT * FROM bin WHERE id = ?", binId, (err, result) => {
         if (err) {
             res.status(400).send({ error: err });
         }
         if (result.length > 0) {
             db.query("UPDATE bin SET fill_level = ?, color = ? WHERE id = ?",
-                [fillLevel, color, id], (err, result) => {
+                [binFillLevel, binColor, binId], (err, result) => {
                     if (err) res.status(400).send({ error: err });
                     else {
                         res.send({ message: 'Color & fill level updated' })
@@ -96,9 +101,10 @@ Router.put("/update/binCompaction", (req, res) => {
 // b) select a collector of the same zone -> send the request (add to assign table) -> update tasks
 
 
-Router.post('/assign', (req, res) => {
+Router.post('/assign/:binId', (req, res) => {
 
-    const binId = req.query.binId;
+    // const binId = req.query.binId;
+    const binId = req.params.binId;
 
     // FIRST CHECK IF A BIN FROM THE SAME UNIT IS ALREADY ASSIGNED TO SOMEONE -> IF SO CHOOSE THAT COLLECTOR
 
@@ -138,13 +144,14 @@ Router.post('/assign', (req, res) => {
                                             [binId, colId, status, time], (err, result) => {
                                                 if (err) res.send({ error: err })
                                                 else {
-                                                    //res.send({ message: 'Request sent succesfully' });
+
                                                     // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
                                                     db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
                                                         colId, (err, result) => {
                                                             if (err) res.send({ error: err })
                                                             else {
-                                                                res.send({ message: 'Request sent succesfully' });
+                                                                res.status(201).send({ message: "Request sent succesfully", selectedColId: colId, criteria: 0 }); // state 0
+
                                                             }
                                                         })
                                                 }
@@ -181,121 +188,150 @@ Router.post('/assign', (req, res) => {
                                                         // create a list of eligible collectors from criteria 1
                                                         eligibleColIds = criteriaTasks(...collectors);
 
-                                                        // take coordinates of eligible collectors from db
-                                                        db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?, ?, ?, ?)", // HARD CODED ----------- (CHECK 1)
-                                                            eligibleColIds, (err, result) => {
-                                                                if (err) {
-                                                                    res.send({ error: err });
-                                                                } else {
-                                                                    collectors = [];
-                                                                    result.map((collector) => {
-                                                                        let collectorObj2 = {
-                                                                            "id": collector.id,
-                                                                            "lat": collector.latitude,
-                                                                            "long": collector.longitude
-                                                                        }
-                                                                        collectors.push(collectorObj2);
-                                                                    })
+                                                        // if only one collector selected from this assign to him -> haven't checked that here (CHECK)
+                                                        if (eligibleColIds.length == 1) {
+                                                            let status = 'Sent';
+                                                            let collector_id = eligibleColIds[0];
+                                                            let time = '21:15' // HARD CODED ------------------------
+                                                            // add to assign table
+                                                            db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
+                                                                [binId, collector_id, status, time], (err, result) => {
+                                                                    if (err) res.send({ error: err })
+                                                                    else {
+                                                                        //res.send({ message: 'Request sent succesfully' });
+                                                                        // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                        db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
+                                                                            collector_id, (err, result) => {
+                                                                                if (err) res.send({ error: err })
+                                                                                else {
 
-                                                                    // take the unit_id of the bin from db
-                                                                    db.query("SELECT unit_id FROM bin WHERE id = ?", binId,
-                                                                        (err, result) => {
-                                                                            if (err) {
-                                                                                res.send({ error: err });
-                                                                            } else {
+                                                                                    res.status(201).send({ message: 'Request sent succesfully', selectedColId: collector_id, criteria: 1 }); // state 2
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                });
 
-                                                                                let unit_id = result[0].unit_id;
-
-                                                                                // take coordinates of that unit
-                                                                                db.query("SELECT latitude, longitude FROM unit WHERE id = ?", unit_id,
-                                                                                    (err, result) => {
-                                                                                        if (err) {
-                                                                                            res.send({ error: err });
-                                                                                        } else {
-
-                                                                                            let latBin = result[0].latitude;
-                                                                                            let longBin = result[0].longitude;
-
-                                                                                            // calculate distances using geometry library google maps
-                                                                                            collectors.map((collector) => {
-                                                                                                collector.distance = SphericalUtil.computeDistanceBetween({ 'lat': latBin, 'lng': longBin }, { 'lat': collector.lat, 'lng': collector.long });
-                                                                                            })
+                                                        }
+                                                        else {
 
 
-                                                                                            eligibleColIds = [] // empty the previous list
 
-                                                                                            // find the nearest collector
-                                                                                            eligibleColIds = criteriaDistance(...collectors);
-
-                                                                                            // if a single collector was selected from above criterias -> add to assign table
-                                                                                            if (eligibleColIds.length === 1) {
-                                                                                                let status = 'Sent';
-                                                                                                let collector_id = eligibleColIds[0];
-                                                                                                let time = '21:15' // HARD CODED ------------------------
-                                                                                                // add to assign table
-                                                                                                db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
-                                                                                                    [binId, collector_id, status, time], (err, result) => {
-                                                                                                        if (err) res.send({ error: err })
-                                                                                                        else {
-                                                                                                            //res.send({ message: 'Request sent succesfully' });
-                                                                                                            // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
-                                                                                                            db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
-                                                                                                                collector_id, (err, result) => {
-                                                                                                                    if (err) res.send({ error: err })
-                                                                                                                    else {
-                                                                                                                        console.log("hi")
-                                                                                                                        res.send({ message: 'Request sent succesfully' });
-                                                                                                                    }
-                                                                                                                })
-                                                                                                        }
-                                                                                                    });
-
-                                                                                            }
-                                                                                            // CRITERIA 3 - IMPLEMENTED BUT DID NOT CHECK (CHECK 3)
-                                                                                            // if a single selector could not be found from above criterias - go for criteria 3
-                                                                                            else if (eligibleColIds.length > 1) {
-                                                                                                db.query("SELECT zone_id FROM unit WHERE id = ?", unit_id,
-                                                                                                    (err, result) => {
-                                                                                                        if (err) res.send({ error: err })
-                                                                                                        else {
-                                                                                                            let zone_id = result[0].zone_id;
-                                                                                                            db.query("SELECT collectorid FROM allocate WHERE zoneid = ?", zone_id,
-                                                                                                                (err, result) => {
-                                                                                                                    if (err) res.send({ error: err })
-                                                                                                                    else {
-                                                                                                                        let col_id = result[0].collectorid;
-                                                                                                                        let status = 'sent';
-                                                                                                                        let time = '21:15' // HARD CODED ------------------------
-                                                                                                                        db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
-                                                                                                                            [binId, col_id, status, time], (err, result) => {
-                                                                                                                                if (err) res.send({ error: err })
-                                                                                                                                else {
-                                                                                                                                    //res.send({ message: 'Request sent succesfully' });
-                                                                                                                                    // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
-                                                                                                                                    db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
-                                                                                                                                        col_id, (err, result) => {
-                                                                                                                                            if (err) res.send({ error: err })
-                                                                                                                                            else {
-                                                                                                                                                res.send({ message: 'Request sent succesfully' });
-                                                                                                                                            }
-                                                                                                                                        })
-                                                                                                                                }
-                                                                                                                            });
-
-                                                                                                                    }
-                                                                                                                })
-                                                                                                        }
-                                                                                                    })
-                                                                                            }
-
-                                                                                        }
-                                                                                    })
-
+                                                            // take coordinates of eligible collectors from db
+                                                            db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?)", // HARD CODED ----------- (CHECK 1)
+                                                                eligibleColIds, (err, result) => {
+                                                                    if (err) {
+                                                                        res.send({ error: err });
+                                                                    } else {
+                                                                        collectors = [];
+                                                                        result.map((collector) => {
+                                                                            let collectorObj2 = {
+                                                                                "id": collector.id,
+                                                                                "lat": collector.latitude,
+                                                                                "long": collector.longitude
                                                                             }
+                                                                            collectors.push(collectorObj2);
                                                                         })
-                                                                }
 
-                                                            })
+                                                                        // take the unit_id of the bin from db
+                                                                        db.query("SELECT unit_id FROM bin WHERE id = ?", binId,
+                                                                            (err, result) => {
+                                                                                if (err) {
+                                                                                    res.send({ error: err });
+                                                                                } else {
+
+                                                                                    let unit_id = result[0].unit_id;
+
+                                                                                    // take coordinates of that unit
+                                                                                    db.query("SELECT latitude, longitude FROM unit WHERE id = ?", unit_id,
+                                                                                        (err, result) => {
+                                                                                            if (err) {
+                                                                                                res.send({ error: err });
+                                                                                            } else {
+
+                                                                                                let latBin = result[0].latitude;
+                                                                                                let longBin = result[0].longitude;
+
+                                                                                                // calculate distances using geometry library google maps
+                                                                                                collectors.map((collector) => {
+                                                                                                    collector.distance = SphericalUtil.computeDistanceBetween({ 'lat': latBin, 'lng': longBin }, { 'lat': collector.lat, 'lng': collector.long });
+                                                                                                })
+
+
+                                                                                                eligibleColIds = [] // empty the previous list
+
+                                                                                                // find the nearest collector
+                                                                                                eligibleColIds = criteriaDistance(...collectors);
+
+                                                                                                // if a single collector was selected from above criterias -> add to assign table
+                                                                                                if (eligibleColIds.length === 1) {
+                                                                                                    let status = 'Sent';
+                                                                                                    let collector_id = eligibleColIds[0];
+                                                                                                    let time = '21:15' // HARD CODED ------------------------
+                                                                                                    // add to assign table
+                                                                                                    db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
+                                                                                                        [binId, collector_id, status, time], (err, result) => {
+                                                                                                            if (err) res.send({ error: err })
+                                                                                                            else {
+                                                                                                                //res.send({ message: 'Request sent succesfully' });
+                                                                                                                // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                                                                db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
+                                                                                                                    collector_id, (err, result) => {
+                                                                                                                        if (err) res.send({ error: err })
+                                                                                                                        else {
+
+                                                                                                                            res.status(201).send({ message: 'Request sent succesfully', selectedColId: collector_id, criteria: 2 }); // state 2
+                                                                                                                        }
+                                                                                                                    })
+                                                                                                            }
+                                                                                                        });
+
+                                                                                                }
+                                                                                                // CRITERIA 3 - IMPLEMENTED BUT DID NOT CHECK (CHECK 3)
+                                                                                                // if a single selector could not be found from above criterias - go for criteria 3
+                                                                                                else if (eligibleColIds.length > 1) {
+                                                                                                    db.query("SELECT zone_id FROM unit WHERE id = ?", unit_id,
+                                                                                                        (err, result) => {
+                                                                                                            if (err) res.send({ error: err })
+                                                                                                            else {
+                                                                                                                let zone_id = result[0].zone_id;
+                                                                                                                db.query("SELECT collectorid FROM allocate WHERE zoneid = ?", zone_id,
+                                                                                                                    (err, result) => {
+                                                                                                                        if (err) res.send({ error: err })
+                                                                                                                        else {
+                                                                                                                            let col_id = result[0].collectorid;
+                                                                                                                            let status = 'sent';
+                                                                                                                            let time = '21:15' // HARD CODED ------------------------
+                                                                                                                            db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
+                                                                                                                                [binId, col_id, status, time], (err, result) => {
+                                                                                                                                    if (err) res.send({ error: err })
+                                                                                                                                    else {
+                                                                                                                                        //res.send({ message: 'Request sent succesfully' });
+                                                                                                                                        // *IF THIS REQUEST IS THE FIRST ONE FROM THAT UNIT* INCREASE 'tasks' OF THAT COLLECTOR (CHECK 2)
+                                                                                                                                        db.query("UPDATE collector SET tasks = tasks + 1 WHERE id = ?",
+                                                                                                                                            col_id, (err, result) => {
+                                                                                                                                                if (err) res.send({ error: err })
+                                                                                                                                                else {
+                                                                                                                                                    res.status(201).send({ message: 'Request sent succesfully', selectedColId: col_id, criteria: 3 }); // state 3
+                                                                                                                                                }
+                                                                                                                                            })
+                                                                                                                                    }
+                                                                                                                                });
+
+                                                                                                                        }
+                                                                                                                    })
+                                                                                                            }
+                                                                                                        })
+                                                                                                }
+
+                                                                                            }
+                                                                                        })
+
+                                                                                }
+                                                                            })
+                                                                    }
+
+                                                                })
+                                                        }
 
                                                     }
                                                 })
