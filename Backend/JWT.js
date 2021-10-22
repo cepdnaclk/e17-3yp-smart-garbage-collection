@@ -16,8 +16,7 @@ const validateToken = (req, res, next) => {
     const token = req.headers["x-access-token"]
     if (!token) {
         res.status(401).send({ error: "User not authenticated!" });
-    }
-    else {
+    } else {
         // jwt.verify(token, "jwtsecret", (err, decoded) => {
         //     if (err) {
         //         res.json({ auth: false, error: "Authentication failed" })
@@ -32,10 +31,11 @@ const validateToken = (req, res, next) => {
             //console.log(validToken.id)
             req.admin = validToken.id; // -> user who sent the request
             if (validToken) {
+                //res.status(401).send({ message: "User authenticated!", data: req.admin });
+                res.send(validToken.id);
                 return next();
             }
-        }
-        catch (err) {
+        } catch (err) {
             res.json({ auth: false, error: err })
         }
 

@@ -1,11 +1,13 @@
 const express = require('express');
 const db = require("../connection");
 const Router = express.Router();
+const { createTokens, validateToken } = require('../JWT');
 
 Router.get("/request", (req, res) => {
     const collector_id = req.query.collector_ID;
     const admin_id = req.query.admin_ID;
-    db.query("SELECT a.request_id,a.admin_id,a.time,b.fname,b.lname,c.location FROM assign a,admin b,unit c,bin d WHERE a.admin_id=b.id && a.status='Sent' && a.bin_id=d.id && d.unit_id=c.id && a.collector_id = ?", collector_id, (err, result) => {
+    db.query("SELECT a.request_id,a.admin_id,a.time,b.fname,b.lname,c.location FROM assign a,admin b,unit c,bin d WHERE a.admin_id=b.id && a.status='Sent' && a.bin_id=d.id && d.unit_id=c.id", (err, result) => {
+        //db.query("SELECT a.request_id,a.admin_id,a.time,b.fname,b.lname,c.location FROM assign a,admin b,unit c,bin d WHERE a.admin_id=b.id && a.status='Sent' && a.bin_id=d.id && d.unit_id=c.id && a.collector_id = ?", collector_id, (err, result) => {
         //db.query("SELECT a.request_id,a.admin_id,a.time,b.fname,b.lname FROM assign a,admin b WHERE a.admin_id=b.id && a.status='Sent' && a.collector_id = ?", collector_id, (err, result) => {
         if (err) res.send({ err: err })
         else {

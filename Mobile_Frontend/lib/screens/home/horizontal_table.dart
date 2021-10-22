@@ -45,9 +45,10 @@ class _HorizontalTableState extends State<HorizontalTable> {
     Map data = {'collector_ID': 8};
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
+      var headers=sharedPreferences.getString("token");
       var response = await get(
-          Uri.parse('http://192.168.1.11:8000/api/request?collector_ID=8'));
-      sharedPreferences.getString("token");
+          Uri.parse('http://192.168.1.11:8000/api/request'),headers: {'x-access-token': headers});
+      //sharedPreferences.getString("token");
       //print(sharedPreferences.getString("token"));
 
       if (response.statusCode == 200) {
