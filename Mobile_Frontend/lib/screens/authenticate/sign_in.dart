@@ -19,8 +19,6 @@ import 'package:http/http.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const SERVER_IP = 'http://192.168.1.167:5000';
-
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
@@ -70,6 +68,7 @@ class _SignInState extends State<SignIn> {
           _isLoading = false;
           validate = true;
           //sharedPreferences.setString("token", jsonData['token']);
+          ScaffoldMessenger.of(context).showSnackBar(success);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => Mainui()),
               (Route<dynamic> route) => false);
@@ -77,6 +76,7 @@ class _SignInState extends State<SignIn> {
       }
       //print(response.statusCode);
       else {
+        ScaffoldMessenger.of(context).showSnackBar(error);
         print(response.body);
         setState(() {
           validate = false;
@@ -85,7 +85,9 @@ class _SignInState extends State<SignIn> {
       }
       //return response.statusCode;
       // return 200;
-    } catch (err) {}
+    } catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(serverError);
+    }
   }
 
   /* 

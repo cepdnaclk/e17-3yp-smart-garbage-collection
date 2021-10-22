@@ -20,6 +20,7 @@ class _HorizontalTableState extends State<HorizontalTable> {
   static const int sortStatus = 1;
   bool isAscending = true;
   int sortType = sortName;
+  bool click = true;
 
   @override
   void initState() {
@@ -191,6 +192,12 @@ class _HorizontalTableState extends State<HorizontalTable> {
         height: 70,
         color: Colors.white,
       ),*/
+      _getTitleItemWidget('Bin Location', 400, Color(0xff008891)),
+      Container(
+        width: 2,
+        height: 56,
+        color: Colors.white,
+      ),
       _getTitleItemWidget('Request coming at (Time)', 400, Color(0xff008891)),
       Container(
         width: 2,
@@ -235,7 +242,7 @@ class _HorizontalTableState extends State<HorizontalTable> {
     return Container(
       color: Colors.blueGrey,
       child: Text(
-        listData[index]['time'].toString(),
+        listData[index]['location'].toString(),
         style: TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
       ),
@@ -249,6 +256,16 @@ class _HorizontalTableState extends State<HorizontalTable> {
   Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
     return Row(
       children: <Widget>[
+        Container(
+          child: Text(
+            listData[index]['time'].toString(),
+            style: TextStyle(fontSize: 18),
+          ),
+          width: 111,
+          height: 52,
+          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.centerLeft,
+        ),
         Container(
           child: Text(
             listData[index]['fname'],
@@ -303,12 +320,15 @@ class _HorizontalTableState extends State<HorizontalTable> {
         ),
         Container(
           child: IconButton(
-              icon: Icon(Icons.add_box),
+              icon: Icon((click == false) ? Icons.done : Icons.add_box),
               color: Colors.black,
               highlightColor: Colors.yellow,
               hoverColor: Colors.green,
               onPressed: () {
                 acceptRequest(listData[index]['request_id'].toString());
+                setState((){
+                  click = false;
+                });
               }),
           width: 100,
           height: 52,

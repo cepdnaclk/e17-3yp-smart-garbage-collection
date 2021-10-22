@@ -14,12 +14,6 @@ router.post('/Signup', function(req, res) {
     const username = req.body.collectorusername;
     const password = req.body.collectorpassword;
 
-    //if first name is not entered
-    //if (fname == '' && lname == '') res.json({ status: 'Please enter your name' })
-
-    //else if ((username == '' || password == '')) res.json({ status: 'Username or Password is missing' });
-
-    //else {
 
     // checking if username already exists
     db.query("SELECT * FROM collector WHERE username = ?", [username],
@@ -34,7 +28,7 @@ router.post('/Signup', function(req, res) {
             } else {
 
                 // succesfull signup 
-
+                //db.query("SELECT a.request_id,a.admin_id,a.time,b.fname,b.lname,c.location FROM assign a,admin b,unit c,bin d WHERE a.admin_id=b.id && a.status='Sent' && a.bin_id=d.id && d.unit_id=c.id && a.collector_id = ?", collector_id, (err, result) => {
                 // hash password
                 bcrypt.hash(password, saultRounds, (err, hash) => {
 
