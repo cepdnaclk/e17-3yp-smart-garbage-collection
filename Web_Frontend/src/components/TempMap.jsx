@@ -120,7 +120,7 @@ export default function TempMap() {
             height: "570px",
             latitude: systemLat,
             longitude: systemLong,
-            zoom: 16.5
+            zoom: 15
         });
 
         const [selectedUnit, setSelectedUnit] = useState(null);
