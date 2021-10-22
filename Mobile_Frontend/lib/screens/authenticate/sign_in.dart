@@ -2,6 +2,7 @@ import 'dart:convert';
 // import 'dart:async';
 // import 'dart:html';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/components/header_widget.dart';
 import 'package:mobile/components/submitbutton.dart';
@@ -27,7 +28,8 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   //final AuthService _auth = AuthService();
   bool showSpinner = false;
-
+  bool hidePassword = true;
+  bool isAPIcallProcess = false;
   // text field state
   //String username = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -90,104 +92,6 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  /* 
-  Future signIn(String username,String password) async {
-    //var url = Uri.parse("http://localhost:8000/Signin");
-    var token;
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    try {
-      final response = await post(
-        Uri.parse('http://localhost:8000/api/authenticate'),
-        body: {
-          'collectorusername': username,
-          'collectorpassword': password,
-        },
-      );
-      if (response.statusCode == 200) {
-        token = jsonDecode(response.body);
-        setState(() {
-          // _isLoading = false;
-          sharedPreferences.setString("token", token['token']);
-        });
-      }
-      print(response.statusCode);
-      print(response.body );
-      return response.statusCode;
-      // return 200;
-    } catch (err) {}
-  }
-
-  Widget _submitButton() {
-    return InkWell(
-        onTap: () async {
-          if (_formKey.currentState?.validate() ?? false) {
-            _formKey.currentState?.save();
-            print(_username.text);
-            print(_password.text);
-            // setState(() {
-            //   _isLoading = true;
-            // });
-            var statusCode = await signIn(_username.text, _password.text);
-            if (statusCode == 200) {
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Login Successfully!!!'),
-                  content: const Text(''),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Mainui(),
-                        ),
-                      ),
-                      child: const Text('Ok'),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Something Went Wrong!!!'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Try Again'),
-                    ),
-                  ],
-                ),
-              );
-            }
-          }
-        },
-        child: SubmitButton(buttontext: "Login"));
-  }
-  
- */
-  /*addUser() async {
-    try{
-      var result = await http_post("Signin", {
-        "collectorusername": _username, "collectorpassword": _password
-      });
-      if (result.ok) {
-            Navigator.of(context).push( //pushReplacement
-                MaterialPageRoute(builder: (context) => Mainui()));
-           
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(error);
-          }
-    }
-    catch (err) {
-         
-      ScaffoldMessenger.of(context).showSnackBar(serverError);
-    }
-  
- 
-  }
-  */
   @override
   Widget build(BuildContext context) {
     double _headerHeight = 90;
@@ -280,7 +184,9 @@ class _SignInState extends State<SignIn> {
                               border: InputBorder.none,
                               fillColor: Color(0xfff0F3057),
                               filled: true,
-                              prefixIcon: Image.asset('images/icon_email.png'),
+                              //prefixIcon: Image.asset('images/icon_email.png'),
+                              prefixIcon:
+                                  Icon(Icons.person, color: Color(0xffE7E7DE)),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color(0xff14DAE2), width: 2.0),
@@ -321,13 +227,28 @@ class _SignInState extends State<SignIn> {
                             }
                           },
                           controller: _password,
-                          obscureText: true,
+                          obscureText: hidePassword,
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hidePassword = !hidePassword;
+                                });
+                              },
+                              color: Colors.white,
+                              icon: Icon(
+                                hidePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
                             border: InputBorder.none,
                             fillColor: Color(0xfff0F3057),
                             filled: true,
-                            prefixIcon: Image.asset('images/icon_lock.png'),
+                            //prefixIcon: Image.asset('images/icon_lock.png'),
+                            prefixIcon:
+                                Icon(Icons.lock, color: Color(0xffE7E7DE)),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color(0xff14DAE2), width: 2.0),
@@ -344,6 +265,34 @@ class _SignInState extends State<SignIn> {
                   ),
                   //SizedBox(height: height * 0.31),
                   //_submitButton(),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 25, top: 10),
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Color(0xff0F3057),
+                            fontSize: 14.0,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Forget password ?',
+                              style: TextStyle(
+                                color: Color(0xff0F3057),
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  print("ok");
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
