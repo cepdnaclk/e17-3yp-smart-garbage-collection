@@ -199,7 +199,7 @@ Router.post('/assign/:binId', (req, res) => {
                                                         // if only one collector selected from this assign to him -> haven't checked that here (CHECK)
 
                                                         // take coordinates of eligible collectors from db
-                                                        db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?, ?, ?, ?)", // HARD CODED ----------- (CHECK 1)
+                                                        db.query("SELECT id, latitude, longitude FROM collector WHERE id IN (?, ?)", // HARD CODED ----------- (CHECK 1)
                                                             eligibleColIds, (err, result) => {
                                                                 if (err) {
                                                                     res.send({ error: err });
@@ -260,7 +260,7 @@ Router.post('/assign/:binId', (req, res) => {
                                                                                                                 collector_id, (err, result) => {
                                                                                                                     if (err) res.send({ error: err })
                                                                                                                     else {
-                                                                                                                        console.log("hi")
+
                                                                                                                         res.status(201).send({ message: 'Request sent succesfully', selectedColId: collector_id, criteria: 2 }); // state 2
                                                                                                                     }
                                                                                                                 })
