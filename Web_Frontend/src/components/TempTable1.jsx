@@ -32,7 +32,7 @@ const columns = [
     { id: 'fill_level', label: 'Fill Level (%)', minWidth: 100, align: 'right' },
     { id: 'color', label: '', minWidth: 50, align: 'right' },
     { id: 'compaction', label: 'Compaction', minWidth: 100, align: 'right' },
-    { id: 'assign', label: 'Assign', minWidth: 100, align: 'center' },
+    // { id: 'assign', label: 'Assign', minWidth: 100, align: 'center' },
     { id: 'location', label: 'Location', minWidth: 100, align: 'right' },
     { id: 'battery', label: 'Battery', minWidth: 100, align: 'right' },
 
