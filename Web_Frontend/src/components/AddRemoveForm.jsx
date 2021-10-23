@@ -29,7 +29,7 @@ export default function AddRemoveForm() {
     const [location, setLocation] = useState('');
 
     useEffect(() => {
-        Axios.get("http://localhost:3001/Units/maxId")
+        Axios.get("http://54.197.72.211:5000/Units/maxId")
             .then(res => {
                 console.log(res);
                 setUnitIdAdd(res.data[0].nextId + 1)
@@ -40,7 +40,7 @@ export default function AddRemoveForm() {
     }, []);
 
     const addUnit = () => {
-        let url = "http://localhost:3001/Units/add?unitID=" + unitIdAdd;
+        let url = "http://54.197.72.211:5000/Units/add?unitID=" + unitIdAdd;
         Axios.post(url, {
             unitLocation: location
         }).then((response) => {
@@ -57,7 +57,7 @@ export default function AddRemoveForm() {
     }
 
     const delUnit = () => {
-        Axios.delete(`http://localhost:3001/Units/delete/${unitIdDel}`, {
+        Axios.delete(`http://54.197.72.211:5000/Units/delete/${unitIdDel}`, {
         }).then((response) => {
             if (response.data.error) {
                 alert(response.data.error);
