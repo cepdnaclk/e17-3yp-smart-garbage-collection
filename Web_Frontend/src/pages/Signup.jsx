@@ -89,7 +89,7 @@ function Signup() {
 
     // if validations are passed
     const submitForm = (data) => {
-        Axios.post("http://localhost:3001/Signup", {
+        Axios.post("http://54.197.72.211:5000/Signup", {
             adminfname: data['firstName'],
             adminlname: data['lastName'],
             adminusername: data['username'],
@@ -118,6 +118,7 @@ function Signup() {
                     <Grid item xs={12} sm={6}>
 
                         <TextField
+                            data-testid="fnameInput"
                             autoComplete="fname"
                             name="firstName"
                             variant="outlined"
@@ -135,12 +136,13 @@ function Signup() {
                             {...register('firstName')}
 
                         />
-                        <div className='error'>{errors.firstName?.message}</div>
+                        <div className='error' data-testid="errorFname">{errors.firstName?.message}</div>
 
                     </Grid>
                     <Grid item xs={12} sm={6}>
 
                         <TextField
+                            data-testid="lnameInput"
                             variant="outlined"
                             fullWidth
                             id="lastName"
@@ -156,13 +158,14 @@ function Signup() {
                             {...register('lastName')}
 
                         />
-                        <div className='error'>{errors.lastName?.message}</div>
+                        <div className='error' data-testid="errorLname">{errors.lastName?.message}</div>
 
                     </Grid></Grid>
 
 
 
                 <TextField className={classes.textFields}
+                    data-testid="usernameInput"
                     variant="outlined"
                     margin="normal"
                     // required
@@ -181,10 +184,11 @@ function Signup() {
 
 
                 />
-                <div className='error'>{errors.username?.message}</div>
+                <div className='error' data-testid="errorUsername">{errors.username?.message}</div>
 
 
                 <TextField className={classes.textFields}
+                    data-testid="passwordInput"
                     variant="outlined"
                     margin="normal"
                     // required
@@ -201,10 +205,11 @@ function Signup() {
 
                     {...register('password')}
                 />
-                <div className='error'>{errors.password?.message}</div>
+                <div className='error' data-testid="errorPassword">{errors.password?.message}</div>
 
 
                 <Button
+                    data-testid="signUpButton"
                     type="submit"
                     fullWidth
                     variant="contained"

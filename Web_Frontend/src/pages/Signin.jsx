@@ -69,7 +69,7 @@ function Signin() {
 
     // if validations are passed
     const submitForm = (data) => {
-        Axios.post("http://localhost:3001/Signin", {
+        Axios.post("http://54.197.72.211:5000/Signin", {
             adminusername: data['username'],
             adminpassword: data['password'],
         }).then((response) => {
@@ -98,6 +98,7 @@ function Signin() {
 
             <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
                 <TextField
+                    data-testid="usernameInput"
                     variant="outlined"
                     margin="normal"
                     required
@@ -114,8 +115,9 @@ function Signin() {
                     {...register('username')}
 
                 />
-                <div className='error'>{errors.username?.message}</div>
+                <div className='error' data-testid="errorUsername">{errors.username?.message}</div>
                 <TextField
+                    data-testid="passwordInput"
                     variant="outlined"
                     margin="normal"
                     required
@@ -132,9 +134,10 @@ function Signin() {
                     {...register('password')}
 
                 />
-                <div className='error'>{errors.password?.message}</div>
+                <div className='error' data-testid="errorPassword">{errors.password?.message}</div>
 
                 <Button
+                    data-testid="signinButton"
                     type="submit"
                     fullWidth
                     variant="contained"
