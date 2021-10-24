@@ -125,9 +125,14 @@ li {
     background-color: rgb(223, 252, 239);
 }
 
-.diagrams,
-.model {
+.diagrams {
     height: 100vh;
+    position: relative;
+    background-color: rgb(223, 252, 239);
+}
+
+.model {
+    height: 150vh;
     position: relative;
     background-color: rgb(223, 252, 239);
 }
@@ -139,7 +144,7 @@ li {
 }
 
 .ui {
-    height: 140vh;
+    height: 180vh;
     position: relative;
     background-color: rgb(223, 252, 239);
 }
