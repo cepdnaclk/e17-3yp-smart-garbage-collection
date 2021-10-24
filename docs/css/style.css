@@ -132,7 +132,7 @@ li {
 }
 
 .model {
-    height: 150vh;
+    height: 160vh;
     position: relative;
     background-color: rgb(223, 252, 239);
 }
@@ -151,6 +151,12 @@ li {
 
 .testing {
     height: 130vh;
+    position: relative;
+    background-color: var(--primary-light);
+}
+
+.algorithm {
+    height: 180vh;
     position: relative;
     background-color: var(--primary-light);
 }
@@ -1752,6 +1758,118 @@ li {
 	color: #00924e;
 }
 .testing tr td:first-child i{
+	display:inline;
+	margin-bottom:0px;
+	font-size:22px;
+}
+
+
+
+
+
+.algorithm .table{
+	border-top:1px solid #ddd;
+	background:#fff;
+}
+.algorithm .table th,
+.algorithm .table {
+	text-align: center;
+}
+.algorithm .table th,
+.algorithm .table td {
+	padding: 20px 10px;
+	border:1px solid #ddd;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.algorithm .table th {
+	width: 25%;
+	font-size: 30px;
+	font-weight: 400;
+	border-bottom: 0;
+	background:#2F313A;
+	color: #EBEDF3;
+	text-transform: uppercase;
+}
+
+
+.algorithm .table th.highlight{
+	border-top: 4px solid #4caf50 !important;
+}
+.algorithm .table tr:nth-child(even){
+	background: #e9fae5;
+}
+.algorithm .table td:first-child{
+	padding-left: 20px;
+	text-align: center;
+	padding-top:35px;
+	background: #00924e;
+}
+.algorithm tr td .ptable-title {
+	font-size: 22px;
+	font-weight:400;
+	color: #fff;
+}
+.algorithm tr td .ptable-title i {
+	width: 10px;
+	line-height: 25px;
+	text-align: center;
+	margin-right: 5px;
+}
+.algorithm .ptable-star {
+	position: relative;
+	display: block;
+	text-align: center;
+}
+.algorithm .ptable-star.red{
+	color: #e91e63;
+}
+.algorithm .ptable-star.green{
+	color: #4caf50;
+}
+.algorithm .ptable-star.lblue{
+	color: #00924e;
+}
+.algorithm .ptable-star i {
+	width: 8px;
+	font-size: 13px;
+}
+.algorithm .ptable-price {
+	display: block;
+}
+.algorithm tr td {
+	font-size: 16px;
+	line-height:32px;
+	
+}
+.algorithm tr td.bg-red{
+	background: #e91e63;
+}
+.algorithm tr td.bg-green{
+	background: #4caf50;
+}
+.algorithm tr td.bg-lblue{
+	background: #00924e;
+}
+.algorithm tr td.bg-red a,
+.algorithm tr td.bg-green a,
+.algorithm tr td.bg-lblue a{
+	color: #fff;
+}
+.algorithm tr td i {
+	display: block;
+	margin-bottom: 12px;
+	font-size: 30px;
+}
+.algorithm tr td i.red{
+	color: #e91e63;
+}
+.algorithm tr td i.green{
+	color: #4caf50;
+}
+.algorithm tr td i.lblue{
+	color: #00924e;
+}
+.algorithm tr td:first-child i{
 	display:inline;
 	margin-bottom:0px;
 	font-size:22px;
