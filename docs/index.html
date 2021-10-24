@@ -1098,9 +1098,27 @@
                 <h4><span class="home_text_light">Registration</span></h4>
                 <div class="col-lg-4">
                     <div class="card">
-                        <img class="img-fluid" src="./assets/images/MobAppTesting/register_validate/register1.PNG">
+                        <img class="img-fluid" src="./assets/images/MobAppTesting/register_validate/register1.PNG" onclick="enlargeImage()" id="img1">
+                        <br /><br /><br />
+                        <!-- Button to reset the Image size -->
+                        <button onclick="resetImg()">Reset</button>
                     </div>
                 </div>
+                <script>
+                    img = document.getElementById("img1");
+                    function enlargeImg() {
+                    // Set image size to 1.5 times original
+                    img.style.transform = "scale(1.5)";
+                    // Animation effect 
+                    img.style.transition = "transform 0.25s ease";
+                    }
+                    // Function to reset image size
+                    function resetImg() {
+                    // Set image size to original
+                        img.style.transform = "scale(1)";
+                        img.style.transition = "transform 0.25s ease";
+                    }
+                </script>
                 <div class="col-lg-4">
                     <div class="card">
                         <img class="img-fluid" src="./assets/images/MobAppTesting/register_validate/register2.PNG">
@@ -1124,6 +1142,9 @@
             <!-- end of row -->
                 
         </div>
+        
+            
+            
         
     </section>
 
