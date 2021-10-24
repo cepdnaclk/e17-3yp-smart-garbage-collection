@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+
+    <!-- Webpage Title -->
+    <title>Smart Garbage Collector</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="./css/aos.min.css" rel="stylesheet">
+    <link href="./css/swiper.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/images/university_logo.png">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text" href="index.html">Trashbot</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html#header">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#architecture">Architecture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">Features</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="index.html#datageneration">Data Flow</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="index.html#datageneration">Generation of Data</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="index.html#flowchart">Flow Chart/ Algorithms</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="index.html#diagrams">Diagrams</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="index.html#design">Design</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="article.html">Circuit</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="article.html">UI / UX</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item" href="terms.html">3D Model</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#budget">Budget</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+                </span>
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+
+
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1>Testing Implementation</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+    <section class="slide py-5">
+        <div class="container">
+        <div class="section-title-light">
+                <h2><span class="home_text_light">Testing Codes</span></h2>
+                <p><span class="paragraph_title">Check our Mobile App Testing Codes</span></p>
+         </div>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/images/MobAppTesting/register_validate/register1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/MobAppTesting/register_validate/register2.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/MobAppTesting/register_validate/register3.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/MobAppTesting/signin_validate/signin.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+        <div class="section-title-light">
+                <p><span class="paragraph_title">Check our Web App Testing Codes</span></p>
+                <p><Algorithm Testing</p>
+                <p>Criteria 1</p>
+         </div>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/1-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/2-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/3-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+        </div>
+    </section>
+    <!-- end of work -->
+
+    <!-- Fill Level Detection Unit -->
+    <section class="fill_level_unit d-flex align-items-center py-5" id="fill_level_unit">
+        <div class="container text-light">
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right">
+                    <img class="img-fluid" src="./assets/images/WebAppTesting/results/test1.PNG" alt="work">
+                </div>
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-wrap="false" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/1-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/2-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/WebAppTesting/algorithm testing/scripts/criteria 1/3-criteria 1.PNG" class="mx-auto d-block w-70" alt="...">
+
+                </div>
+                
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container --> 
+    </section>
+
+    <!-- Compaction Unit -->
+    <section class="compaction_unit d-flex align-items-center py-5" id="compaction_unit">
+        <div class="container text-light">
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right">
+                    <img class="img-fluid" src="./assets/images/compaction_unit.png" alt="work">
+                </div>
+                <div class="col-lg-5 d-flex align-items-center px-4 py-3" data-aos="">
+                    <div class="row">
+                        <div class="text-center text-lg-start py-4 pt-lg-0">
+                            <br><br><h2 class="py-2"><span class="paragraph_title">Compaction Unit</span></h2>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p><span class="paragraph">Microcontroller on the relay switch, once the bin is full and compaction times
+                                     are less than 4 to actuate DC motor.</span></p>
+                            </div>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p><span class="paragraph">DC motor activates the scissor jack mechanism to 
+                                    compact the waste in the bin.</span></p>
+                            </div>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p><span class="paragraph">When the compaction begins, buzzer will be turned on and 
+                                    monitor person activity using IR sensor.</span></p>
+                            </div>
+                        </div>
+                        <div class="container" data-aos="fade-up">
+                            <div class="row g-5">
+                                <div class="col-6 text-start">
+                                    <img class="img-fluid" src="./assets/images/circuit_components/dualrelay.PNG">
+                                    <p><span class="paragraph">Dual Channel Relay Module</span></p>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="./assets/images/circuit_components/motor.PNG"> 
+                                    <p><span class="paragraph">DC Motor</span></p>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="./assets/images/circuit_components/ir_sensor.PNG"> 
+                                    <p><span class="paragraph">IR Sensor</span></p>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="./assets/images/circuit_components/buzzer.PNG">
+                                    <p><span class="paragraph">Piezo Buzzer</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of container -->
+                    </div>
+                    <!-- end of row -->
+                </div>
+                <!-- end of col-lg-5 -->
+            </div><br><br><br><br><br><br>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of work -->
+
+    <!-- Main Circuit -->
+    <section class="main_circuit d-flex align-items-center text-light py-5" id="main_circuit">
+        <div class="container">
+            <div class="row">
+                <div class="section-title" data-aos="fade-right">
+                    <h2><span class="home_text">Main Circuit Diagram</span></h2>
+                    <p>Check Our Complete Circuit Diagram</p>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right">
+                    <img class="img-fluid" src="./assets/images/main_circuit_diagram.png" alt="Main Circuit Diagram" id="main_circuit_img">
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
+  
+                    <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+  
+                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                    var img = document.getElementById("main_circuit_img");
+                    var modalImg = document.getElementById("img01");
+                    var captionText = document.getElementById("caption");
+                    img.onclick = function(){
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                        captionText.innerHTML = this.alt;
+                    }
+  
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+  
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() { 
+                        modal.style.display = "none";
+                    }
+                    </script>
+                </div>
+                <div class="col-lg-5 d-flex align-items-center px-4 py-3" data-aos="">
+                    <div class="row">
+                        <div class="text-center text-lg-start py-4 pt-lg-0">
+                            <br><br><h5 class="py-2">Our System has three main units. They are given below,</h5><br><br>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p>Power Supply Unit</p>
+                            </div>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p>Fill Level Detection Unit</p>
+                            </div>
+                            <div class="block d-flex align-items-center">
+                                <p class="pe-2"><span class="home_text"><i class="far fa-check-circle fa-1x"></i></p>
+                                <p>Compaction Unit</p>
+                            </div>
+                        </div>
+                    </div><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact -->
+    <section class="contactus text-light py-5" id ="contactus">
+        <div class="container" data-aos="zoom-in">
+            <div class="row">
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-map fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Smart Garbage <br>Collector</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Call Us</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Messsage Us</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
+                    <div class="ms-2">
+                        <div class="d-flex align-items-center">
+                            <h4 class="">Quick Links</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of row -->
+        </div><br>
+        <!-- end of container -->
+    </section>
+    <!-- end of contactus -->
+
+
+    <!-- Footer -->
+    <section class="footer text-light">
+        <div class="container">
+            <div class="row" data-aos="fade-right">
+                <div class="col-lg-3 py-4 py-md-5"> 
+                    <p class="py-3 para-light">Smart garbage Collector is an IoT system which facilitates the management of Garbage Collection and disposal.</p>    
+                </div>
+                <!-- end of col -->
+
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div> 
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i> 
+                            <p class="ms-3">+94 77 764 8682 (Isara)</p>  
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">+94 77 269 3120 (Hashini)</p>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">+94 70 327 2396 (Vidurangi)</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- end of col -->
+
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>                            
+                                <p class="ms-3">e17352@eng.pdn.ac.lk</p>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>                            
+                                <p class="ms-3">e17398@eng.pdn.ac.lk</p>                            
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                                <p class="ms-3">e17148@eng.pdn.ac.lk</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- end of col -->
+
+                <div class="col-lg-3 py-4 py-md-5">
+                    <div>
+                        
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="https://www.pdn.ac.lk/academics/academics.php/" target="_blank">
+                                <p class="ms-3">University of Peradeniya</p>
+                            </a>
+
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="http://eng.pdn.ac.lk/" target="_blank">
+                                <p class="ms-3">Faculty of Engineering</p>
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center py-2">
+                            <i class="fas fa-caret-right"></i>
+                            <a href="http://www.ce.pdn.ac.lk/" target="_blank">
+                                <p class="ms-3">Department of Computer Engineering</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </section>
+    <!-- end of footer -->
+
+
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light">
+        <div class="container d-flex justify-content-between">
+            <div>
+                
+            </div>
+            
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of bottom -->
+
+
+    <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn">
+        <img src="assets/images/up-arrow.png" alt="alternative">
+    </button>
+    <!-- end of back to top button -->
+
+
+    <!-- Scripts -->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- Bootstrap framework -->
+    <script src="./js/purecounter.min.js"></script>
+    <!-- Purecounter counter for statistics numbers -->
+    <script src="./js/swiper.min.js"></script>
+    <!-- Swiper for image and text sliders -->
+    <script src="./js/aos.js"></script>
+    <!-- AOS on Animation Scroll -->
+    <script src="./js/script.js"></script>
+    <!-- Custom scripts -->
+</body>
+</html>
