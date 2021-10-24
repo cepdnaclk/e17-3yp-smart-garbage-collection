@@ -149,8 +149,14 @@ li {
     background-color: rgb(223, 252, 239);
 }
 
+.cloud {
+    height: 80vh;
+    position: relative;
+    background-color: rgb(223, 252, 239);
+}
+
 .testing {
-    height: 130vh;
+    height: 150vh;
     position: relative;
     background-color: var(--primary-light);
 }
@@ -163,6 +169,12 @@ li {
 
 .security {
     height: 70vh;
+    position: relative;
+    background-color: var(--primary-light);
+}
+
+.progress {
+    height: 100vh;
     position: relative;
     background-color: var(--primary-light);
 }
