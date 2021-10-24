@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const Router = express.Router();
 const bcrypt = require('bcrypt');
-const auth = require("../middlewares/auth");
+const auth = require("../Middlewares/auth");
 //const { response } = require('express');
 const { createTokens, validateToken } = require('../JWT');
 
 const saultRounds = 10; // for pw hashing
 
-Router.post('/authenticate', async(req, res) => {
+Router.post('/authenticate', async (req, res) => {
     const username = req.body.collectorusername;
     const password = req.body.collectorpassword;
 
@@ -24,7 +24,7 @@ Router.post('/authenticate', async(req, res) => {
 
     //verify whether collector has registered - send back jwt token
     let sql = `SELECT * FROM collector WHERE username = "${username}"`;
-    db.query(sql, async(err, result) => {
+    db.query(sql, async (err, result) => {
         if (err) {
             res.send({ err: err });
 

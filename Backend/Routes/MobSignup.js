@@ -1,14 +1,14 @@
 const express = require('express');
 const db = require("../connection");
 const bcrypt = require('bcrypt');
-const auth = require("../middlewares/auth");
+const auth = require("../Middlewares/auth");
 const router = express.Router();
 
 const saultRounds = 15; // for pw hashing
 
 router.use(express.json());
 
-router.post('/Signup', function(req, res, next) {
+router.post('/Signup', function (req, res, next) {
     const fname = req.body.collectorfname;
     const lname = req.body.collectorlname;
     const username = req.body.collectorusername;
