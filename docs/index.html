@@ -1017,14 +1017,13 @@
         <div class="container">
             <div class="section-title" data-aos="fade-right">
                 <h2><span class="home_text">Testing</span></h2>
-                <p>Check Our Plan of Testing</p>
+                <p>Check Our Testing</p>
             </div>
             <div class="testing-table table-responsive" data-aos="fade-right">
                 <table class="table">
                     <!-- Heading -->
                     <thead>
                         <tr>
-                            <th>&nbsp;</th>
                             <th class="highlight">
                                 What?
                             </th>
@@ -1034,16 +1033,35 @@
                             <th class="highlight">
                                 How?
                             </th>
+                            <th class="highlight">
+                                Results
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="ptable-title">Web and Mobile Application Testing</span></td>
+                            <td><span class="ptable-title">User sign up & sign in
+                                (Unit tests)
+                                </span></td>
                             <td>
-                                Testing the web and mobile applications for the better functioning.
+                                It is important to make sure that the system is only accessible by eligible users with accurate user credentials.
                             </td>
                             <td>
-                                User Interfaces should be tested to improve user experience.
+                                <div>
+                                    Checked with empty user inputs, invalid usernames, invalid passwords and incorrect input lengths from the front end.
+                                    <br> Using,
+                                    <b>Flutter test library</b> &
+                                    <b>React testing library with JEST</b>
+                        
+                                </div> 
+                                <hr>
+                                <div>Checked with already signed up usernames, wrong password and input combinations from backend.
+                                    <br> Using,
+                                    <b>Mocha test framework
+                                        with Chai assertion library
+                                        </b>
+                                </div>
+                                
                             </td>
                             <td>
                                 Web and Mobile Application testing by using APPIUM.<br>
