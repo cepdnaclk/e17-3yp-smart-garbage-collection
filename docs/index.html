@@ -485,7 +485,7 @@
                 <div class="col-lg-7" data-aos="fade-right">
                     
                     <div class="section-title">
-                        <p>Flow Diagram & Algorithms</p>
+                        <p>Flow Diagram</p>
                     </div>
                     <p align="justify" class="py-2 para-light" >Firstly, the GSM module and other ports are initialized. 
                         Then, we check whether garbage bin is used by someone. If it is used, the fill height is sensed 
@@ -538,6 +538,88 @@
         <!-- end of container -->
     </section>
     <!-- end of flow chart -->
+
+
+    <!-- Automation Algorithm -->
+    <section class="algorithm d-flex align-items-center text-light py-5" id="algorithm">
+        <div class="container">
+            <div class="section-title" data-aos="fade-right">
+                <h2><span class="home_text">Algorithm</span></h2>
+                <p>Automation Algorithm</p>
+            </div>
+            <div class="algorithm-table table-responsive" data-aos="fade-right">
+                <table class="table">
+                    <!-- Heading -->
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th class="highlight">
+                                For What?
+                            </th>
+                            <th class="highlight">
+                                How Implemented?
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="ptable-title">Initial Condition</span></td>
+                            <td>
+                                To stop assigning  same location to two Garbage Collectors.
+                            </td>
+                            <td>
+                                Check the database whether another bin in the unit related to 
+                                bin in which the request is sent has been assigned to another garbage collector. 
+                                Assign the request to that same Garbage Collector.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="ptable-title"> First Criteria</span></td>
+                            <td>
+                                To distribute the workload evenly among Garbage Collectors.
+                            </td>
+                            <td> 
+                                Define an amount of tasks for one round. 
+                                Store the number of active tasks of every garbage collector in the database. 
+                                Find round number for each collector using amount of active tasks and tasks per round. 
+                                Select collector who has the lowest round number.
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td><span class="ptable-title">Second Criteria</span></td>
+                            <td> 
+                                To assign the nearest collector to the bin.
+                            </td>
+                            <td>
+                                Get smallest distances from collectors to bins  using locations. 
+                                Select collector who has the smallest distance to the bin.
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td><span class="ptable-title">Third Criteria</span></td>
+                            <td> 
+                                When the Garbage Collecting starts, everyone can start from the same round and same location. 
+                                To assign the bins next to each other in the same zone to a collector by Preventing two bins 
+                                that are too far apart from, being assigned to the same collector. 
+                                Every red bin must be assigned to relevant collector in the zone.
+                            </td>
+                            <td>
+                                Access database and find any relevant collector in the zone corresponding to the bin 
+                                where the request came from.
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end of container -->
+    </section>
+
+    <!-- end of Testing -->
+
 
     <!-- System Diagrams -->
     <section class="diagrams" id="diagrams">
