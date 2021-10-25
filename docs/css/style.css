@@ -132,7 +132,7 @@ li {
 }
 
 .model {
-    height: 160vh;
+    height: 150vh;
     position: relative;
     background-color: rgb(223, 252, 239);
 }
@@ -150,7 +150,7 @@ li {
 }
 
 .cloud {
-    height: 80vh;
+    height: 100vh;
     position: relative;
     background-color: rgb(223, 252, 239);
 }
@@ -162,7 +162,7 @@ li {
 }
 
 .algorithm {
-    height: 180vh;
+    height: 150vh;
     position: relative;
     background-color: var(--primary-light);
 }
