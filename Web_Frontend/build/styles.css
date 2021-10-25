@@ -1,0 +1,45 @@
+body {
+    /* background-color: #d2f8f6; */
+    background-color: #0F3057;
+    /* background-image: url("src\images\wave.png"); */
+}
+
+h1 {
+    color: #0F3057;
+}
+
+h2 {
+    /* color: #008891; */
+    color: #0F3057;
+    font-size: 1.8rem;
+    font-family: 'Righteous', cursive;
+}
+
+h3 {
+    color: #008891;
+    font-family: 'Righteous', cursive;
+    font-size: 1.5rem;
+}
+
+h4 {
+    color: #008891;
+    font-family: 'Righteous', cursive;
+    font-size: 1rem;
+}
+
+.main-heading {
+    font-family: 'Righteous', cursive;
+    font-size: 4em;
+}
+
+p {
+    color: #0F3057;
+    /* font-family: 'Righteous', cursive; */
+    font-size: 0.8rem;
+}
+
+.error{
+    position: absolute;
+    color: red;
+    font-size: .6rem;
+}
