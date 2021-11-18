@@ -79,7 +79,7 @@ export default function TempMap() {
 
         // get units data
         useEffect(() => {
-            Axios.get("http://54.197.72.211:5000/Units/getAll")
+            Axios.get("http://localhost:3001/Units/getAll")
                 .then(res => {
                     setUnits(res.data)
                 })
@@ -90,7 +90,7 @@ export default function TempMap() {
 
         // get collectors data
         useEffect(() => {
-            Axios.get("http://54.197.72.211:5000/Collectors/getLocation")
+            Axios.get("http://localhost:3001/Collectors/getLocation")
                 .then(res => {
                     setCollectors(res.data);
                 })
@@ -101,7 +101,7 @@ export default function TempMap() {
 
         // get system coordinates - did not work
         useEffect(() => {
-            Axios.get("http://54.197.72.211:5000/System/getCoordinates")
+            Axios.get("http://localhost:3001/System/getCoordinates")
                 .then(res => {
                     setSystemLat(res.data[0]['latitude']);
                     setSystemLong(res.data[0]['longitude']);

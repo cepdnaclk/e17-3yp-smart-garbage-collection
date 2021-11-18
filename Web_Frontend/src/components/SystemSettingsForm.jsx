@@ -30,7 +30,7 @@ export default function SystemSettingsForm() {
     const [currentHighBound, setCurrentHighBound] = useState(80);
 
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/System/getBinHeight")
+        Axios.get("http://localhost:3001/System/getBinHeight")
             .then(res => {
                 //console.log(res);
                 setCurrentBinHeight(res.data[0].bin_height)
@@ -41,7 +41,7 @@ export default function SystemSettingsForm() {
     }, []);
 
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/System/getLowBound")
+        Axios.get("http://localhost:3001/System/getLowBound")
             .then(res => {
                 //console.log(res);
                 setCurrentLowBound(res.data[0].low_bound)
@@ -52,7 +52,7 @@ export default function SystemSettingsForm() {
     }, []);
 
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/System/getHighBound")
+        Axios.get("http://localhost:3001/System/getHighBound")
             .then(res => {
                 //console.log(res);
                 setCurrentHighBound(res.data[0].high_bound)

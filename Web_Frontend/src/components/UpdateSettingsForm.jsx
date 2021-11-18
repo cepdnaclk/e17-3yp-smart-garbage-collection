@@ -48,7 +48,7 @@ export default function UpdateSettingsForm() {
         }
 
         else {
-            Axios.put("http://54.197.72.211:5000/System/update/lowBound", {
+            Axios.put("http://localhost:3001/System/update/lowBound", {
                 low_bound: data['lowBound'],
             }).then((response) => {
                 if (response.data.error) {
@@ -61,7 +61,7 @@ export default function UpdateSettingsForm() {
                 }
             });
 
-            Axios.put("http://54.197.72.211:5000/System/update/highBound", {
+            Axios.put("http://localhost:3001/System/update/highBound", {
                 high_bound: data['highBound'],
             }).then((response) => {
                 if (response.data.error) {

@@ -115,7 +115,7 @@ export default function TempTable2() {
 
     // get collectors
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/Collectors")
+        Axios.get("http://localhost:3001/Collectors")
             .then(res => {
                 console.log(res);
                 setCollector(res.data)
@@ -127,7 +127,7 @@ export default function TempTable2() {
 
     // get requests
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/Requests/getAll")
+        Axios.get("http://localhost:3001/Requests/getAll")
             .then(res => {
                 console.log(res);
                 setRequests(res.data)
