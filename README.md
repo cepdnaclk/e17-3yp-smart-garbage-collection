@@ -13,15 +13,14 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ## Features (Planned)
 
 ### Hardware
-- Sensors to get fill level (volume & weight) of garbage.
-- LED indicator(red,yellow,green) to show fill level on the garbage bin & for night visibility.
+- Sensors to get fill level of garbage.
+- LED indicator(red,yellow,green) to show fill level on the garbage bin.
 - Compaction mechanism along with a security sensor used to compact garbage when garbage limit is full. (Compaction happens only when security sensor identifies when bin is not used. Compaction will reduce the number of times that bins should be emptied.)
 - Solar panel to get power 
 
 
 ### Website
-- To get the overview of the garbage bin( fill level, battery capacity, garbage categories ..) & decide the priority
-- Assign employees to the each garbage bin to collect the disposal
+- To get the overview of the garbage bin( fill level, battery capacity, garbage categories ..).
 - View bins and garbage collecting employees in a map
 - Add/remove new bins to the system
 - Set parameter values(fill level and garbage categories) for indication of status(red,yellow,green) and to set when to do compaction process
@@ -29,7 +28,6 @@ The problem of proper garbage collection & disposal is a continuous struggle tha
 ### Mobile App
 
 - Get the request of collecting garbage/ Accept the request/ cancel the request
-- Along with the request a qr code will be given to unlock red bins. Can scan it to open the bin.
 - To get the information about the assigned bins
 - Using map can easily locate the bin
 

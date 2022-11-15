@@ -89,7 +89,7 @@ function Signup() {
 
     // if validations are passed
     const submitForm = (data) => {
-        Axios.post("http://54.197.72.211:5000/Signup", {
+        Axios.post("http://localhost:3001/Signup", {
             adminfname: data['firstName'],
             adminlname: data['lastName'],
             adminusername: data['username'],

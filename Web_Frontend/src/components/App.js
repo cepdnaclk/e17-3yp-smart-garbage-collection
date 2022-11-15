@@ -21,7 +21,7 @@ function App() {
     const [authState, setAuthState] = useState(false);
 
     useEffect(() => {
-        Axios.get("http://54.197.72.211:5000/Auth", {
+        Axios.get("http://localhost:3001/Auth", {
             headers: {
                 "x-access-token": localStorage.getItem("token")
             }
