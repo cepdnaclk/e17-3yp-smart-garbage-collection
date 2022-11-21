@@ -17,9 +17,9 @@ Router.put("/update/bin", (req, res) => {
     // const color = req.query.binColor;
 
     // testing purpose
-    const binId = req.query.binId;
-    const binFillLevel = req.query.binFillLevel;
-    const binColor = req.query.binColor;
+    const binId = req.body.binId;
+    const binFillLevel = req.body.binFillLevel;
+    const binColor = req.body.binColor;
 
     // check if a bin exists with the given id
     db.query("SELECT * FROM bin WHERE id = ?", binId, (err, result) => {
@@ -45,8 +45,8 @@ Router.put("/update/bin", (req, res) => {
 // 2. compaction cycles
 Router.put("/update/binCompaction", (req, res) => {
 
-    const id = req.query.binId;
-    const compaction = req.query.binCompactionCycles;
+    const id = req.body.binId;
+    const compaction = req.body.binCompactionCycles;
 
     // check if a bin exists with the given id
     db.query("SELECT * FROM bin WHERE id = ?", id, (err, result) => {
