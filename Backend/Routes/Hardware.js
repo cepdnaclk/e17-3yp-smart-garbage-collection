@@ -138,7 +138,14 @@ Router.post('/assign/:binId', (req, res) => {
                                     if (result.length > 0) {
                                         let colId = result[0].collector_id;
                                         let status = 'Sent';
-                                        let time = '21:15' // HARD CODED ------------------------
+                                        //let time = '21:15' // HARD CODED ------------------------
+                                        var currentdate = new Date(); 
+                                        var time = currentdate.getDate() + "/"
+                                        + (currentdate.getMonth()+1)  + "/" 
+                                        + currentdate.getFullYear() + " @ "  
+                                        + currentdate.getHours() + ":"  
+                                        + currentdate.getMinutes() + ":" 
+                                        + currentdate.getSeconds();
                                         // add to assign table
                                         db.query("INSERT INTO assign (bin_id, collector_id, status, time) VALUES (?,?,?,?)",
                                             [binId, colId, status, time], (err, result) => {
